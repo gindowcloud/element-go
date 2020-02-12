@@ -7,6 +7,7 @@
       :viewer="viewer" :editor="editor" @edit-submit="onEditSubmit"
       >
       <el-table-column label="姓名" prop="name" />
+      <el-table-column label="注册日期" prop="date" />
     </ex-table>
   </div>
 </template>
@@ -22,11 +23,12 @@ export default {
       title: '用户列表',
       params: {
         state: '',
-        q: ''
+        q: '',
+        date: []
       },
       data: [
-        { state: 1, name: 'Jack Chen', phone: '13366668888' },
-        { state: 2, name: 'Jonson Li', phone: '13800009999' },
+        { state: 1, name: 'Jack Chen', phone: '13366668888', date: '2020-1-1' },
+        { state: 2, name: 'Jonson Li', phone: '13800009999', date: '2020-2-1' },
       ],
       total: 0,
       loading: false,
@@ -37,6 +39,7 @@ export default {
     filter() {
       return [
         { name: 'state', label: '状态', type: 'select', options: this.states },
+        { name: 'date', label: ['起始日期', '结束日期'], type: 'daterange' },
         { name: 'q', label: '搜索关键词' },
       ]
     },

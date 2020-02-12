@@ -4,8 +4,8 @@
       <el-select v-if="item.type == 'select'" v-model="value[item.name]">
         <el-option v-for="(j, i) in item.options" :key="i" :label="j.label" :value="j.value" />
       </el-select>
-      <el-date-picker v-else-if="item.type == 'date'" type="date" v-model="value[item.key]" :placeholder="item.label" :editable="false" />
-      <el-date-picker v-else-if="item.type == 'daterange'" type="daterange" v-model="value[item.key]" :start-placeholder="item.label[0]" :end-placeholder="item.label[1]" :editable="false" range-separator="-" value-format="yyyy-MM-dd" />
+      <el-date-picker v-else-if="item.type == 'date'" type="date" v-model="value[item.name]" :placeholder="item.label" :editable="false" />
+      <el-date-picker v-else-if="item.type == 'daterange'" type="daterange" v-model="value[item.name]" :start-placeholder="item.label[0]" :end-placeholder="item.label[1]" :editable="false" range-separator="-" value-format="yyyy-MM-dd" />
       <el-input v-else v-model="value[item.name]" :placeholder="item.label" @keyup.enter.native="onSearch" />
     </el-form-item>
     <el-form-item>
