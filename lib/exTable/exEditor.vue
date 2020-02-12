@@ -15,7 +15,7 @@
             <el-checkbox v-for="(j, i) in item.options" :key="i" :label="j.value">{{j.label}}</el-checkbox>
         </el-checkbox-group>
         <!-- 上传组件 -->
-        <el-upload class="uploader" :show-file-list="false" :before-upload="beforeUpload" :on-success="onUpload"
+        <el-upload class="uploader" :show-file-list="false" :before-upload="beforeUpload" :on-success="upload"
             :action="item.action" :headers="{ Authorization: 'Bearer ' + item.token }" v-else-if="item.type == 'upload'">
             <el-image lazy v-if="model[item.name]" :src="model[item.name]" fit="cover" />                    
             <i class="el-icon-plus" v-else/>
@@ -25,12 +25,12 @@
         <!-- 多行文本 -->
         <el-input type="textarea" v-model="model[item.name]" :readonly="item.readonly" v-else-if="item.type == 'textarea'" />
         <!-- 文本组件 -->
-        <el-input v-model="model[item.name]" :readonly="item.readonly" @keyup.enter.native="onSubmit('form')" v-else/>
+        <el-input v-model="model[item.name]" :readonly="item.readonly" @keyup.enter.native="submit('form')" v-else/>
       </el-form-item>
     </el-form>
     <div slot="footer" class="dialog-footer">
-      <el-button @click="onCancel">{{ $t('lang.cancel') }}</el-button>
-      <el-button @click="onSubmit" type="primary">{{ $t('lang.save') }}</el-button>
+      <el-button @click="cancel">{{ $t('lang.cancel') }}</el-button>
+      <el-button @click="submit" type="primary">{{ $t('lang.save') }}</el-button>
     </div>
   </el-dialog>
 </template>
@@ -66,23 +66,27 @@ export default {
       this.visible = this.show
     },
     visible(val) {
-      if (!val) this.onClose()
+      if (!val) this.close()
     }
   },
   methods: {
     // 关闭窗口
-    onClose() {
+    close() {
       this.$emit("close")
     },
     // 重置表单
-    onCancel() {
+    cancel() {
       this.$refs['formEditor'].resetFields()      
       this.$emit("cancel")
-      this.onClose()
+      this.close()
     },
     // 提交表单
-    onSubmit() {
+    submit() {
       this.$emit("submit")
+    },
+    // 上传图片
+    upload(ret) {
+      this.$emit("upload", ret)
     },
     // 校验上传
     beforeUpload(file) {
@@ -91,10 +95,6 @@ export default {
       if (!isType) this.$message.error('上传头像图片只能是 JPG/PNG 格式!')
       if (!isLt2M) this.$message.error('上传头像图片大小不能超过 2MB!')
       return isType && isLt2M;
-    },
-    // 上传图片
-    onUpload(ret) {
-      this.$emit("upload", ret)
     }
   }
 }

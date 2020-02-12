@@ -8,7 +8,7 @@
       </el-col>
     </el-row>
     <div slot="footer" class="dialog-footer">
-      <el-button @click="onClose" type="primary">{{ $t('lang.okay') }}</el-button>
+      <el-button @click="close" type="primary">{{ $t('lang.okay') }}</el-button>
     </div>
   </el-dialog>
 </template>
@@ -44,11 +44,11 @@ export default {
       this.visible = this.show
     },
     visible (val) {
-      if (!val) this.onClose() // 关闭窗口
+      if (!val) this.close() // 关闭窗口
     }
   },
   methods: {
-    onClose() {
+    close() {
       this.$emit("close")
     }
   }

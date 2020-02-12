@@ -2,12 +2,12 @@
   <div>
     <ex-table ref="table"
       :title="title"
-      :params="params" :filter="filter" :loading="loading" @search="onSearch" @page-change="onPageChange"
-      :total="total" v-model="data" allow-remove allow-create allow-export @remove="onRemove" @create="onCreate" @export="onExport"
-      :viewer="viewer" :editor="editor" @edit-submit="onEditSubmit"
+      :params="params" :filter="filter" :loading="loading" @search="search" @page-change="pageChange"
+      :total="total" v-model="data" allow-remove allow-create allow-export @remove="remove" @create="create" @export="download"
+      :viewer="viewer" :editor="editor" @edit-submit="editSubmit"
       >
       <el-table-column label="姓名" prop="name" />
-      <el-table-column label="注册日期" prop="date" />
+      <el-table-column label="注册日期" prop="date" align="right" />
     </ex-table>
   </div>
 </template>
@@ -67,30 +67,30 @@ export default {
         this.loading = false
       }, 250)
     },
-    onSearch() {
+    search() {
       this.params.page = 1
       this.$message('On Search');
       this.getData()
     },
-    onPageChange(page) {
+    pageChange(page) {
       this.params.page = page
       this.$message('On Page Changed');
       this.getData()
     },
-    onEditSubmit() {
+    editSubmit() {
       let $ref = this.$refs['table']
       this.$message('On Modify');
-      $ref.onEditClose()
+      $ref.editClose()
     },
-    onRemove (index, row) {
+    remove (index, row) {
       let $ref = this.$refs['table']
       this.$message('On Remove');
-      $ref.onRemove(index)
+      $ref.remove(index)
     },
-    onCreate() {
+    create() {
       this.$message('On Create');
     },
-    onExport() {
+    download() {
       this.$message('On Export');
     }
   }

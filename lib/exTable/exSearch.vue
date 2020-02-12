@@ -6,11 +6,11 @@
       </el-select>
       <el-date-picker v-else-if="item.type == 'date'" type="date" v-model="value[item.name]" :placeholder="item.label" :editable="false" />
       <el-date-picker v-else-if="item.type == 'daterange'" type="daterange" v-model="value[item.name]" :start-placeholder="item.label[0]" :end-placeholder="item.label[1]" :editable="false" range-separator="-" value-format="yyyy-MM-dd" />
-      <el-input v-else v-model="value[item.name]" :placeholder="item.label" @keyup.enter.native="onSearch" />
+      <el-input v-else v-model="value[item.name]" :placeholder="item.label" @keyup.enter.native="search" />
     </el-form-item>
     <el-form-item>
-      <el-button type="primary" @click="onSearch">{{ $t("lang.search") }}</el-button>
-      <el-button @click="onReset">{{ $t("lang.reset") }}</el-button>
+      <el-button type="primary" @click="search">{{ $t("lang.search") }}</el-button>
+      <el-button @click="reset">{{ $t("lang.reset") }}</el-button>
     </el-form-item>
   </el-form>
 </template>
@@ -22,10 +22,10 @@ export default {
     filter: Array,
   },
   methods: {
-    onSearch() {
+    search() {
       this.$emit("search")
     },
-    onReset() {
+    reset() {
       this.$refs['formSearch'].resetFields()
       this.$emit("reset")
     }
