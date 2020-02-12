@@ -82,7 +82,7 @@ export default {
       this.$message('On Modify');
       $ref.editClose()
     },
-    remove (index, row) {
+    remove (index) {
       let $ref = this.$refs['table']
       this.$message('On Remove');
       $ref.remove(index)
