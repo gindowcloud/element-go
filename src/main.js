@@ -7,9 +7,8 @@ import 'element-ui/lib/theme-chalk/index.css'
 Vue.use(ElementUI)
 
 //
-import exTable from './lib/exTable'
-import exLocale from './lib/locale/lang/en'
-Vue.use(exTable, { exLocale })
+import exTable from '../lib'
+Vue.use(exTable)
 
 new Vue({
   el: '#app',
