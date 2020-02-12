@@ -8,7 +8,8 @@ Vue.use(ElementUI)
 
 //
 import exTable from './lib/exTable'
-Vue.use(exTable)
+import exLocale from './lib/locale/lang/en'
+Vue.use(exTable, { exLocale })
 
 new Vue({
   el: '#app',

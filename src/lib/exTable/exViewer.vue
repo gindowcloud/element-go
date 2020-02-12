@@ -1,14 +1,14 @@
 <template>
   <el-dialog width="80%" :title="title" :visible.sync="visible">
     <el-row v-for="(item, i) in datas" :key="i">
-      <el-col :md="4" class="text-right">{{ item.label || '&nbsp;' }}</el-col>
+      <el-col :md="4">{{ item.label || '&nbsp;' }}</el-col>
       <el-col :md="20">
         <el-image lazy class="shrink" :src="item.value" v-if="item.type == 'image'" :style="'width:' + (item.width || this.imageSize) + '; height:' + (item.height || this.imageSize) + ';'" />
-        <div v-else>{{ item.value || '&nbsp;' }}</div>
+        <div v-else>{{ item.value || '-' }}</div>
       </el-col>
     </el-row>
     <div slot="footer" class="dialog-footer">
-      <el-button @click="onClose" type="primary">OK</el-button>
+      <el-button @click="onClose" type="primary">{{ $t('lang.okay') }}</el-button>
     </div>
   </el-dialog>
 </template>
@@ -31,7 +31,7 @@ export default {
     datas() {
       return this.items.map(j => {
         if (j.name) j.value = this.model[j.name]
-        else if (j.type == 'select') {
+        if (j.type == 'select') {
           let data = j.options.filter(m => m.value == j.value)
           j.value = data[0] ? data[0].label : null
         }

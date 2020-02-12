@@ -11,4 +11,4 @@ yarn-error.log
 *.njsproj
 *.sln
 
-element-extension-*.tgz
+element-extensions-*.tgz

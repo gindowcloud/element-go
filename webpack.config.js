@@ -3,7 +3,6 @@ var webpack = require('webpack')
 
 // 执行环境
 const NODE_ENV = process.env.NODE_ENV;
-console.log("-----NODE_ENV===",NODE_ENV);
 
 module.exports = {
   entry: './src/main.js',
@@ -11,7 +10,7 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, './dist'),
     publicPath: '/dist/',
-    filename: 'element-extension.min.js',
+    filename: 'element-extensions.min.js',
     library: 'elementExtension',
     libraryTarget: 'umd',
     umdNamedDefine: true

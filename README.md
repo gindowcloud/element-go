@@ -1,8 +1,16 @@
-# Element Extension
+# Element Extensions
 
-> A Vue.js project
+> Element Extensions for VueJs
+>
+> Github: https://github.com/hecity/element-extensions
 
-## Build Setup
+## Install
+``` bash
+# install
+npm i element-extensions -S
+```
+
+## Preview
 
 ``` bash
 # install dependencies
@@ -16,3 +24,4 @@ npm run build
 ```
 
 For detailed explanation on how things work, consult the [docs for vue-loader](http://vuejs.github.io/vue-loader).
+

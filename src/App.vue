@@ -6,7 +6,7 @@
       :total="total" v-model="data" allow-remove allow-create allow-export @remove="onRemove" @create="onCreate" @export="onExport"
       :viewer="viewer" :editor="editor" @edit-submit="onEditSubmit"
       >
-      <el-table-column label="Name" prop="name" />
+      <el-table-column label="姓名" prop="name" />
     </ex-table>
   </div>
 </template>
@@ -16,8 +16,8 @@ export default {
   data() {
     return {
       states: [
-        { label: 'Disabled', value: 1 },
-        { label: 'Normal', value: 2 }
+        { label: '禁用', value: 1 },
+        { label: '正常', value: 2 }
       ],
       title: '用户列表',
       params: {
@@ -36,23 +36,23 @@ export default {
     // 搜索表单参数
     filter() {
       return [
-        { name: 'state', label: 'State', type: 'select', options: this.states },
-        { name: 'q', label: 'Keywords' },
+        { name: 'state', label: '状态', type: 'select', options: this.states },
+        { name: 'q', label: '搜索关键词' },
       ]
     },
     // 查看表单参数
     viewer() {
       return [
-        { name: 'name' , label: 'Name' },
-        { name: 'phone', label: 'Phone' },
-        { name: 'state', label: 'State', type: 'select', options: this.states },
+        { name: 'name' , label: '姓名' },
+        { name: 'phone', label: '电话' },
+        { name: 'state', label: '状态', type: 'select', options: this.states },
       ]
     },
     // 编辑表单参数
     editor() {
       return [
-        { name: 'name', label: 'Name' },
-        { name: 'phone', label: 'Phone', readonly: true },
+        { name: 'name', label: '姓名' },
+        { name: 'phone', label: '电话', readonly: true },
       ]
     }
   },

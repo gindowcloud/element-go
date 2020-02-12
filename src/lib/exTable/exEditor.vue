@@ -1,7 +1,7 @@
 <template>
   <el-dialog width="80%" :title="title" :visible.sync="visible">
-    <el-form ref="formEditor" :model="model" @submit.native.prevent>
-      <el-form-item v-for="(item, i) in datas" :key="i" :label="item.label" :prop="item.name">
+    <el-form ref="formEditor" :model="model" @submit.native.prevent label-position="left">
+      <el-form-item v-for="(item, i) in datas" :key="i" :label="item.label" :prop="item.name" label-width="200px">
         <!-- 开关组件 -->
         <el-switch v-model="model[item.name]" :readonly="item.readonly" v-if="item.type == 'switch'" />
         <!-- 下拉组件 -->
@@ -21,7 +21,7 @@
             <i class="el-icon-plus" v-else/>
         </el-upload>
         <!-- 日期组件 -->
-        <el-date-picker v-model="model[item.name]" :readonly="item.readonly" type="date" placeholder="选择日期" v-else-if="item.type == 'date'" />
+        <el-date-picker v-model="model[item.name]" :readonly="item.readonly" type="date" v-else-if="item.type == 'date'" />
         <!-- 多行文本 -->
         <el-input type="textarea" v-model="model[item.name]" :readonly="item.readonly" v-else-if="item.type == 'textarea'" />
         <!-- 文本组件 -->
@@ -29,8 +29,8 @@
       </el-form-item>
     </el-form>
     <div slot="footer" class="dialog-footer">
-      <el-button @click="onCancel">Cancel</el-button>
-      <el-button @click="onSubmit" type="primary">Save</el-button>
+      <el-button @click="onCancel">{{ $t('lang.cancel') }}</el-button>
+      <el-button @click="onSubmit" type="primary">{{ $t('lang.save') }}</el-button>
     </div>
   </el-dialog>
 </template>

@@ -9,8 +9,8 @@
       </el-col>
       <el-col :md="4" class="text-right">
         <el-button-group>
-          <el-button plain v-if="allowCreate" size="small" icon="el-icon-plus" @click="onCreate">Create</el-button>
-          <el-button plain v-if="allowExport" size="small" icon="el-icon-download" @click="onExport">Export</el-button>
+          <el-button plain v-if="allowCreate" size="small" icon="el-icon-plus" @click="onCreate">{{ $t('lang.create') }}</el-button>
+          <el-button plain v-if="allowExport" size="small" icon="el-icon-download" @click="onExport">{{ $t('lang.export') }}</el-button>
         </el-button-group>
       </el-col>
     </el-row>
@@ -21,13 +21,13 @@
         <el-table-column align="right">
           <template slot-scope="scope">
             <div class="col-action">
-              <el-button type="text" v-if="viewer" @click="onView(scope.row)">VIEW</el-button>
-              <el-button type="text" v-if="editor" @click="onEdit(scope.row)">EDIT</el-button>
+              <el-button type="text" v-if="viewer" @click="onView(scope.row)">{{ $t('lang.view') }}</el-button>
+              <el-button type="text" v-if="editor" @click="onEdit(scope.row)">{{ $t('lang.edit') }}</el-button>
               <el-dropdown v-if="allowRemove || hasActionSlot">
                 <span class="el-dropdown-link"><i class="el-icon-more" /></span>
                 <el-dropdown-menu slot="dropdown">
                   <slot name="action" :$index="scope.$index" :row="scope.row" />
-                  <el-dropdown-item v-if="allowRemove" @click.native="onConfirm(scope.$index, scope.row)">DELETE</el-dropdown-item>
+                  <el-dropdown-item v-if="allowRemove" @click.native="onConfirm(scope.$index, scope.row)">{{ $t('lang.delete') }}</el-dropdown-item>
                 </el-dropdown-menu>
               </el-dropdown>
             </div>
