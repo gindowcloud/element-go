@@ -1,4 +1,4 @@
-# mint-admin
+# Mint Admin
 
 > A Vue.js project
 
