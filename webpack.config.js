@@ -11,8 +11,8 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, './dist'),
     publicPath: '/dist/',
-    filename: 'mint-admin.min.js',
-    library: 'mintAdmin',
+    filename: 'element-extension.min.js',
+    library: 'elementExtension',
     libraryTarget: 'umd',
     umdNamedDefine: true
   },

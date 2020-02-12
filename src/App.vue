@@ -1,13 +1,13 @@
 <template>
   <div>
-    <mint-table ref="table"
+    <ex-table ref="table"
       :title="title"
       :params="params" :filter="filter" :loading="loading" @search="onSearch" @page-change="onPageChange"
       :total="total" v-model="data" allow-remove allow-create allow-export @remove="onRemove" @create="onCreate" @export="onExport"
       :viewer="viewer" :editor="editor" @edit-submit="onEditSubmit"
       >
       <el-table-column label="Name" prop="name" />
-    </mint-table>
+    </ex-table>
   </div>
 </template>
 

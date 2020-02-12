@@ -1,4 +1,4 @@
-# Mint Admin
+# Element Extension
 
 > A Vue.js project
 

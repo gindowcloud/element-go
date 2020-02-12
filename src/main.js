@@ -7,8 +7,8 @@ import 'element-ui/lib/theme-chalk/index.css'
 Vue.use(ElementUI)
 
 //
-import mintTable from './lib/mintTable'
-Vue.use(mintTable)
+import exTable from './lib/exTable'
+Vue.use(exTable)
 
 new Vue({
   el: '#app',

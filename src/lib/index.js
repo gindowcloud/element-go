@@ -1,6 +1,6 @@
-import mintTable from './mintTable/index.js'
+import exTable from './exTable/index.js'
 
-const components = [mintTable]
+const components = [exTable]
 const install = function(vue) {
   if (install.installed) return;
   components.map((component) => {
@@ -14,5 +14,5 @@ if (typeof window !== 'undefined' && window.Vue) {
 
 export default {
   install,
-  mintTable
+  exTable
 }

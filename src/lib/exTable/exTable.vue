@@ -5,7 +5,7 @@
     <!-- 搜索表单 -->
     <el-row>
       <el-col :md="20" v-if="filter">
-        <mint-search v-model="params" :filter="filter" @search="onSearch" @reset="onReset" />
+        <ex-search v-model="params" :filter="filter" @search="onSearch" @reset="onReset" />
       </el-col>
       <el-col :md="4" class="text-right">
         <el-button-group>
@@ -38,20 +38,20 @@
     <!-- 数据分页 -->
     <el-pagination background layout="total,prev,pager,next" :load="true" :page-size="params.size" :current-page="params.page" :total="total" @current-change="onPageChange" />
     <!-- 查看表单 -->
-    <mint-viewer v-if="viewer" :title="viewTitle" :items="viewer" :show="dialogView" @close="onViewClose" :model="row" />
+    <ex-viewer v-if="viewer" :title="viewTitle" :items="viewer" :show="dialogView" @close="onViewClose" :model="row" />
     <!-- 编辑表单 -->
-    <mint-editor v-if="editor" :title="editTitle" :items="editor" :show="dialogEdit" @close="onEditClose" :model="row" @upload="onEditUpload" @submit="onEditSubmit" />
+    <ex-editor v-if="editor" :title="editTitle" :items="editor" :show="dialogEdit" @close="onEditClose" :model="row" @upload="onEditUpload" @submit="onEditSubmit" />
   </div>
 </template>
 
 <script>
-import mintSearch from './mintSearch'
-import mintViewer from './mintViewer'
-import mintEditor from './mintEditor'
+import exSearch from './exSearch'
+import exViewer from './exViewer'
+import exEditor from './exEditor'
 
 export default {
-  name: 'mintTable',
-  components: { mintSearch, mintViewer, mintEditor },
+  name: 'exTable',
+  components: { exSearch, exViewer, exEditor },
   props: {
     title: String,
     params: Object,
