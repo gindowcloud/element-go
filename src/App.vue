@@ -1,11 +1,13 @@
 <template>
   <div>
-    <ex-table ref="table"
-      :title="title"
-      :params="params" :filter="filter" :loading="loading" @search="search" @page-change="pageChange"
-      :total="total" v-model="data" allow-remove allow-create allow-export @remove="remove" @create="create" @export="download"
+    <ex-table
+      ref="table" v-model="data" :total="total" :loading="loading" :title="title"
+      :params="params" :filter="filter" @search="search" @page-change="pageChange"
       :viewer="viewer" :editor="editor" @edit-submit="editSubmit"
-      >
+      allow-remove @remove="remove"
+      allow-create @create="create"
+      allow-export @export="download"
+    >
       <el-table-column label="姓名" prop="name" />
       <el-table-column label="注册日期" prop="date" align="right" />
     </ex-table>

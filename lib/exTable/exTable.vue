@@ -18,12 +18,12 @@
     <div v-loading="loading">
       <el-table :data="value">
         <slot />
-        <el-table-column width="140" align="right">
+        <el-table-column width="150" align="right" v-if="hasAction">
           <template slot-scope="scope">
             <div class="col-action">
               <el-button type="text" v-if="viewer" @click="view(scope.row)">{{ $t('lang.view') }}</el-button>
               <el-button type="text" v-if="editor" @click="edit(scope.row)">{{ $t('lang.edit') }}</el-button>
-              <el-dropdown v-if="allowRemove || hasActionSlot">
+              <el-dropdown v-if="hasActionMore">
                 <span class="el-dropdown-link"><i class="el-icon-more" /></span>
                 <el-dropdown-menu slot="dropdown">
                   <slot name="action" :$index="scope.$index" :row="scope.row" />
@@ -77,8 +77,11 @@ export default {
     }
   },
   computed: {
-    hasActionSlot() {
-      return this.$scopedSlots.action
+    hasActionMore() {
+      return this.$scopedSlots.action || this.allowRemove
+    },
+    hasAction() {
+      return this.viewer || this.editor || this.hasActionMore
     }
   },
   mounted() {

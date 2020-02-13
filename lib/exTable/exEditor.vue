@@ -105,6 +105,6 @@ export default {
 .uploader { height: 120px; }
 .uploader >>> .el-upload { position: relative; overflow: hidden; cursor: pointer; }
 .uploader >>> .el-upload:hover { border-color: #409EFF; }
-.uploader .el-icon-plus { width: 158px; height: 158px; line-height: 158px; text-align: center; font-size: 16px; color: #999; border: 1px dashed #eee; }
+.uploader .el-icon-plus { width: 118px; height: 118px; line-height: 118px; text-align: center; font-size: 16px; color: #999; border: 1px dashed #eee; }
 .uploader .el-image { width: 120px; height: 120px; }
 </style>
