@@ -2,4 +2,4 @@
 .text-right { text-align: right; }
 
 /* Layout */
-.ex-table { background-color: #fff; }
+.ex-table, .ex-tree { background-color: #fff; }

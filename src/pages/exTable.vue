@@ -1,0 +1,100 @@
+<template>
+  <div class="demo">
+    <ex-table      
+      ref="table" v-model="data" :total="total" :loading="loading"
+      :params="params" :filter="filter" @search="search" @page-change="pageChange"
+      :viewer="viewer"
+      :editor="editor" @edit-submit="editSubmit"
+      allow-remove @remove="remove"
+      allow-create @create="create"
+      allow-export @export="download"
+      >
+      <el-table-column label="姓名" prop="name" />
+      <el-table-column label="注册日期" prop="date" align="right" />
+    </ex-table>
+  </div>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      states: [
+        { label: '禁用', value: 1 },
+        { label: '正常', value: 2 }
+      ],
+      params: {
+        state: '',
+        q: '',
+        date: []
+      },
+      data: [
+        { state: 1, name: 'Jack Chen', phone: '13366668888', date: '2020-1-1' },
+        { state: 2, name: 'Jonson Li', phone: '13800009999', date: '2020-2-1' },
+      ],
+      total: 0,
+      loading: false,
+    }
+  },
+  computed: {
+    // 搜索表单参数
+    filter() {
+      return [
+        { name: 'state', label: '用户状态', type: 'select', options: this.states },
+        { name: 'date', label: ['起始日期', '结束日期'], type: 'daterange' },
+        { name: 'q', label: '搜索关键词' },
+      ]
+    },
+    // 查看表单参数
+    viewer() {
+      return [
+        { name: 'name' , label: '姓名' },
+        { name: 'phone', label: '电话' },
+        { name: 'state', label: '状态', type: 'select', options: this.states },
+      ]
+    },
+    // 编辑表单参数
+    editor() {
+      return [
+        { name: 'name', label: '姓名' },
+        { name: 'phone', label: '电话', readonly: true },
+      ]
+    }
+  },
+  methods: {
+    getData() {
+      this.loading = true
+      setTimeout(() => {
+        this.total = 100
+        this.loading = false
+      }, 250)
+    },
+    search() {
+      this.params.page = 1
+      this.getData()
+    },
+    pageChange(page) {
+      this.params.page = page
+      this.getData()
+    },
+    editSubmit() {
+      let $ref = this.$refs['table']
+      $ref.editClose()
+    },
+    remove (index) {
+      let $ref = this.$refs['table']
+      $ref.remove(index)
+    },
+    create() {
+      this.$message.success('On Create');
+    },
+    download() {
+      this.$message.success('On Export');
+    }
+  }
+}
+</script>
+
+<style scoped>
+.demo { min-height: calc(100vh - 40px); background-color: #fff; }
+</style>
