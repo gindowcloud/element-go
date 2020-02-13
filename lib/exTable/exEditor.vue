@@ -29,8 +29,8 @@
       </el-form-item>
     </el-form>
     <div slot="footer" class="dialog-footer">
-      <el-button @click="cancel">{{ $t('lang.cancel') }}</el-button>
-      <el-button @click="submit" type="primary">{{ $t('lang.save') }}</el-button>
+      <el-button @click="cancel">{{ $t('cancel') }}</el-button>
+      <el-button @click="submit" type="primary">{{ $t('save') }}</el-button>
     </div>
   </el-dialog>
 </template>

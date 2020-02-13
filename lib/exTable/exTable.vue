@@ -9,8 +9,8 @@
       </el-col>
       <el-col :md="4" class="text-right">
         <el-button-group>
-          <el-button plain v-if="allowCreate" size="small" icon="el-icon-plus" @click="create">{{ $t('lang.create') }}</el-button>
-          <el-button plain v-if="allowExport" size="small" icon="el-icon-download" @click="download">{{ $t('lang.export') }}</el-button>
+          <el-button plain v-if="allowCreate" size="small" icon="el-icon-plus" @click="create">{{ $t('create') }}</el-button>
+          <el-button plain v-if="allowExport" size="small" icon="el-icon-download" @click="download">{{ $t('export') }}</el-button>
         </el-button-group>
       </el-col>
     </el-row>
@@ -21,13 +21,13 @@
         <el-table-column width="150" align="right" v-if="hasAction">
           <template slot-scope="scope">
             <div class="col-action">
-              <el-button type="text" v-if="viewer" @click="view(scope.row)">{{ $t('lang.view') }}</el-button>
-              <el-button type="text" v-if="editor" @click="edit(scope.row)">{{ $t('lang.edit') }}</el-button>
+              <el-button type="text" v-if="viewer" @click="view(scope.row)">{{ $t('view') }}</el-button>
+              <el-button type="text" v-if="editor" @click="edit(scope.row)">{{ $t('edit') }}</el-button>
               <el-dropdown v-if="hasActionMore">
                 <span class="el-dropdown-link"><i class="el-icon-more" /></span>
                 <el-dropdown-menu slot="dropdown">
                   <slot name="action" :$index="scope.$index" :row="scope.row" />
-                  <el-dropdown-item v-if="allowRemove" @click.native="confirm(scope.$index, scope.row)">{{ $t('lang.delete') }}</el-dropdown-item>
+                  <el-dropdown-item v-if="allowRemove" @click.native="confirm(scope.$index, scope.row)">{{ $t('delete') }}</el-dropdown-item>
                 </el-dropdown-menu>
               </el-dropdown>
             </div>
@@ -146,7 +146,7 @@ export default {
     },
     // 删除确认
     confirm (index, row) {
-      this.$confirm('Are you sure to remove?', 'Confirm', { type: 'warning' }).then(() => {
+      this.$confirm(this.$t('confirm.delete'), { type: 'warning' }).then(() => {
         this.$emit('remove', index, row)
       }).catch(() => {})
     },

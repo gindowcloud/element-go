@@ -9,8 +9,8 @@
       <el-input v-else v-model="value[item.name]" :placeholder="item.label" @keyup.enter.native="search" />
     </el-form-item>
     <el-form-item>
-      <el-button type="primary" @click="search">{{ $t("lang.search") }}</el-button>
-      <el-button @click="reset">{{ $t("lang.reset") }}</el-button>
+      <el-button type="primary" @click="search">{{ $t("search") }}</el-button>
+      <el-button @click="reset">{{ $t("reset") }}</el-button>
     </el-form-item>
   </el-form>
 </template>

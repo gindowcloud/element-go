@@ -3,11 +3,9 @@ import App from './App.vue'
 
 //
 import ElementUI from 'element-ui'
+import exTable from '../lib'
 import 'element-ui/lib/theme-chalk/index.css'
 Vue.use(ElementUI)
-
-//
-import exTable from '../lib'
 Vue.use(exTable)
 
 new Vue({

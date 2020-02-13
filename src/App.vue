@@ -61,6 +61,9 @@ export default {
       ]
     }
   },
+  mounted() {
+    console.log( this.$t('lang') )
+  },
   methods: {
     getData() {
       this.loading = true

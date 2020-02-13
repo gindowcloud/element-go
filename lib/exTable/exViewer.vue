@@ -8,7 +8,7 @@
       </el-col>
     </el-row>
     <div slot="footer" class="dialog-footer">
-      <el-button @click="close" type="primary">{{ $t('lang.okay') }}</el-button>
+      <el-button @click="close" type="primary">{{ $t('okay') }}</el-button>
     </div>
   </el-dialog>
 </template>
