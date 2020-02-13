@@ -1,11 +1,15 @@
 <template>
   <el-form ref="formSearch" :model="value" :inline="true" size="small">
     <el-form-item v-for="(item, index) in filter" :key="index" :prop="item.name">
-      <el-select v-if="item.type == 'select'" v-model="value[item.name]">
+      <!-- 下拉输入 -->      
+      <el-select v-if="item.type == 'select'" v-model="value[item.name]" :placeholder="item.label">
         <el-option v-for="(j, i) in item.options" :key="i" :label="j.label" :value="j.value" />
       </el-select>
+      <!-- 日期输入 -->
       <el-date-picker v-else-if="item.type == 'date'" type="date" v-model="value[item.name]" :placeholder="item.label" :editable="false" />
+      <!-- 日期区间 -->
       <el-date-picker v-else-if="item.type == 'daterange'" type="daterange" v-model="value[item.name]" :start-placeholder="item.label[0]" :end-placeholder="item.label[1]" :editable="false" range-separator="-" value-format="yyyy-MM-dd" />
+      <!-- 普通输入 -->
       <el-input v-else v-model="value[item.name]" :placeholder="item.label" @keyup.enter.native="search" />
     </el-form-item>
     <el-form-item>

@@ -1,7 +1,5 @@
 <template>
-  <div>
-    <!-- 表单标题 -->
-    <div v-if="title" class="margin-bottom">{{ title }}</div>
+  <div class="ex-table">
     <!-- 搜索表单 -->
     <el-row>
       <el-col :md="20" v-if="filter">
@@ -36,7 +34,7 @@
       </el-table>
     </div>
     <!-- 数据分页 -->
-    <el-pagination background layout="total,prev,pager,next" :load="true" :page-size="params.size" :current-page="params.page" :total="total" @current-change="pageChange" />
+    <el-pagination v-if="total" background layout="total,prev,pager,next" :load="true" :page-size="params.size" :current-page="params.page" :total="total" @current-change="pageChange" />
     <!-- 查看表单 -->
     <ex-viewer v-if="viewer" :title="viewTitle" :items="viewer" :show="dialogView" @close="viewClose" :model="row" />
     <!-- 编辑表单 -->
@@ -159,11 +157,11 @@ export default {
 </script>
 
 <style scoped>
-.text-right { text-align: right; }
-.margin-bottom { margin-bottom: 16px; }
-.col-action .el-button, .col-action .el-dropdown { margin-left: 15px; }
-.col-action .el-button:first-child,
-.col-action .el-dropdown:first-child { margin-left: 0; }
-.el-dropdown-link { cursor: pointer; color: #409EFF; }
-.el-pagination { margin: 30px 0; text-align: center; }
+.ex-table { padding: 32px; }
+.ex-table .col-action .el-button,
+.ex-table .col-action .el-dropdown { margin-left: 15px; }
+.ex-table .col-action .el-button:first-child,
+.ex-table .col-action .el-dropdown:first-child { margin-left: 0; }
+.ex-table .el-dropdown-link { cursor: pointer; color: #409EFF; }
+.ex-table .el-pagination { margin: 30px 0; text-align: center; }
 </style>

@@ -1,13 +1,14 @@
 <template>
-  <div>
-    <ex-table
-      ref="table" v-model="data" :total="total" :loading="loading" :title="title"
+  <div class="demo">
+    <ex-table      
+      ref="table" v-model="data" :total="total" :loading="loading"
       :params="params" :filter="filter" @search="search" @page-change="pageChange"
-      :viewer="viewer" :editor="editor" @edit-submit="editSubmit"
+      :viewer="viewer"
+      :editor="editor" @edit-submit="editSubmit"
       allow-remove @remove="remove"
       allow-create @create="create"
       allow-export @export="download"
-    >
+      >
       <el-table-column label="姓名" prop="name" />
       <el-table-column label="注册日期" prop="date" align="right" />
     </ex-table>
@@ -22,7 +23,6 @@ export default {
         { label: '禁用', value: 1 },
         { label: '正常', value: 2 }
       ],
-      title: '用户列表',
       params: {
         state: '',
         q: '',
@@ -40,7 +40,7 @@ export default {
     // 搜索表单参数
     filter() {
       return [
-        { name: 'state', label: '状态', type: 'select', options: this.states },
+        { name: 'state', label: '用户状态', type: 'select', options: this.states },
         { name: 'date', label: ['起始日期', '结束日期'], type: 'daterange' },
         { name: 'q', label: '搜索关键词' },
       ]
@@ -60,9 +60,6 @@ export default {
         { name: 'phone', label: '电话', readonly: true },
       ]
     }
-  },
-  mounted() {
-    console.log( this.$t('lang') )
   },
   methods: {
     getData() {
@@ -101,3 +98,7 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.demo { margin: 32px; min-height: calc(100vh - 64px); border-radius: 8px; background-color: #fff; }
+</style>

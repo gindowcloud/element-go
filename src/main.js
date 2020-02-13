@@ -1,12 +1,7 @@
 import Vue from 'vue'
 import App from './App.vue'
-
-//
-import ElementUI from 'element-ui'
-import exTable from '../lib'
-import 'element-ui/lib/theme-chalk/index.css'
-Vue.use(ElementUI)
-Vue.use(exTable)
+import './plugins/element'
+import './styles/index.css'
 
 new Vue({
   el: '#app',
