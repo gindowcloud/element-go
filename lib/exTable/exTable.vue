@@ -157,7 +157,7 @@ export default {
 </script>
 
 <style scoped>
-.ex-table { padding: 32px; }
+.ex-table { padding: 20px; }
 .ex-table .col-action .el-button,
 .ex-table .col-action .el-dropdown { margin-left: 15px; }
 .ex-table .col-action .el-button:first-child,

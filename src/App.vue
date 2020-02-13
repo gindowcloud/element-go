@@ -100,5 +100,5 @@ export default {
 </script>
 
 <style scoped>
-.demo { margin: 32px; min-height: calc(100vh - 64px); border-radius: 8px; background-color: #fff; }
+.demo { margin: 20px; min-height: calc(100vh - 40px); background-color: #fff; }
 </style>

@@ -1,1 +1,5 @@
+/* Common */
 .text-right { text-align: right; }
+
+/* Layout */
+.ex-table { background-color: #fff; }
