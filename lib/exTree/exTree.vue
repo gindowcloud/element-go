@@ -1,7 +1,7 @@
 <template>
   <div class="ex-tree">
     <!-- 控制区 -->
-    <el-row class="row-action">
+    <el-row v-if="allowCreate" class="row-action">
       <el-col class="text-right">
         <el-button-group>
           <el-button plain v-if="allowCreate" size="small" icon="el-icon-plus" @click="create({})">{{ $t('create') }}</el-button>
@@ -14,13 +14,14 @@
         :expand-on-click-node="false" icon-class="el-icon-arrow-right"
         :props="props" :data="data" :lazy="!data" :load="loadNode"
         >
-        <div class="node" slot-scope="{ node }">
+        <div class="node" slot-scope="{ node, data }">
           <span>{{ node.label }}</span>
           <span class="col-action">
             <el-button v-if="allowRemove && node.isLeaf" type="text" size="mini" @click="remove(node)"><i class="el-icon-delete" /> {{ $t('delete') }}</el-button>
-            <el-button v-if="allowCreate && editor" type="text" size="mini" @click="create(node)"><i class="el-icon-plus" /> {{ $t('append') }}</el-button>
+            <el-button v-if="allowAppend && editor" type="text" size="mini" @click="create(node)"><i class="el-icon-plus" /> {{ $t('append') }}</el-button>
             <el-button v-if="editor" type="text" size="mini" @click="edit(node)"><i class="el-icon-edit-outline" /> {{ $t('edit') }}</el-button>
           </span>
+          <span v-if="hasSlot" class="col-slot"><slot :row="data" /></span>
         </div>
       </el-tree>
     </div>
@@ -42,6 +43,7 @@ export default {
     editor: Array,
     editTitle: String,
     allowCreate: Boolean,
+    allowAppend: Boolean,
     allowRemove: Boolean
   },
   data() {
@@ -51,7 +53,10 @@ export default {
       row: {},
     }
   },
-  created() {
+  computed: {
+    hasSlot() {
+      return this.$scopedSlots.default
+    }
   },
   methods: {
     // 获取数据
@@ -108,5 +113,6 @@ export default {
 .ex-tree .row-action { margin-bottom: 20px; }
 .ex-tree >>> .el-tree-node__content { height: 40px; line-height: 40px; border-bottom: 1px solid #f6f6f6; }
 .ex-tree .node { width: 100%; }
-.ex-tree .col-action { float: right; }
+.ex-tree .col-slot { float: right; }
+.ex-tree .col-action { float: right; text-align: right; width: 200px; }
 </style>

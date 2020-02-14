@@ -4,9 +4,9 @@
       ref="tree"
       :props="props" @load="load" :loading="loading"
       :editor="editor" editTitle="添加/编辑目录"
-      allow-create @submit="submit"
+      allow-append @submit="submit"
       allow-remove @remove="remove"
-      />
+    />
   </div>
 </template>
 
