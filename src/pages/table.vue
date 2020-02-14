@@ -1,6 +1,6 @@
 <template>
-  <div class="demo">
-    <ex-tree      
+  <div class="ex-demo">
+    <ex-table      
       ref="table" v-model="data" :total="total" :loading="loading"
       :params="params" :filter="filter" @search="search" @page-change="pageChange"
       :viewer="viewer"
@@ -11,7 +11,7 @@
       >
       <el-table-column label="姓名" prop="name" />
       <el-table-column label="注册日期" prop="date" align="right" />
-    </ex-tree>
+    </ex-table>
   </div>
 </template>
 
@@ -71,34 +71,26 @@ export default {
     },
     search() {
       this.params.page = 1
-      this.$message('On Search');
       this.getData()
     },
     pageChange(page) {
       this.params.page = page
-      this.$message('On Page Changed');
       this.getData()
     },
     editSubmit() {
       let $ref = this.$refs['table']
-      this.$message('On Modify');
       $ref.editClose()
     },
     remove (index) {
       let $ref = this.$refs['table']
-      this.$message('On Remove');
       $ref.remove(index)
     },
     create() {
-      this.$message('On Create');
+      this.$message.success('On Create');
     },
     download() {
-      this.$message('On Export');
+      this.$message.success('On Export');
     }
   }
 }
 </script>
-
-<style scoped>
-.demo { min-height: calc(100vh - 40px); background-color: #fff; }
-</style>

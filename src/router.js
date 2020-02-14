@@ -1,8 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import layout from './layouts/layout'
-import exTable from './pages/exTable'
-import exTree from './pages/exTree'
+import pageTable from './pages/table'
+import pageTree from './pages/tree'
 
 Vue.use(Router)
 
@@ -13,8 +13,8 @@ const router = new Router({
       path: '/',
       component: layout,
       children: [
-        { path: 'exTable', component: exTable },
-        { path: 'exTree', component: exTree },
+        { path: 'table', component: pageTable },
+        { path: 'tree', component: pageTree },
       ]
     },
   ]

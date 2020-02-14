@@ -51,7 +51,7 @@ export default {
   name: 'exTable',
   components: { exSearch, exViewer, exEditor },
   props: {
-    title: String,
+    loading: Boolean,
     params: Object,
     filter: Array,
     viewer: Array,
@@ -64,8 +64,7 @@ export default {
     editTitle: String,
     allowExport: Boolean,
     allowCreate: Boolean,
-    allowRemove: Boolean,
-    loading: Boolean
+    allowRemove: Boolean
   },
   data() {
     return {
@@ -107,7 +106,7 @@ export default {
       this.$emit("export")
     },
     // 查看资料
-    view (row) {
+    view(row) {
       if (this.viewUrl) {
         let url = this.viewUrl
         url.match(/{([^}]+)}/gi).forEach(j => {
@@ -143,13 +142,13 @@ export default {
         this.$emit("edit-upload", ret)
     },
     // 删除确认
-    confirm (index, row) {
+    confirm(index, row) {
       this.$confirm(this.$t('confirm.delete'), { type: 'warning' }).then(() => {
         this.$emit('remove', index, row)
       }).catch(() => {})
     },
     // 删除一行
-    remove (index) {
+    remove(index) {
       this.value.splice(index, 1)
     }
   }
