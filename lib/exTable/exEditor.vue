@@ -1,7 +1,7 @@
 <template>
   <el-dialog width="80%" :title="title" :visible.sync="visible">
     <el-form ref="formEditor" :model="model" @submit.native.prevent label-position="left">
-      <el-form-item v-for="(item, i) in datas" :key="i" :label="item.label" :prop="item.name" label-width="200px">
+      <el-form-item v-for="(item, i) in datas" :key="i" :label="item.label" :prop="item.name" :required="item.required" label-width="200px">
         <!-- 开关组件 -->
         <el-switch v-model="model[item.name]" :readonly="item.readonly" v-if="item.type == 'switch'" />
         <!-- 下拉组件 -->
@@ -12,7 +12,7 @@
         <el-cascader v-model="model[item.name]" :disabled="item.readonly" v-else-if="item.type == 'cascader'" collapse-tags filterable :clearable="item.clearable" :options="item.options" :props="item.props" />
         <!-- 多选组件 -->
         <el-checkbox-group v-model="model[item.name]" :disabled="item.readonly" v-else-if="item.type == 'checkbox'">
-            <el-checkbox v-for="(j, i) in item.options" :key="i" :label="j.value">{{j.label}}</el-checkbox>
+            <el-checkbox v-for="(j, i) in item.options" :key="i" :label="j.value">{{ j.label }}</el-checkbox>
         </el-checkbox-group>
         <!-- 上传组件 -->
         <el-upload class="uploader" :show-file-list="false" :before-upload="beforeUpload" :on-success="upload"
@@ -82,7 +82,10 @@ export default {
     },
     // 提交表单
     submit() {
-      this.$emit("submit")
+      this.$refs['formEditor'].validate((valid) => {
+        if (!valid) return false
+        this.$emit("submit")
+      })
     },
     // 上传图片
     upload(ret) {

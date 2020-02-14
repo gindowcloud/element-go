@@ -4,49 +4,52 @@
     <el-row class="row-action">
       <el-col class="text-right">
         <el-button-group>
-          <el-button plain v-if="allowCreate" size="small" icon="el-icon-plus" @click="create">{{ $t('create') }}</el-button>
+          <el-button plain v-if="allowCreate" size="small" icon="el-icon-plus" @click="create(null)">{{ $t('create') }}</el-button>
         </el-button-group>
       </el-col>
     </el-row>
     <!-- 树型区 -->
     <div v-loading="loading">
       <el-tree
-        lazy :load="loadNode"
         :expand-on-click-node="false" icon-class="el-icon-arrow-right"
-        :data="value" :props="props"
-        :draggable="allowDrag" @node-drop="drag"
+        :props="props" :data="data" :lazy="!data" :load="loadNode"
         >
-        <div class="node" slot-scope="{ node, data }">
-          <span>{{ data.label }}</span>
+        <div class="node" slot-scope="{ node }">
+          <span>{{ node.label }}</span>
           <span class="col-action">
-              <el-button v-if="allowCreate" type="text" size="mini" @click="create(data)"><i class="el-icon-plus" /> {{ $t('append') }}</el-button>
-              <el-button type="text" size="mini" @click="edit(data)"><i class="el-icon-edit-outline" /> {{ $t('edit') }}</el-button>
-              <el-button v-if="allowRemove" type="text" size="mini" @click="confirm(data, node)"><i class="el-icon-delete" /> {{ $t('delete') }}</el-button>
+            <el-button v-if="allowRemove && node.isLeaf" type="text" size="mini" @click="remove(node)"><i class="el-icon-delete" /> {{ $t('delete') }}</el-button>
+            <el-button v-if="allowCreate && editor" type="text" size="mini" @click="create(node)"><i class="el-icon-plus" /> {{ $t('append') }}</el-button>
+            <el-button v-if="editor" type="text" size="mini" @click="edit(node)"><i class="el-icon-edit-outline" /> {{ $t('edit') }}</el-button>
           </span>
         </div>
       </el-tree>
     </div>
+    <!-- 编辑表单 -->
+    <ex-editor v-if="editor" :title="editTitle" :items="editor" :show="dialogEdit" @close="editClose" :model="row" @submit="submit" />
   </div>
 </template>
 
 <script>
+import exEditor from '../exTable/exEditor'
+
 export default {
   name: 'exTree',
+  components: { exEditor },
   props: {
     loading: Boolean,
-    value: Array,
     props: Object,
-
+    data: Array,
     editor: Array,
-    editUrl: String,
     editTitle: String,
-
     allowCreate: Boolean,
-    allowRemove: Boolean,
-    allowDrag: Boolean
+    allowRemove: Boolean
   },
   data() {
     return {
+      dialogEdit: false,
+      isCreate: false,
+      row: {},
+      current: {},
     }
   },
   created() {
@@ -54,43 +57,50 @@ export default {
   methods: {
     // 获取数据
     loadNode(node, resolve) {
-      this.$emit("load", node, resolve)
+      this.$emit("load", node.data, resolve)
     },
     // 新建提交
-    create() {
-      this.$emit("create")
+    create(node) {
+      this.row = {}
+      this.current = node
+      this.isCreate = true
+      this.dialogEdit = true
     },
     // 编辑资料
-    edit(row) {
-        this.$emit("edit", row)
-        this.row = row
-        this.dialogEdit = true
+    edit(node) {
+      this.row = node.data
+      this.isCreate = false
+      this.dialogEdit = true
     },
     // 编辑关闭
     editClose() {
-        this.dialogEdit = false
+      this.dialogEdit = false
     },
     // 编辑保存
-    editSubmit() {
-        this.$emit("edit-submit")
+    submit() {
+      this.$emit("submit", this.row, this.isCreate)
     },
-    // 编辑保存
-    editUpload(ret) {
-        this.$emit("edit-upload", ret)
+    // 保存添加
+    store(row) {
+      if (!this.current && !this.data) return
+      if (!this.current) return this.data.push(row)
+      const data = this.current.data
+      if (!data.children) this.$set(data, 'children', [])
+      data.children.push(row)
     },
-    // 删除确认
-    confirm(index, row) {
+    // 删除功能
+    remove(node) {
       this.$confirm(this.$t('confirm.delete'), { type: 'warning' }).then(() => {
-        this.$emit('remove', index, row)
+        this.$emit('remove', node)
       }).catch(() => {})
     },
-    // 删除一行
-    remove(index) {
-      this.value.splice(index, 1)
+    // 删除节点
+    destroy(node) {
+      const parent = node.parent
+      const children = parent.childNodes
+      const index = children.findIndex(j => j.id === node.id)
+      children.splice(index, 1)
     },
-    drag() {
-      this.$emit("drag")
-    }
   }
 }
 </script>

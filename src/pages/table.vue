@@ -56,7 +56,7 @@ export default {
     // 编辑表单参数
     editor() {
       return [
-        { name: 'name', label: '姓名' },
+        { name: 'name', label: '姓名', required: true },
         { name: 'phone', label: '电话', readonly: true },
       ]
     }
@@ -83,7 +83,7 @@ export default {
     },
     remove (index) {
       let $ref = this.$refs['table']
-      $ref.remove(index)
+      $ref.destroy(index)
     },
     create() {
       this.$message.success('On Create');

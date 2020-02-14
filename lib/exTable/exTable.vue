@@ -25,7 +25,7 @@
                 <span class="el-dropdown-link"><i class="el-icon-more" /></span>
                 <el-dropdown-menu slot="dropdown">
                   <slot name="action" :$index="scope.$index" :row="scope.row" />
-                  <el-dropdown-item v-if="allowRemove" @click.native="confirm(scope.$index, scope.row)">{{ $t('delete') }}</el-dropdown-item>
+                  <el-dropdown-item v-if="allowRemove" @click.native="remove(scope.$index, scope.row)">{{ $t('delete') }}</el-dropdown-item>
                 </el-dropdown-menu>
               </el-dropdown>
             </div>
@@ -142,13 +142,13 @@ export default {
         this.$emit("edit-upload", ret)
     },
     // 删除确认
-    confirm(index, row) {
+    remove(index, row) {
       this.$confirm(this.$t('confirm.delete'), { type: 'warning' }).then(() => {
         this.$emit('remove', index, row)
       }).catch(() => {})
     },
     // 删除一行
-    remove(index) {
+    destroy(index) {
       this.value.splice(index, 1)
     }
   }
