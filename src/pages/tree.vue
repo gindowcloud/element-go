@@ -1,11 +1,11 @@
 <template>
   <div class="demo">
-    <ex-tree      
+    <ex-tree
       ref="tree"
       :props="props" @load="load" :loading="loading"
       :editor="editor" editTitle="添加/编辑目录"
       allow-create @submit="submit"
-      allow-remove @remove="remove"      
+      allow-remove @remove="remove"
       />
   </div>
 </template>
@@ -50,9 +50,9 @@ export default {
       let $ref = this.$refs['tree']
       $ref.destroy(node)
     },
-    submit(data, isCreate) {
+    submit(data, parent) {
       let $ref = this.$refs['tree']
-      if (isCreate) $ref.store(data)
+      if (parent) $ref.store(data, parent)
       $ref.editClose()
     }
   }

@@ -4,7 +4,7 @@
     <el-row class="row-action">
       <el-col class="text-right">
         <el-button-group>
-          <el-button plain v-if="allowCreate" size="small" icon="el-icon-plus" @click="create(null)">{{ $t('create') }}</el-button>
+          <el-button plain v-if="allowCreate" size="small" icon="el-icon-plus" @click="create({})">{{ $t('create') }}</el-button>
         </el-button-group>
       </el-col>
     </el-row>
@@ -47,9 +47,8 @@ export default {
   data() {
     return {
       dialogEdit: false,
-      isCreate: false,
+      parent: null, // 添加时的父节点
       row: {},
-      current: {},
     }
   },
   created() {
@@ -60,16 +59,15 @@ export default {
       this.$emit("load", node.data, resolve)
     },
     // 新建提交
-    create(node) {
+    create(parent) {
+      this.parent = parent
       this.row = {}
-      this.current = node
-      this.isCreate = true
       this.dialogEdit = true
     },
     // 编辑资料
     edit(node) {
+      this.parent = null
       this.row = node.data
-      this.isCreate = false
       this.dialogEdit = true
     },
     // 编辑关闭
@@ -78,13 +76,13 @@ export default {
     },
     // 编辑保存
     submit() {
-      this.$emit("submit", this.row, this.isCreate)
+      this.$emit("submit", this.row, this.parent)
     },
     // 保存添加
-    store(row) {
-      if (!this.current && !this.data) return
-      if (!this.current) return this.data.push(row)
-      const data = this.current.data
+    store(row, parent) {
+      if (!parent.data && !this.data) return
+      if (!parent.data) return this.data.push(row)
+      const data = parent.data
       if (!data.children) this.$set(data, 'children', [])
       data.children.push(row)
     },
