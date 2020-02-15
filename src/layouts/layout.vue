@@ -1,23 +1,50 @@
 <template>
-  <el-container>
-    <el-aside width="200px">
-      <div class="logo">Element Extensions</div>
-      <el-menu router :default-openeds="['1', '3']">
-        <el-submenu index="1">
-          <template slot="title"><i class="el-icon-menu" />业务组件</template>
-            <el-menu-item index="/table">ExTable</el-menu-item>
-            <el-menu-item index="/tree">ExTree</el-menu-item>
-        </el-submenu>
-      </el-menu>
-    </el-aside>
-    <el-main>
-      <router-view class="ex-demo" />
-    </el-main>
-  </el-container>
+  <ex-layout
+    :menu="menu"
+    :is-collapse="isCollapse" @collapse="collapse" />
 </template>
 
-<style scoped>
-.el-aside .logo { padding: 25px 0 24px; background: #fff; border-right: 1px solid #e6e6e6; border-bottom: 1px solid #f6f6f6; text-align: center; }
-.el-menu { min-height: calc(100vh - 72px); }
-.ex-demo { min-height: calc(100vh - 40px); background-color: #fff; }
-</style>
+<script>
+export default {
+  data() {
+    return {
+      isCollapse: true,
+      menu: [
+        { title: '首页', path: '/dashboard', icon: 'el-icon-data-board' },
+        { title: '数据', path: '/statistics', icon: 'el-icon-s-data' },
+        { title: '订单', path: '/orders/index', icon: 'el-icon-shopping-cart-2', children: [
+          { title: '服务订单', path: '/orders/services' },
+          { title: '服务评价', path: '/orders/reviews' },
+          { title: '卡券订单', path: '/orders/coupons' },
+          { title: '油卡订单', path: '/orders/fuelcards' },
+          { title: '余额充值', path: '/orders/deposits' },
+          { title: '话费充值', path: '/orders/topup' },
+        ]},
+        { title: '商户', path: '/shops', icon: 'el-icon-house', children: [
+          { title: '门店管理', path: '/shops' },
+          { title: '企业客户', path: '/shops/clients' },
+        ]},
+        { title: '用户', path: '/users', icon: 'el-icon-user', children: [
+          { title: '用户管理', path: '/users' },
+          { title: '用户卡券', path: '/users/coupons' },
+        ]},
+        { title: '财务', path: '/finance/transitions', icon: 'el-icon-coin', children: [
+          { title: '转账记录', path: '/finance/transitions' },
+          { title: '提现记录', path: '/finance/withdrawals' },
+        ]},
+        { title: '设置', path: '/settings', icon: 'el-icon-setting', children: [
+          { title: '系统配置', path: '/settings' },
+          { title: '服务类型', path: '/settings/categories' },
+          { title: '地区管理', path: '/settings/areas' }
+        ]}        
+      ]
+    }
+  },
+  methods: {
+    collapse () {
+      this.isCollapse = !this.isCollapse
+    }
+  }
+}
+</script>
+
