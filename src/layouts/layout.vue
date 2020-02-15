@@ -1,5 +1,5 @@
 <template>
-  <ex-layout :menu="menu" />
+  <ex-layout :menu="menu" user="Joming He" :user-menu="userMenu" />
 </template>
 
 <script>
@@ -17,10 +17,6 @@ export default {
           { title: '余额充值', path: '/orders/deposits' },
           { title: '话费充值', path: '/orders/topup' },
         ]},
-        { title: '商户', path: '/shops', icon: 'el-icon-house', children: [
-          { title: '门店管理', path: '/shops' },
-          { title: '企业客户', path: '/shops/clients' },
-        ]},
         { title: '用户', path: '/users', icon: 'el-icon-user', children: [
           { title: '用户管理', path: '/users' },
           { title: '用户卡券', path: '/users/coupons' },
@@ -34,6 +30,10 @@ export default {
           { title: '服务类型', path: '/settings/categories' },
           { title: '地区管理', path: '/settings/areas' }
         ]}        
+      ],
+      userMenu: [
+        { title: '资料'  },
+        { title: '设置' },
       ]
     }
   }

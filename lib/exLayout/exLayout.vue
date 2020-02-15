@@ -1,5 +1,5 @@
 <template>
-  <el-container class="ex-menu">
+  <el-container class="ex-layout">
     <el-aside :class="{ collapsed: isCollapsed }" :width="width">
       <el-menu
         router unique-opened 
@@ -26,6 +26,13 @@
     </el-aside>
     <el-container>
       <el-header>
+        <el-dropdown v-if="user" class="float-right" @command="command">
+          <span class="username"><i class="el-icon-user" /> {{ user }}</span>
+          <el-dropdown-menu v-if="userMenu" slot="dropdown">
+            <el-dropdown-item v-for="(item, key) in userMenu" :key="key" :command="item.path || ''">{{ item.title }}</el-dropdown-item>
+            <el-dropdown-item command="logout" divided>{{ $t('logout') }}</el-dropdown-item>
+          </el-dropdown-menu>
+        </el-dropdown>
         <div class="toggle" @click="collapse">
           <i class="el-icon-s-unfold" v-if="isCollapsed" />
           <i class="el-icon-s-fold" v-else/>
@@ -43,7 +50,9 @@ export default {
     collapsed: { type: Boolean, default: true },
     width: { type: String, default: '140px' },
     logo: String,
-    menu: Array
+    menu: Array,
+    user: String,
+    userMenu: Array    
   },
   data() {
     return {
@@ -51,22 +60,31 @@ export default {
     }
   },
   methods: {
-    collapse () {
+    collapse() {
       this.isCollapsed = !this.isCollapsed
       this.$emit('collapse')
+    },
+    command(command) {
+      switch(command) {
+        case '': break;
+        case 'logout': this.$emit('logout'); break
+        default: this.$router.push(command); break
+      }
     }
   }
 }
 </script>
 
 <style scoped>
-.el-header { background-color: #fff; line-height: 60px; }
-.el-header .toggle { font-size: 16px; }
+.el-header { background-color: #fff; line-height: 60px; box-shadow: 0 1px 5px #eee; }
+.el-header .toggle { float: left; font-size: 16px; }
+.el-header .username { float: right; border-left: 1px solid #f6f6f6; line-height: 20px; padding: 20px 15px 20px 25px; color: #666; }
+.el-header .username i { margin-right: 10px; }
 .el-menu { min-height: 100vh; border-right: 0 !important; }
 .el-menu .logo { height: 60px; text-align: center; font-size: 24px; background-color: #292929; }
 .el-menu .logo span { display: inline-block; width: 32px; height: 32px; margin-top: 14px; background-color: #fff; color: #1989fa; border-radius: 50%; }
 .el-menu >>> .el-submenu__title, .el-menu-item { height: 40px; line-height: 40px; }
 .el-menu >>> .el-submenu__icon-arrow { margin-top: -5px; color: #555; }
 .el-menu >>> .el-menu--inline .el-menu-item { padding-left: 49px !important; }
-.ex-menu .collapsed { width: 65px !important; }
+.collapsed { width: 65px !important; }
 </style>

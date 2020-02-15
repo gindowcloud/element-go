@@ -1,5 +1,7 @@
 /* Common */
 .text-right { text-align: right; }
+.float-right { float: right; }
 
 /* Layout */
+.ex-layout { background: #f3f3f3; }
 .ex-table, .ex-tree { background-color: #fff; }
