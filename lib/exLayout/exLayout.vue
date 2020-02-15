@@ -31,9 +31,7 @@
           <i class="el-icon-s-fold" v-else/>
         </div>
       </el-header>
-      <el-main>
-        <router-view class="page" />
-      </el-main>
+      <el-main><router-view /></el-main>
     </el-container>
   </el-container>
 </template>
@@ -71,5 +69,4 @@ export default {
 .el-menu >>> .el-submenu__icon-arrow { margin-top: -5px; color: #555; }
 .el-menu >>> .el-menu--inline .el-menu-item { padding-left: 49px !important; }
 .ex-menu .collapsed { width: 65px !important; }
-.ex-menu .page { min-height: calc(100vh - 100px); background-color: #fff; }
 </style>
