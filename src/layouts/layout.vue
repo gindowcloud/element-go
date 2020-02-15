@@ -1,14 +1,11 @@
 <template>
-  <ex-layout
-    :menu="menu"
-    :is-collapse="isCollapse" @collapse="collapse" />
+  <ex-layout :menu="menu" />
 </template>
 
 <script>
 export default {
   data() {
     return {
-      isCollapse: true,
       menu: [
         { title: '首页', path: '/dashboard', icon: 'el-icon-data-board' },
         { title: '数据', path: '/statistics', icon: 'el-icon-s-data' },
@@ -39,12 +36,6 @@ export default {
         ]}        
       ]
     }
-  },
-  methods: {
-    collapse () {
-      this.isCollapse = !this.isCollapse
-    }
   }
 }
 </script>
-
