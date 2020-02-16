@@ -1,5 +1,5 @@
 <template>
-  <ex-layout :menu="menu" user="Joming He" :user-menu="userMenu" />
+  <ex-layout :menu="menu" user="周明" :user-menu="userMenu" @logout="logout" />
 </template>
 
 <script>
@@ -8,33 +8,23 @@ export default {
     return {
       menu: [
         { title: '首页', path: '/dashboard', icon: 'el-icon-data-board' },
-        { title: '数据', path: '/statistics', icon: 'el-icon-s-data' },
-        { title: '订单', path: '/orders/index', icon: 'el-icon-shopping-cart-2', children: [
-          { title: '服务订单', path: '/orders/services' },
-          { title: '服务评价', path: '/orders/reviews' },
-          { title: '卡券订单', path: '/orders/coupons' },
-          { title: '油卡订单', path: '/orders/fuelcards' },
-          { title: '余额充值', path: '/orders/deposits' },
-          { title: '话费充值', path: '/orders/topup' },
-        ]},
-        { title: '用户', path: '/users', icon: 'el-icon-user', children: [
-          { title: '用户管理', path: '/users' },
-          { title: '用户卡券', path: '/users/coupons' },
-        ]},
-        { title: '财务', path: '/finance/transitions', icon: 'el-icon-coin', children: [
-          { title: '转账记录', path: '/finance/transitions' },
-          { title: '提现记录', path: '/finance/withdrawals' },
+        { title: '组件', path: '/orders/index', icon: 'el-icon-shopping-cart-2', children: [
+          { title: 'ExTable', path: '/table' },
+          { title: 'ExTree', path: '/tree' },
         ]},
         { title: '设置', path: '/settings', icon: 'el-icon-setting', children: [
-          { title: '系统配置', path: '/settings' },
-          { title: '服务类型', path: '/settings/categories' },
-          { title: '地区管理', path: '/settings/areas' }
+          { title: '系统设置', path: '/settings' },
         ]}        
       ],
       userMenu: [
         { title: '资料'  },
         { title: '设置' },
       ]
+    }
+  },
+  methods: {
+    logout() {
+      this.$message.success('Logout')
     }
   }
 }

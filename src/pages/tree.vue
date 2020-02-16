@@ -34,7 +34,6 @@ export default {
   methods: {
     load(node, resolve) {
       this.loading = true
-      this.$message('On Load')
       setTimeout(() => {
         resolve([
           { label: '一级 3' },
@@ -46,7 +45,7 @@ export default {
     },
     // 删除节点
     remove(node) {
-      this.$message('On Remove')
+      this.$message.success('Remove')
       let $ref = this.$refs['tree']
       $ref.destroy(node)
     },

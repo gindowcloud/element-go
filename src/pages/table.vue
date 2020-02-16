@@ -9,8 +9,11 @@
       allow-create @create="create"
       allow-export @export="download"
       >
-      <el-table-column label="姓名" prop="name" />
-      <el-table-column label="注册日期" prop="date" align="right" />
+      <el-table-column label="姓名" width="120" prop="name" />
+      <el-table-column label="省份" width="120" prop="province" />
+      <el-table-column label="市区" width="120" prop="city" />
+      <el-table-column label="地址" width="300" prop="address" />
+      <el-table-column label="日期" prop="date" align="right" />
     </ex-table>
   </div>
 </template>
@@ -28,10 +31,35 @@ export default {
         q: '',
         date: []
       },
-      data: [
-        { state: 1, name: 'Jack Chen', phone: '13366668888', date: '2020-1-1' },
-        { state: 2, name: 'Jonson Li', phone: '13800009999', date: '2020-2-1' },
-      ],
+      data: [{
+          date: '2016-05-02',
+          name: '王小虎',
+          province: '上海',
+          city: '普陀区',
+          address: '上海市普陀区金沙江路 1518 弄',
+          zip: 200333
+        }, {
+          date: '2016-05-04',
+          name: '王小虎',
+          province: '上海',
+          city: '普陀区',
+          address: '上海市普陀区金沙江路 1517 弄',
+          zip: 200333
+        }, {
+          date: '2016-05-01',
+          name: '王小虎',
+          province: '上海',
+          city: '普陀区',
+          address: '上海市普陀区金沙江路 1519 弄',
+          zip: 200333
+        }, {
+          date: '2016-05-03',
+          name: '王小虎',
+          province: '上海',
+          city: '普陀区',
+          address: '上海市普陀区金沙江路 1516 弄',
+          zip: 200333
+        }],
       total: 0,
       loading: false,
     }
@@ -78,18 +106,20 @@ export default {
       this.getData()
     },
     editSubmit() {
+      this.$message.success('Update');
       let $ref = this.$refs['table']
       $ref.editClose()
     },
     remove (index) {
+      this.$message.success('Remove');
       let $ref = this.$refs['table']
       $ref.destroy(index)
     },
     create() {
-      this.$message.success('On Create');
+      this.$message.success('Create');
     },
     download() {
-      this.$message.success('On Export');
+      this.$message.success('Export');
     }
   }
 }
