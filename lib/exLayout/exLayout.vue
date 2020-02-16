@@ -54,7 +54,7 @@ import Cookies from 'js-cookie'
 export default {
   name: 'exLayout',
   props: {
-    collapsed: String,
+    collapsed: { type: Boolean, default: true },
     width: { type: String, default: '140px' },
     logo: String,
     menu: Array,
