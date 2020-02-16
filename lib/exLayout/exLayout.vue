@@ -38,16 +38,23 @@
           <i class="el-icon-s-fold" v-else/>
         </div>
       </el-header>
-      <el-main><router-view /></el-main>
+      <el-main>
+        <!-- 路由内容 -->
+        <transition mode="out-in" name="fade-transform">
+          <router-view/>
+        </transition>
+      </el-main>
     </el-container>
   </el-container>
 </template>
 
 <script>
+import Cookies from 'js-cookie'
+
 export default {
   name: 'exLayout',
   props: {
-    collapsed: { type: Boolean, default: true },
+    collapsed: String,
     width: { type: String, default: '140px' },
     logo: String,
     menu: Array,
@@ -59,10 +66,15 @@ export default {
       isCollapsed: this.collapsed
     }
   },
+  created() {
+    let collapsed = Cookies.get('sidebarCollapsed')
+    if (collapsed) this.isCollapsed = collapsed === 'true'
+  },
   methods: {
     collapse() {
       this.isCollapsed = !this.isCollapsed
-      this.$emit('collapse')
+      Cookies.set('sidebarCollapsed', this.isCollapsed)
+      this.$emit('collapse', this.isCollapsed)
     },
     command(command) {
       switch(command) {

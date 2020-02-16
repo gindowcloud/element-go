@@ -1,6 +1,11 @@
+@import './transition.css';
+
 /* Common */
-.text-right { text-align: right; }
+.float-left { float: left; }
 .float-right { float: right; }
+.text-left { text-align: left; }
+.text-center { text-align: center; }
+.text-right { text-align: right; }
 
 /* Layout */
 .ex-layout { background: #f3f3f3; }
