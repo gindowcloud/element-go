@@ -8,7 +8,7 @@ export default {
     return {
       menu: [
         { title: '首页', path: '/dashboard', icon: 'el-icon-data-board' },
-        { title: '组件', path: '/orders/index', icon: 'el-icon-shopping-cart-2', children: [
+        { title: '组件', path: '/table', icon: 'el-icon-cherry', children: [
           { title: 'ExTable', path: '/table' },
           { title: 'ExTree', path: '/tree' },
         ]},
