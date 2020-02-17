@@ -20,7 +20,7 @@
           <template slot-scope="scope">
             <div class="col-action">
               <el-button type="text" v-if="viewer" @click="view(scope.row)">{{ $t('view') }}</el-button>
-              <el-button type="text" v-if="editor" @click="edit(scope.row)">{{ $t('edit') }}</el-button>
+              <el-button type="text" v-if="allowModify && editor" @click="edit(scope.row)">{{ $t('edit') }}</el-button>
               <el-dropdown v-if="hasActionMore">
                 <span class="el-dropdown-link"><i class="el-icon-more" /></span>
                 <el-dropdown-menu slot="dropdown">
@@ -64,7 +64,8 @@ export default {
     editTitle: String,
     allowExport: Boolean,
     allowCreate: Boolean,
-    allowRemove: Boolean
+    allowRemove: Boolean,
+    allowModify: { type: Boolean, default: true }
   },
   data() {
     return {
