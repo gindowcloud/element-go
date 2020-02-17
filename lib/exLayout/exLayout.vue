@@ -24,7 +24,7 @@
         </template>
       </el-menu>      
     </el-aside>
-    <el-container>
+    <el-container class="ex-main">
       <el-header>
         <el-dropdown v-if="user" class="float-right" @command="command">
           <span class="username"><i class="el-icon-user" /> {{ user }}</span>
@@ -88,10 +88,13 @@ export default {
 </script>
 
 <style scoped>
+.ex-layout { height: 100vh; }
+.ex-main { overflow: auto; }
 .el-header { background-color: #fff; line-height: 60px; box-shadow: 0 1px 5px #eee; }
 .el-header .toggle { float: left; font-size: 16px; }
 .el-header .username { float: right; border-left: 1px solid #f6f6f6; line-height: 20px; padding: 20px 15px 20px 25px; color: #666; }
 .el-header .username i { margin-right: 10px; }
+.el-main { overflow: visible !important; }
 .el-menu { min-height: 100vh; border-right: 0 !important; }
 .el-menu .logo { height: 60px; text-align: center; font-size: 24px; background-color: #292929; }
 .el-menu .logo span { display: inline-block; width: 32px; height: 32px; margin-top: 14px; background-color: #fff; color: #1989fa; border-radius: 50%; }
