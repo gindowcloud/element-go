@@ -3,9 +3,16 @@
 /* Common */
 .float-left { float: left; }
 .float-right { float: right; }
+
 .text-left { text-align: left; }
 .text-center { text-align: center; }
 .text-right { text-align: right; }
+
+.color-red { color: #f33; }
+.color-green { color: #093; }
+.color-orange { color: #f80; }
+.color-blue { color: #409EFF; }
+.color-gray { color: lightgray; }
 
 /* Layout */
 .ex-layout { background: #f3f3f3; }

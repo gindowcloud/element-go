@@ -1,5 +1,5 @@
 <template>
-  <el-dialog width="80%" :title="title" :visible.sync="visible">
+  <el-dialog width="80%" :title="showTitle" :visible.sync="visible">
     <el-row v-for="(item, i) in datas" :key="i">
       <el-col :md="4">{{ item.label || '&nbsp;' }}</el-col>
       <el-col :md="20">
@@ -16,14 +16,15 @@
 <script>
 export default {
   props: {
-    title: { default: 'View' },
-    show: { default: false },
+    title: String,
+    show: { type: Boolean, default: false },
     items: Array,
     model: Object
   },
   data() {
     return {
       visible: false,
+      showTitle: this.title || this.$t('view'),
       imageSize: '100px', // 默认图片尺寸
     }
   },
