@@ -102,4 +102,8 @@ export default {
 .el-menu >>> .el-submenu__icon-arrow { margin-top: -5px; color: #555; }
 .el-menu >>> .el-menu--inline .el-menu-item { padding-left: 49px !important; }
 .collapsed { width: 65px !important; }
+@media screen and (max-width: 992px) { /* 中型以下屏幕 */
+  .el-header { border-bottom: 1px solid #eee; }
+  .el-main { padding: 0; }
+}
 </style>
