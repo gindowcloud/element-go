@@ -17,9 +17,7 @@
         <div class="node" slot-scope="{ node, data }">
           <span>{{ node.label }}</span>
           <span class="col-action">
-            <el-popconfirm v-if="allowRemove && node.isLeaf" @onConfirm="remove(node)" :title="$t('confirm.delete')">
-              <el-button slot="reference" type="text" size="mini"><i class="el-icon-delete" /> {{ $t('delete') }}</el-button>
-            </el-popconfirm>
+            <el-button v-if="allowRemove && node.isLeaf" @click="remove(node)" type="text" size="mini"><i class="el-icon-delete" /> {{ $t('delete') }}</el-button>
             <el-button v-if="allowAppend && editor" type="text" size="mini" @click="create(node)"><i class="el-icon-plus" /> {{ $t('append') }}</el-button>
             <el-button v-if="editor" type="text" size="mini" @click="edit(node)"><i class="el-icon-edit-outline" /> {{ $t('edit') }}</el-button>
           </span>
@@ -95,7 +93,9 @@ export default {
     },
     // 删除功能
     remove(node) {
-      this.$emit('remove', node)
+      this.$confirm(this.$t('confirm.delete'), { type: 'warning' }).then(() => {
+        this.$emit('remove', node)
+      }).catch(() => {})
     },
     // 删除节点
     destroy(node) {
