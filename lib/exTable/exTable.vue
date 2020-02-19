@@ -2,10 +2,10 @@
   <div class="ex-table">
     <!-- 搜索表单 -->
     <el-row>
-      <el-col :md="20" v-if="filter">
+      <el-col :sm="19" v-if="filter">
         <ex-search v-model="params" :filter="filter" @search="search" @reset="reset" />
       </el-col>
-      <el-col :md="4" class="text-right">
+      <el-col :sm="5" class="text-right">
         <el-button-group>
           <el-button plain v-if="allowCreate" size="small" icon="el-icon-plus" @click="create">{{ $t('create') }}</el-button>
           <el-button plain v-if="allowExport" size="small" icon="el-icon-download" @click="download">{{ $t('export') }}</el-button>
@@ -162,6 +162,7 @@ export default {
 .ex-table .col-action .el-dropdown { margin-left: 15px; }
 .ex-table .col-action .el-button:first-child,
 .ex-table .col-action .el-dropdown:first-child { margin-left: 0; }
+.ex-table .el-button-group { margin-top: 1px; }
 .ex-table .el-dropdown-link { cursor: pointer; color: #409EFF; }
 .ex-table .el-pagination { margin: 30px 0; text-align: center; }
 </style>

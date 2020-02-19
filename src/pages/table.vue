@@ -9,11 +9,11 @@
       allow-create @create="create"
       allow-export @export="download"
       >
-      <el-table-column label="姓名" width="120" prop="name" />
-      <el-table-column label="省份" width="120" prop="province" />
-      <el-table-column label="市区" width="120" prop="city" />
-      <el-table-column label="地址" width="300" prop="address" />
-      <el-table-column label="日期" prop="date" align="right" />
+      <el-table-column label="姓名" width="100" prop="name" />
+      <el-table-column label="省份" width="90" prop="province" />
+      <el-table-column label="市区" width="100" prop="city" />
+      <el-table-column label="地址" prop="address" />
+      <el-table-column label="日期" width="120" prop="date" align="right" />
     </ex-table>
   </div>
 </template>
