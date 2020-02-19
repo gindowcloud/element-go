@@ -1,5 +1,5 @@
 <template>
-  <el-form ref="formSearch" :model="value" :inline="true" size="small">
+  <el-form ref="formSearch" :model="value" :inline="true" size="small" @submit.native.prevent>
     <el-form-item v-for="(item, index) in filter" :key="index" :prop="item.name">
       <!-- 下拉输入 -->      
       <el-select v-if="item.type == 'select'" v-model="value[item.name]" :placeholder="item.label">
