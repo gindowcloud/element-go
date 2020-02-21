@@ -1,8 +1,8 @@
 <template>
   <div class="ex-demo">
-    <ex-table      
-      ref="table" v-model="data" :total="total" :loading="loading"
+    <ex-table ref="table"
       :params="params" :filter="filter" @search="search" @page-change="pageChange"
+      :total="total" :loading="loading" v-model="data"
       :shower="shower" show-title="View Data" show-width="600px" allow-show @show="show"
       :editor="editor" edit-title="Edit Data" edit-width="600px" allow-edit @edit="edit" @update="update"
       allow-remove @remove="remove"
