@@ -82,7 +82,7 @@ export default {
       return this.$scopedSlots.action || this.allowRemove
     },
     hasAction() {
-      return this.shower || this.editor || this.hasActionMore
+      return this.allowShow || this.allowEdit || this.shower || this.editor || this.hasActionMore
     }
   },
   mounted() {
