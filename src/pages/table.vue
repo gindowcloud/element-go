@@ -3,10 +3,11 @@
     <ex-table      
       ref="table" v-model="data" :total="total" :loading="loading"
       :params="params" :filter="filter" @search="search" @page-change="pageChange"
-      :viewer="viewer"
-      :editor="editor" @edit-submit="editSubmit"
+      :shower="shower" allow-show @show="show"
+      :editor="editor" allow-edit @edit="edit" @update="update"
       allow-remove @remove="remove"
       allow-create @create="create"
+      allow-import @import="upload"
       allow-export @export="download"
       >
       <el-table-column label="姓名" width="100" prop="name" />
@@ -74,7 +75,7 @@ export default {
       ]
     },
     // 查看表单参数
-    viewer() {
+    shower() {
       return [
         { name: 'name' , label: '姓名' },
         { name: 'phone', label: '电话' },
@@ -100,26 +101,37 @@ export default {
     search() {
       this.params.page = 1
       this.getData()
+      console.log('search')
     },
     pageChange(page) {
       this.params.page = page
       this.getData()
+      console.log('page-change')
     },
-    editSubmit() {
-      this.$message.success('Update');
+    show(row) {
+      console.log('show', row)
+    },
+    edit(row) {
+      console.log('edit', row)
+    },
+    update(row) {
       let $ref = this.$refs['table']
       $ref.editClose()
+      console.log('update', row)
     },
-    remove (index) {
-      this.$message.success('Remove');
+    remove (index, row) {
       let $ref = this.$refs['table']
       $ref.destroy(index)
+      console.log('destroy', row)
     },
     create() {
-      this.$message.success('Create');
+      console.log('create')
+    },
+    upload() {
+      console.log('import')
     },
     download() {
-      this.$message.success('Export');
+      console.log('export')
     }
   }
 }

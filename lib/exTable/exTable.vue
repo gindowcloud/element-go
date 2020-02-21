@@ -8,6 +8,7 @@
       <el-col :sm="5" class="text-right">
         <el-button-group>
           <el-button plain v-if="allowCreate" size="small" icon="el-icon-plus" @click="create">{{ $t('create') }}</el-button>
+          <el-button plain v-if="allowImport" size="small" icon="el-icon-upload" @click="upload">{{ $t('import') }}</el-button>
           <el-button plain v-if="allowExport" size="small" icon="el-icon-download" @click="download">{{ $t('export') }}</el-button>
         </el-button-group>
       </el-col>
@@ -19,8 +20,8 @@
         <el-table-column width="150" align="right" v-if="hasAction">
           <template slot-scope="scope">
             <div class="col-action">
-              <el-button type="text" v-if="viewer" @click="view(scope.row)">{{ $t('view') }}</el-button>
-              <el-button type="text" v-if="allowModify && editor" @click="edit(scope.row)">{{ $t('edit') }}</el-button>
+              <el-button type="text" v-if="allowShow || shower" @click="show(scope.row)">{{ $t('view') }}</el-button>
+              <el-button type="text" v-if="allowEdit || editor" @click="edit(scope.row)">{{ $t('edit') }}</el-button>
               <el-dropdown v-if="hasActionMore">
                 <span class="el-dropdown-link"><i class="el-icon-more" /></span>
                 <el-dropdown-menu slot="dropdown">
@@ -36,7 +37,7 @@
     <!-- 数据分页 -->
     <el-pagination v-if="total" background layout="total,prev,pager,next" :load="true" :page-size="params.size" :current-page="params.page" :total="total" @current-change="pageChange" />
     <!-- 查看表单 -->
-    <ex-viewer v-if="viewer" :title="viewTitle" :items="viewer" :show="dialogView" @close="viewClose" :model="row" />
+    <ex-shower v-if="shower" :title="showTitle" :items="shower" :show="dialogShow" @close="showClose" :model="row" />
     <!-- 编辑表单 -->
     <ex-editor v-if="editor" :title="editTitle" :items="editor" :show="dialogEdit" @close="editClose" :model="row" @upload="editUpload" @submit="editSubmit" />
   </div>
@@ -44,32 +45,32 @@
 
 <script>
 import exSearch from './exSearch'
-import exViewer from './exViewer'
+import exShower from './exShower'
 import exEditor from './exEditor'
 
 export default {
   name: 'exTable',
-  components: { exSearch, exViewer, exEditor },
+  components: { exSearch, exShower, exEditor },
   props: {
+    value: Array,
     loading: Boolean,
     params: Object,
     filter: Array,
-    viewer: Array,
+    shower: Array,
     editor: Array,
-    value: Array,
     total: Number,
-    viewUrl: String,
-    editUrl: String,
-    viewTitle: String,
+    showTitle: String,
     editTitle: String,
-    allowExport: Boolean,
-    allowCreate: Boolean,
+    allowShow: Boolean,
+    allowEdit: Boolean,
     allowRemove: Boolean,
-    allowModify: { type: Boolean, default: true }
+    allowCreate: Boolean,
+    allowImport: Boolean,
+    allowExport: Boolean,
   },
   data() {
     return {
-      dialogView: false,
+      dialogShow: false,
       dialogEdit: false,
       row: {}
     }
@@ -79,7 +80,7 @@ export default {
       return this.$scopedSlots.action || this.allowRemove
     },
     hasAction() {
-      return this.viewer || this.editor || this.hasActionMore
+      return this.shower || this.editor || this.hasActionMore
     }
   },
   mounted() {
@@ -102,33 +103,31 @@ export default {
     create() {
       this.$emit("create")
     },
+    // 新建导入
+    upload() {
+      this.$emit("import")
+    },
     // 新建导出
     download() {
-      this.$emit("export")
+      this.$confirm(this.$t('confirm.export'), { type: 'warning' }).then(() => {
+        this.$emit("export")
+      }).catch(() => {})
     },
     // 查看资料
-    view(row) {
-      if (this.viewUrl) {
-        let url = this.viewUrl
-        url.match(/{([^}]+)}/gi).forEach(j => {
-            let name = j.substring(1, j.length - 1)
-            url = url.replace(j, row[name])
-        })
-        return this.$router.push(url)
-      }
-      this.$emit("view", row)
+    show(row) {
       this.row = row
-      this.dialogView = true
+      this.dialogShow = true
+      this.$emit("show", row)
     },
     // 查看关闭
-    viewClose() {
-        this.dialogView = false
+    showClose() {
+        this.dialogShow = false
     },
     // 编辑资料
     edit(row) {
-        this.$emit("edit", row)
         this.row = row
         this.dialogEdit = true
+        this.$emit("edit", row)
     },
     // 编辑关闭
     editClose() {
@@ -136,7 +135,7 @@ export default {
     },
     // 编辑保存
     editSubmit() {
-        this.$emit("edit-submit")
+        this.$emit("update", this.row)
     },
     // 编辑保存
     editUpload(ret) {
