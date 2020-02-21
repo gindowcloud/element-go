@@ -37,9 +37,9 @@
     <!-- 数据分页 -->
     <el-pagination v-if="total" background layout="total,prev,pager,next" :load="true" :page-size="params.size" :current-page="params.page" :total="total" @current-change="pageChange" />
     <!-- 查看表单 -->
-    <ex-shower v-if="shower" :title="showTitle" :items="shower" :show="dialogShow" @close="showClose" :model="row" />
+    <ex-shower v-if="shower" :title="showTitle" :width="showWidth" :items="shower" :show="dialogShow" @close="showClose" :model="row" />
     <!-- 编辑表单 -->
-    <ex-editor v-if="editor" :title="editTitle" :items="editor" :show="dialogEdit" @close="editClose" :model="row" @upload="editUpload" @submit="editSubmit" />
+    <ex-editor v-if="editor" :title="editTitle" :width="showWidth" :items="editor" :show="dialogEdit" @close="editClose" :model="row" @upload="editUpload" @submit="editSubmit" />
   </div>
 </template>
 
@@ -60,7 +60,9 @@ export default {
     editor: Array,
     total: Number,
     showTitle: String,
+    showWidth: String,
     editTitle: String,
+    editWidth: String,
     allowShow: Boolean,
     allowEdit: Boolean,
     allowRemove: Boolean,

@@ -1,5 +1,5 @@
 <template>
-  <el-dialog width="80%" :title="showTitle" :visible.sync="visible">
+  <el-dialog :width="width" :title="showTitle" :visible.sync="visible">
     <el-form ref="formEditor" :model="model" @submit.native.prevent label-position="left">
       <el-form-item v-for="(item, i) in datas" :key="i" :label="item.label" :prop="item.name" :required="item.required" label-width="200px">
         <!-- 开关组件 -->
@@ -38,8 +38,9 @@
 <script>
 export default {
   props: {
-    title: String,
     show: { type: Boolean, default: false },
+    title: String,
+    width: String,
     items: Array,
     model: Object,
   },

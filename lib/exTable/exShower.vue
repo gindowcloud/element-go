@@ -1,5 +1,5 @@
 <template>
-  <el-dialog width="80%" :title="showTitle" :visible.sync="visible">
+  <el-dialog :width="width" :title="showTitle" :visible.sync="visible">
     <el-row v-for="(item, i) in datas" :key="i">
       <el-col :md="4">{{ item.label || '&nbsp;' }}</el-col>
       <el-col :md="20">
@@ -16,8 +16,9 @@
 <script>
 export default {
   props: {
-    title: String,
     show: { type: Boolean, default: false },
+    title: String,
+    width: String,
     items: Array,
     model: Object
   },
