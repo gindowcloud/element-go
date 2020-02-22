@@ -38,9 +38,9 @@ export default {
 </script>
 
 <style scoped>
-.el-select { width: 159px; }
+.el-select, .el-input { width: 140px; }
 .el-range-editor { width: 240px; }
 @media screen and (max-width: 992px) { /* 中型以下屏幕 */
-  .el-select, .el-input { width: 119px; }
+  .el-select, .el-input { width: 120px; }
 }
 </style>

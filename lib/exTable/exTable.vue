@@ -1,15 +1,15 @@
 <template>
   <div class="ex-table">
     <!-- 搜索表单 -->
-    <el-row>
-      <el-col :sm="19" v-if="filter">
+    <el-row type="flex">
+      <el-col :sm="16" v-if="filter">
         <ex-search v-model="params" :filter="filter" @search="search" @reset="reset" />
       </el-col>
-      <el-col :sm="5" class="text-right">
+      <el-col :sm="8" class="text-right">
         <el-button-group>
           <el-button plain v-if="allowCreate" size="small" icon="el-icon-plus" @click="create">{{ $t('create') }}</el-button>
-          <el-button plain v-if="allowImport" size="small" icon="el-icon-upload" @click="upload">{{ $t('import') }}</el-button>
-          <el-button plain v-if="allowExport" size="small" icon="el-icon-download" @click="download">{{ $t('export') }}</el-button>
+          <el-button plain v-if="allowImport" size="small" icon="el-icon-upload2" @click="importStart">{{ $t('import') }}</el-button>
+          <el-button plain v-if="allowExport" size="small" icon="el-icon-download" @click="exportStart">{{ $t('export') }}</el-button>
         </el-button-group>
       </el-col>
     </el-row>
@@ -39,7 +39,9 @@
     <!-- 查看表单 -->
     <ex-shower v-if="shower" :title="showTitle" :width="showWidth" :items="shower" :show="dialogShow" @close="showClose" :model="row" />
     <!-- 编辑表单 -->
-    <ex-editor v-if="editor" :title="editTitle" :width="showWidth" :items="editor" :show="dialogEdit" @close="editClose" :model="row" @upload="editUpload" @submit="editSubmit" />
+    <ex-editor v-if="editor" :title="editTitle" :width="editWidth" :items="editor" :show="dialogEdit" @close="editClose" :model="row" @upload="editUpload" @submit="update" />
+    <!-- 导入表单 -->
+    <ex-import v-if="allowImport" :title="importTitle" :width="importWidth" :action="importAction" :headers="importHeaders" :show="dialogImport" @close="importClose" @import="imported"><slot name="import" /></ex-import>
   </div>
 </template>
 
@@ -47,10 +49,11 @@
 import exSearch from './exSearch'
 import exShower from './exShower'
 import exEditor from './exEditor'
+import exImport from './exImport'
 
 export default {
   name: 'exTable',
-  components: { exSearch, exShower, exEditor },
+  components: { exSearch, exShower, exEditor, exImport },
   props: {
     value: Array,
     loading: Boolean,
@@ -63,6 +66,10 @@ export default {
     showWidth: String,
     editTitle: String,
     editWidth: String,
+    importTitle: String,
+    importWidth: String,
+    importAction: String,
+    importHeaders: Object,
     allowShow: Boolean,
     allowEdit: Boolean,
     allowRemove: Boolean,
@@ -74,6 +81,7 @@ export default {
     return {
       dialogShow: false,
       dialogEdit: false,
+      dialogImport: false,
       row: {}
     }
   },
@@ -106,11 +114,18 @@ export default {
       this.$emit("create")
     },
     // 新建导入
-    upload() {
-      this.$emit("import")
+    importStart() {
+      this.dialogImport = true
+    },
+    importClose() {
+      this.dialogImport = false
+    },
+    imported(ret) {
+      this.dialogImport = false
+      this.$emit("import", ret)
     },
     // 新建导出
-    download() {
+    exportStart() {
       this.$confirm(this.$t('confirm.export'), { type: 'warning' }).then(() => {
         this.$emit("export")
       }).catch(() => {})
@@ -136,7 +151,7 @@ export default {
         this.dialogEdit = false
     },
     // 编辑保存
-    editSubmit() {
+    update() {
         this.$emit("update", this.row)
     },
     // 编辑保存
