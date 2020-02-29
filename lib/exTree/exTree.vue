@@ -93,7 +93,7 @@ export default {
     },
     // 删除功能
     remove(node) {
-      this.$confirm(this.$t('confirm.delete'), { type: 'warning' }).then(() => {
+      this.$confirm(this.$t('confirm.delete'), this.$t('confirm.title'), { type: 'warning' }).then(() => {
         this.$emit('remove', node)
       }).catch(() => {})
     },

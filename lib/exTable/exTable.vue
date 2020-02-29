@@ -41,7 +41,13 @@
     <!-- 编辑表单 -->
     <ex-editor v-if="editor" :title="editTitle" :width="editWidth" :items="editor" :show="dialogEdit" @close="editClose" :model="row" @upload="editUpload" @submit="update" />
     <!-- 导入表单 -->
-    <ex-import v-if="allowImport" :title="importTitle" :width="importWidth" :action="importAction" :headers="importHeaders" :show="dialogImport" @close="importClose" @import="imported"><slot name="import" /></ex-import>
+    <ex-import v-if="allowImport"
+      :title="importTitle" :width="importWidth" :show="dialogImport" @close="importClose"
+      :action="importAction" :headers="importHeaders" @import="imported"
+    >
+      <el-link class="sample" type="info" v-if="importSample" @click="sampleDownload">{{ $t('importer.sample') }}</el-link>
+      <slot name="import" />
+    </ex-import>
   </div>
 </template>
 
@@ -68,8 +74,9 @@ export default {
     editWidth: String,
     importTitle: String,
     importWidth: String,
-    importAction: String,
     importHeaders: Object,
+    importAction: String,
+    importSample: String,
     allowShow: Boolean,
     allowEdit: Boolean,
     allowRemove: Boolean,
@@ -124,6 +131,12 @@ export default {
       this.dialogImport = false
       this.$emit("import", ret)
     },
+    // 下载上传模板
+    sampleDownload() {
+      let a = document.createElement('a')
+      a.href = this.importSample
+      a.click()
+    },
     // 新建导出
     exportStart() {
       this.$confirm(this.$t('confirm.export'), { type: 'warning' }).then(() => {
@@ -160,7 +173,7 @@ export default {
     },
     // 删除确认
     remove(index, row) {
-      this.$confirm(this.$t('confirm.delete'), { type: 'warning' }).then(() => {
+      this.$confirm(this.$t('confirm.delete'), this.$t('confirm.title'), { type: 'warning' }).then(() => {
         this.$emit('remove', index, row)
       }).catch(() => {})
     },
@@ -181,4 +194,5 @@ export default {
 .ex-table .el-button-group { margin-top: 1px; }
 .ex-table .el-dropdown-link { cursor: pointer; color: #409EFF; }
 .ex-table .el-pagination { margin: 30px 0; text-align: center; }
+.ex-table .sample { font-weight: 400; }
 </style>

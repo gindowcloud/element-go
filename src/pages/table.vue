@@ -7,14 +7,13 @@
       :editor="editor" edit-title="Edit Data" edit-width="600px" allow-edit @edit="edit" @update="update"
       allow-remove @remove="remove"
       allow-create @create="create"
-      allow-import @import="imported"
+      allow-import @import="uploaded" import-sample="/upload-sample.xlsx"
       allow-export @export="download">
       <el-table-column label="姓名" width="100" prop="name" />
       <el-table-column label="省份" width="90" prop="province" />
       <el-table-column label="市区" width="100" prop="city" />
       <el-table-column label="地址" prop="address" />
       <el-table-column label="日期" width="120" prop="date" align="right" />
-      <div slot="import" @click="sample">点击下载模块文件</div>
     </ex-table>
   </div>
 </template>
@@ -127,14 +126,11 @@ export default {
     create() {
       console.log('create')
     },
-    sample() {
-      console.log('sample')
-    },
-    imported() {
-      console.log('import')
+    uploaded() {
+      console.log('uploaded')
     },
     download() {
-      console.log('export')
+      console.log('download')
     }
   }
 }
