@@ -13,6 +13,7 @@
       <el-table-column label="省份" width="90" prop="province" />
       <el-table-column label="市区" width="100" prop="city" />
       <el-table-column label="地址" prop="address" />
+      <el-table-column label="余额"><template slot-scope="scope">{{ scope.row.money.thousands() }}</template></el-table-column>
       <el-table-column label="日期" width="120" prop="date" align="right" />
     </ex-table>
   </div>
@@ -33,16 +34,17 @@ export default {
         date: []
       },
       data: [
-        { date: '2016-05-02', name: '王小虎', province: '上海', city: '普陀区', address: '上海市普陀区金沙江路 1518 弄', zip: 200333 },
-        { date: '2016-05-02', name: '王小虎', province: '上海', city: '普陀区', address: '上海市普陀区金沙江路 1518 弄', zip: 200333 },
-        { date: '2016-05-02', name: '王小虎', province: '上海', city: '普陀区', address: '上海市普陀区金沙江路 1518 弄', zip: 200333 },
-        { date: '2016-05-02', name: '王小虎', province: '上海', city: '普陀区', address: '上海市普陀区金沙江路 1518 弄', zip: 200333 },
-        { date: '2016-05-02', name: '王小虎', province: '上海', city: '普陀区', address: '上海市普陀区金沙江路 1518 弄', zip: 200333 },
+        { date: '2016-05-02', name: '王小虎', province: '上海', city: '普陀区', money: '10000', address: '上海市普陀区金沙江路 1518 弄', zip: 200333 },
+        { date: '2016-05-02', name: '王小虎', province: '上海', city: '普陀区', money: '10000', address: '上海市普陀区金沙江路 1518 弄', zip: 200333 },
+        { date: '2016-05-02', name: '王小虎', province: '上海', city: '普陀区', money: '10000', address: '上海市普陀区金沙江路 1518 弄', zip: 200333 },
+        { date: '2016-05-02', name: '王小虎', province: '上海', city: '普陀区', money: '10000', address: '上海市普陀区金沙江路 1518 弄', zip: 200333 },
+        { date: '2016-05-02', name: '王小虎', province: '上海', city: '普陀区', money: '10000', address: '上海市普陀区金沙江路 1518 弄', zip: 200333 },
         {
           date: '2016-05-04',
           name: '王小虎',
           province: '上海',
           city: '普陀区',
+          money: '10000',
           address: '上海市普陀区金沙江路 1517 弄',
           zip: 200333
         }, {
@@ -50,6 +52,7 @@ export default {
           name: '王小虎',
           province: '上海',
           city: '普陀区',
+          money: '10000',
           address: '上海市普陀区金沙江路 1519 弄',
           zip: 200333
         }, {
@@ -57,6 +60,7 @@ export default {
           name: '王小虎',
           province: '上海',
           city: '普陀区',
+          money: '10000',
           address: '上海市普陀区金沙江路 1516 弄',
           zip: 200333
         }],

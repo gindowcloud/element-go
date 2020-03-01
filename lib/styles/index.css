@@ -15,5 +15,6 @@
 .color-gray { color: lightgray; }
 
 /* Layout */
+.container { padding: 20px; background-color: #fff; }
 .ex-layout { background: #f3f3f3; }
 .ex-table, .ex-tree { background-color: #fff; }
