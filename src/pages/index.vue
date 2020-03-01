@@ -1,3 +1,3 @@
 <template>
-  <div />
+  <div class="container">Welcome</div>
 </template>

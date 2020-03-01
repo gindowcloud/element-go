@@ -10,10 +10,9 @@
       allow-import @import="uploaded" import-sample="/upload-sample.xlsx"
       allow-export @export="download">
       <el-table-column label="姓名" width="100" prop="name" />
-      <el-table-column label="省份" width="90" prop="province" />
-      <el-table-column label="市区" width="100" prop="city" />
-      <el-table-column label="地址" prop="address" />
-      <el-table-column label="余额"><template slot-scope="scope">{{ scope.row.money.thousands() }}</template></el-table-column>
+      <el-table-column label="年龄" width="100" prop="age" />
+      <el-table-column label="地区" prop="county" />
+      <el-table-column label="积分"><template slot-scope="scope">{{ scope.row.money.thousands() }}</template></el-table-column>
       <el-table-column label="日期" width="120" prop="date" align="right" />
     </ex-table>
   </div>
@@ -33,37 +32,7 @@ export default {
         q: '',
         date: []
       },
-      data: [
-        { date: '2016-05-02', name: '王小虎', province: '上海', city: '普陀区', money: '10000', address: '上海市普陀区金沙江路 1518 弄', zip: 200333 },
-        { date: '2016-05-02', name: '王小虎', province: '上海', city: '普陀区', money: '10000', address: '上海市普陀区金沙江路 1518 弄', zip: 200333 },
-        { date: '2016-05-02', name: '王小虎', province: '上海', city: '普陀区', money: '10000', address: '上海市普陀区金沙江路 1518 弄', zip: 200333 },
-        { date: '2016-05-02', name: '王小虎', province: '上海', city: '普陀区', money: '10000', address: '上海市普陀区金沙江路 1518 弄', zip: 200333 },
-        { date: '2016-05-02', name: '王小虎', province: '上海', city: '普陀区', money: '10000', address: '上海市普陀区金沙江路 1518 弄', zip: 200333 },
-        {
-          date: '2016-05-04',
-          name: '王小虎',
-          province: '上海',
-          city: '普陀区',
-          money: '10000',
-          address: '上海市普陀区金沙江路 1517 弄',
-          zip: 200333
-        }, {
-          date: '2016-05-01',
-          name: '王小虎',
-          province: '上海',
-          city: '普陀区',
-          money: '10000',
-          address: '上海市普陀区金沙江路 1519 弄',
-          zip: 200333
-        }, {
-          date: '2016-05-03',
-          name: '王小虎',
-          province: '上海',
-          city: '普陀区',
-          money: '10000',
-          address: '上海市普陀区金沙江路 1516 弄',
-          zip: 200333
-        }],
+      data: [],
       total: 0,
       loading: false,
     }
@@ -96,10 +65,11 @@ export default {
   methods: {
     getData() {
       this.loading = true
-      setTimeout(() => {
-        this.total = 100
+      this.$api.users().then(ret => {
+        this.total = ret.total
+        this.data = ret.data
         this.loading = false
-      }, 250)
+      }).catch(() => {})
     },
     search() {
       this.params.page = 1
