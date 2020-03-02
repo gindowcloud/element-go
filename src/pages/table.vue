@@ -66,7 +66,7 @@ export default {
     getData() {
       this.loading = true
       this.$api.users().then(ret => {
-        this.total = ret.total
+        this.total = ret.meta.total
         this.data = ret.data
         this.loading = false
       }).catch(() => {})

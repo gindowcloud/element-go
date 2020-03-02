@@ -6,10 +6,11 @@ Mock.setup({
 
 function users () {
   const ret = {
-    total: 24,
+    code: 200,
+    meta: { total: 24 },
     data: []
   }
-  for (let i = 0; i < ret.total; i++) ret.data.push(Mock.mock({
+  for (let i = 0; i < ret.meta.total; i++) ret.data.push(Mock.mock({
     name: Mock.mock('@cname'),
     county: Mock.mock('@county(true)'),
     date: Mock.mock('@date'),
