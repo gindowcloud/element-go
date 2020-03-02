@@ -1,5 +1,8 @@
 <template>
-  <ex-layout :menu="menu" user="周明" :user-menu="userMenu" @logout="logout" />
+  <ex-layout 
+    :menu="menu"
+    :user-menu="userMenu" user="周明" @logout="logout"
+  />
 </template>
 
 <script>
