@@ -74,12 +74,10 @@ export default {
     search() {
       this.params.page = 1
       this.getData()
-      console.log('search')
     },
     pageChange(page) {
       this.params.page = page
       this.getData()
-      console.log('page-change')
     },
     show(row) {
       console.log('show', row)

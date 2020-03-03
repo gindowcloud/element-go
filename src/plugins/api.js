@@ -3,11 +3,11 @@ import { $http } from '../../lib'
 import { Message } from 'element-ui'
 
 $http.configure({
-  handle(ret) {
-    if (ret.code != 200) return Promise.reject(new Error(ret.message))
+  resolve(ret) {
+    if (ret.code != 200) return Promise.reject(ret)
     return ret
   },
-  error(err) {
+  reject(err) {
     Message({ type: 'error', message: err.message })
     return Promise.reject(err)
   }
