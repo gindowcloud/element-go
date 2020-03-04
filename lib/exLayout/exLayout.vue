@@ -1,15 +1,11 @@
 <template>
-  <el-container class="ex-layout">
-    <!-- 左侧 -->
-    <el-aside :class="{ collapsed: isCollapsed }" :width="width">
-      <!-- 菜单 -->
-      <ex-menu v-model="isCollapsed" :menu="menu" :logo="logo" :logoCollapsed="logoCollapsed" />
+  <el-container class="ex-layout" :class="{ collapsed: collapsed, opened: opened }">
+    <div class="ex-drawer" @click="closeDrawer" /><!-- 抽屉遮罩 -->
+    <el-aside :width="width">
+      <ex-menu :collapsed="collapsed" @close-drawer="closeDrawer" :menu="menu" :logo="logo" />
     </el-aside>
-    <!-- 右侧 -->
     <el-container class="ex-main">
-      <!-- 头部 -->
       <el-header>
-        <!-- 用户 -->
         <el-dropdown v-if="user" class="float-right" @command="command">
           <span class="username"><i class="el-icon-user" /> {{ user }}</span>
           <el-dropdown-menu v-if="userMenu" slot="dropdown">
@@ -17,15 +13,9 @@
             <el-dropdown-item command="logout" divided>{{ $t('logout') }}</el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
-        <!-- 收缩 -->
-        <div class="toggle" @click="collapse">
-          <i class="el-icon-s-unfold" v-if="isCollapsed" />
-          <i class="el-icon-s-fold" v-else/>
-        </div>
+        <div class="toggle" @click="collapse"><i :class="toggleIcon" /></div>
       </el-header>
-      <!-- 主要 -->
       <el-main>
-        <!-- 内容 -->
         <transition mode="out-in" name="fade-transform">
           <router-view/>
         </transition>
@@ -42,28 +32,50 @@ export default {
   name: 'exLayout',
   components: { exMenu },
   props: {
-    collapsed: { type: Boolean, default: false },
     width: { type: String, default: '140px' },
     logo: String,
-    logoCollapsed: String,
     menu: Array,
     user: String,
     userMenu: Array
   },
   data() {
     return {
-      isCollapsed: this.collapsed
+      isCollapsed: false,
+      isDrawer: false,
+      clientWidth: document.body.clientWidth
+    }
+  },
+  computed: {
+    isMobile() {
+      return this.clientWidth < 992
+    },
+    collapsed() {
+      return this.isCollapsed && !this.isMobile
+    },
+    opened() {
+      return this.isDrawer && this.isMobile
+    },
+    toggleIcon() {
+      if (this.isMobile) return this.opened ? 'el-icon-s-fold' : 'el-icon-s-unfold'
+      else return this.collapsed ? 'el-icon-s-unfold' : 'el-icon-s-fold'
     }
   },
   created() {
     let collapsed = Cookies.get('sidebarCollapsed')
     if (collapsed) this.isCollapsed = collapsed === 'true'
+    window.onresize = () => { this.clientWidth = document.body.clientWidth }
   },
   methods: {
+    closeDrawer() {
+      this.isDrawer = false
+    },
     collapse() {
-      this.isCollapsed = !this.isCollapsed
-      Cookies.set('sidebarCollapsed', this.isCollapsed, { expires: 365 })
-      this.$emit('collapse', this.isCollapsed)
+      if (this.isMobile) this.isDrawer = !this.isDrawer
+      else {
+        this.isCollapsed = !this.isCollapsed
+        Cookies.set('sidebarCollapsed', this.isCollapsed, { expires: 365 })
+        this.$emit('collapse', this.isCollapsed)
+      }
     },
     command(command) {
       switch(command) {
@@ -84,8 +96,12 @@ export default {
 .el-header .username { float: right; border-left: 1px solid #f6f6f6; line-height: 20px; padding: 20px 15px 20px 25px; color: #666; }
 .el-header .username i { margin-right: 10px; }
 .el-main { overflow: visible !important; }
-.collapsed { width: 65px !important; }
+.collapsed .el-aside { width: 65px !important; }
 @media screen and (max-width: 992px) { /* 中型以下屏幕 */
+  .el-aside { left: -100vh; position: fixed; z-index: 9999; }
+  .ex-drawer { left: -100vh; position: fixed; z-index: 9998; width: 100vw; height: 100vh; background: #000; opacity: 0.5; }
+  .opened .el-aside,
+  .opened .ex-drawer { left: 0; }
   .el-header { border-bottom: 1px solid #eee; }
   .el-main { padding: 0; }
 }
