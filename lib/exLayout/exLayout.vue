@@ -3,24 +3,7 @@
     <!-- 左侧 -->
     <el-aside :class="{ collapsed: isCollapsed }" :width="width">
       <!-- 菜单 -->
-      <el-menu
-        router unique-opened 
-        :collapse-transition="false" background-color="#222" text-color="#fff"
-        :collapse="isCollapsed"  :default-active="$route.path">
-        <div class="logo">          
-          <span v-if="!logo"><i  class="el-icon-eleme" /></span>
-          <el-image v-else :src="logoSrc" fit="contain" />
-        </div>
-        <template v-for="(menu, key) in menu">
-          <el-menu-item v-if="!menu.children" :key="key" :index="menu.path">
-            <i :class="menu.icon" /><span>{{ menu.title }}</span>
-          </el-menu-item>
-          <el-submenu v-if="menu.children" :key="key" :index="menu.path">
-            <template slot="title"><i :class="menu.icon" /><span>{{ menu.title }}</span></template>          
-            <el-menu-item v-for="(item, i) in menu.children" :key="i" :index="item.path">{{ item.title }}</el-menu-item>
-          </el-submenu>
-        </template>
-      </el-menu>      
+      <ex-menu v-model="isCollapsed" :menu="menu" :logo="logo" :logoCollapsed="logoCollapsed" />
     </el-aside>
     <!-- 右侧 -->
     <el-container class="ex-main">
@@ -52,10 +35,12 @@
 </template>
 
 <script>
+import exMenu from './exMenu'
 import Cookies from 'js-cookie'
 
 export default {
   name: 'exLayout',
+  components: { exMenu },
   props: {
     collapsed: { type: Boolean, default: false },
     width: { type: String, default: '140px' },
@@ -68,11 +53,6 @@ export default {
   data() {
     return {
       isCollapsed: this.collapsed
-    }
-  },
-  computed: {
-    logoSrc () {
-      return this.isCollapsed && this.logoCollapsed ? this.logoCollapsed : this.logo
     }
   },
   created() {
@@ -104,13 +84,6 @@ export default {
 .el-header .username { float: right; border-left: 1px solid #f6f6f6; line-height: 20px; padding: 20px 15px 20px 25px; color: #666; }
 .el-header .username i { margin-right: 10px; }
 .el-main { overflow: visible !important; }
-.el-menu { min-height: 100vh; border-right: 0 !important; }
-.el-menu .logo { height: 60px; text-align: center; font-size: 24px; background-color: #292929; }
-.el-menu .logo span { display: inline-block; width: 32px; height: 32px; margin-top: 14px; background-color: #fff; color: #1989fa; border-radius: 50%; }
-.el-menu .logo .el-image { height: 32px; margin: 14px 0; }
-.el-menu >>> .el-submenu__title, .el-menu-item { height: 40px; line-height: 40px; }
-.el-menu >>> .el-submenu__icon-arrow { margin-top: -5px; color: #555; }
-.el-menu >>> .el-menu--inline .el-menu-item { padding-left: 49px !important; }
 .collapsed { width: 65px !important; }
 @media screen and (max-width: 992px) { /* 中型以下屏幕 */
   .el-header { border-bottom: 1px solid #eee; }
