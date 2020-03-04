@@ -1,6 +1,8 @@
 <template>
   <el-container class="ex-layout">
+    <!-- 左侧 -->
     <el-aside :class="{ collapsed: isCollapsed }" :width="width">
+      <!-- 菜单 -->
       <el-menu
         router unique-opened 
         :collapse-transition="false" background-color="#222" text-color="#fff"
@@ -14,16 +16,17 @@
             <i :class="menu.icon" /><span>{{ menu.title }}</span>
           </el-menu-item>
           <el-submenu v-if="menu.children" :key="key" :index="menu.path">
-            <template slot="title">
-              <i :class="menu.icon" /><span>{{ menu.title }}</span>
-            </template>          
+            <template slot="title"><i :class="menu.icon" /><span>{{ menu.title }}</span></template>          
             <el-menu-item v-for="(item, i) in menu.children" :key="i" :index="item.path">{{ item.title }}</el-menu-item>
           </el-submenu>
         </template>
       </el-menu>      
     </el-aside>
+    <!-- 右侧 -->
     <el-container class="ex-main">
+      <!-- 头部 -->
       <el-header>
+        <!-- 用户 -->
         <el-dropdown v-if="user" class="float-right" @command="command">
           <span class="username"><i class="el-icon-user" /> {{ user }}</span>
           <el-dropdown-menu v-if="userMenu" slot="dropdown">
@@ -31,13 +34,15 @@
             <el-dropdown-item command="logout" divided>{{ $t('logout') }}</el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
+        <!-- 收缩 -->
         <div class="toggle" @click="collapse">
           <i class="el-icon-s-unfold" v-if="isCollapsed" />
           <i class="el-icon-s-fold" v-else/>
         </div>
       </el-header>
+      <!-- 主要 -->
       <el-main>
-        <!-- 路由内容 -->
+        <!-- 内容 -->
         <transition mode="out-in" name="fade-transform">
           <router-view/>
         </transition>
@@ -77,7 +82,7 @@ export default {
   methods: {
     collapse() {
       this.isCollapsed = !this.isCollapsed
-      Cookies.set('sidebarCollapsed', this.isCollapsed)
+      Cookies.set('sidebarCollapsed', this.isCollapsed, { expires: 365 })
       this.$emit('collapse', this.isCollapsed)
     },
     command(command) {
