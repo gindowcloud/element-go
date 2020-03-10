@@ -10,7 +10,7 @@
         <el-dropdown v-if="user" class="float-right" @command="command">
           <span class="username"><i class="el-icon-user" /> {{ user }}</span>
           <el-dropdown-menu v-if="userMenu" slot="dropdown">
-            <el-dropdown-item v-for="(item, key) in userMenu" :key="key" :command="item.path || ''">{{ item.title }}</el-dropdown-item>
+            <el-dropdown-item v-for="(item, key) in userMenu" :key="key" :disabled="item.path == path" :command="item.path || ''">{{ item.title }}</el-dropdown-item>
             <el-dropdown-item command="logout" divided>{{ $t('logout') }}</el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
@@ -21,7 +21,7 @@
         <!-- 三级菜单 -->
         <div class="grand-menu" v-if="currentMenu">
           <span v-for="(menu, key) in currentMenu" :key="key">
-            <i v-if="key">/</i><el-link :underline="false" :class="{ on: menu.path == path }" @click="$to(menu.path)">{{ menu.title }}</el-link>
+            <i v-if="key">/</i><el-link :underline="false" :disabled="menu.path == path" @click="$to(menu.path)">{{ menu.title }}</el-link>
           </span>
         </div>
         <!-- 主要内容 -->
@@ -121,7 +121,6 @@ export default {
 .grand-menu { margin-bottom: 10px; }
 .grand-menu > span { display: inline-block; }
 .grand-menu > span > i { margin: 0 10px; color: #ddd; }
-.grand-menu > span > a.on { color: #409EFF; }
 @media screen and (max-width: 992px) { /* 中型以下屏幕 */
   .el-aside { left: -100vh; position: fixed; z-index: 9999; }
   .ex-drawer { left: -100vh; position: fixed; z-index: 9998; width: 100vw; height: 100vh; background: #000; opacity: 0.5; }
