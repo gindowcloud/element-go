@@ -175,8 +175,12 @@ export default {
     },
     // 新建提交
     create() {
-      this.row = {}
-      this.dialogCreate = true
+      if (this.creator) {
+        let row = {}
+        this.creator.forEach(j => { row[j.name] = j.type == 'checkbox' ? [] : null })
+        this.row = Object.assign({}, row)
+        this.dialogCreate = true
+      }
       this.$emit("create")
     },
     createClose() {
