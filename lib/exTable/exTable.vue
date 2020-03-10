@@ -177,7 +177,13 @@ export default {
     create() {
       if (this.creator) {
         let row = {}
-        this.creator.forEach(j => { row[j.name] = j.type == 'checkbox' ? [] : null })
+        this.creator.forEach(j => {
+          switch(j.type) {
+            case 'checkbox': row[j.name] = []; break
+            case 'select': row[j.name] = j.options[0].value; break
+            default: row[j.name] = null
+          }
+        })
         this.row = Object.assign({}, row)
         this.dialogCreate = true
       }
