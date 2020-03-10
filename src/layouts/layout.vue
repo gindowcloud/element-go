@@ -21,7 +21,7 @@ export default {
       ],
       userMenu: [
         { title: '资料'  },
-        { title: '设置' },
+        { title: '设置', path: '/settings' },
       ]
     }
   },
