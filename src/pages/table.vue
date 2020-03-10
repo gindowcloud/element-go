@@ -5,12 +5,13 @@
       :total="total" :loading="loading" v-model="data"
       :shower="shower" show-title="View Data" show-width="600px" allow-show @show="show"
       :editor="editor" edit-title="Edit Data" edit-width="600px" allow-edit @edit="edit" @update="update"
+      :creator="editor" allow-create @create="create" @store="store"
       allow-remove @remove="remove"
-      allow-create @create="create"
       allow-import @import="uploaded" import-sample="/upload-sample.xlsx"
       allow-export @export="download">
       <el-table-column label="姓名" width="100" prop="name" />
       <el-table-column label="年龄" width="100" prop="age" />
+      <el-table-column label="电话" width="160" prop="phone" />
       <el-table-column label="地区" prop="county" />
       <el-table-column label="积分"><template slot-scope="scope">{{ scope.row.money.thousands() }}</template></el-table-column>
       <el-table-column label="日期" width="120" prop="date" align="right" />
@@ -58,7 +59,8 @@ export default {
     editor() {
       return [
         { name: 'name', label: '姓名', required: true },
-        { name: 'phone', label: '电话', readonly: true },
+        { name: 'phone', label: '电话' },
+        { name: 'age', label: '年龄', readonly: true },
       ]
     }
   },
@@ -89,6 +91,11 @@ export default {
       let $ref = this.$refs['table']
       $ref.editClose()
       console.log('update', row)
+    },
+    store(row) {
+      let $ref = this.$refs['table']
+      $ref.createClose()
+      console.log('store', row)
     },
     remove (index, row) {
       let $ref = this.$refs['table']

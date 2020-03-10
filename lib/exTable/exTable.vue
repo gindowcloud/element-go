@@ -7,7 +7,7 @@
       </el-col>
       <el-col :sm="8" class="text-right">
         <el-button-group>
-          <el-button plain v-if="allowCreate" size="small" icon="el-icon-plus" @click="create">{{ $t('create') }}</el-button>
+          <el-button plain v-if="allowCreate || creator" size="small" icon="el-icon-plus" @click="create">{{ $t('create') }}</el-button>
           <el-button plain v-if="allowImport" size="small" icon="el-icon-upload2" @click="importStart">{{ $t('import') }}</el-button>
           <el-button plain v-if="allowExport" size="small" icon="el-icon-download" @click="exportStart">{{ $t('export') }}</el-button>
         </el-button-group>
@@ -37,9 +37,11 @@
     <!-- 数据分页 -->
     <el-pagination v-if="total" background layout="total,prev,pager,next" :load="true" :page-size="params.size" :current-page="params.page" :total="total" @current-change="pageChange" />
     <!-- 查看表单 -->
-    <ex-shower v-if="shower" :title="showTitle" :width="showWidth" :items="shower" :show="dialogShow" @close="showClose" :model="row" />
+    <ex-shower v-if="shower" :items="shower" :show="dialogShow" :title="showTitle" :width="showWidth" @close="showClose" :model="row" />
     <!-- 编辑表单 -->
-    <ex-editor v-if="editor" :title="editTitle" :width="editWidth" :items="editor" :show="dialogEdit" @close="editClose" :model="row" @upload="editUpload" @submit="update" />
+    <ex-editor v-if="editor" :items="editor" :show="dialogEdit" :title="editTitle" :width="editWidth" @close="editClose" :model="row" @upload="editUpload" @submit="update" />
+    <!-- 添加表单 -->
+    <ex-editor v-if="creator" :items="creator" :show="dialogCreate" :title="createTitle" :width="createWidth" @close="createClose" :model="row" @upload="createUpload" @submit="store" />
     <!-- 导入表单 -->
     <ex-import v-if="allowImport"
       :title="importTitle" :width="importWidth" :show="dialogImport" @close="importClose"
@@ -67,11 +69,14 @@ export default {
     filter: Array,
     shower: Array,
     editor: Array,
+    creator: Array,
     total: Number,
     showTitle: String,
     showWidth: String,
     editTitle: String,
     editWidth: String,
+    createTitle: String,
+    createWidth: String,
     importTitle: String,
     importWidth: String,
     importHeaders: Object,
@@ -88,6 +93,7 @@ export default {
     return {
       dialogShow: false,
       dialogEdit: false,
+      dialogCreate: false,
       dialogImport: false,
       row: {}
     }
@@ -115,10 +121,6 @@ export default {
     // 改变分页
     pageChange(page) {
       this.$emit("page-change", page)
-    },
-    // 新建提交
-    create() {
-      this.$emit("create")
     },
     // 新建导入
     importStart() {
@@ -151,25 +153,40 @@ export default {
     },
     // 查看关闭
     showClose() {
-        this.dialogShow = false
+      this.dialogShow = false
     },
     // 编辑资料
     edit(row) {
-        this.row = row
-        this.dialogEdit = true
-        this.$emit("edit", row)
+      this.row = row
+      this.dialogEdit = true
+      this.$emit("edit", row)
     },
     // 编辑关闭
     editClose() {
-        this.dialogEdit = false
+      this.dialogEdit = false
     },
     // 编辑保存
     update() {
-        this.$emit("update", this.row)
+      this.$emit("update", this.row)
     },
     // 编辑保存
     editUpload(ret) {
-        this.$emit("edit-upload", ret)
+      this.$emit("edit-upload", ret)
+    },
+    // 新建提交
+    create() {
+      this.row = {}
+      this.dialogCreate = true
+      this.$emit("create")
+    },
+    createClose() {
+      this.dialogCreate = false
+    },
+    store() {
+      this.$emit("store", this.row)
+    },
+    createUpload(ret) {
+      this.$emit("create-upload", ret)
     },
     // 删除确认
     remove(index, row) {
