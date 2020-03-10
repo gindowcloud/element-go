@@ -6,6 +6,7 @@
     </el-aside>
     <el-container class="ex-main">
       <el-header>
+        <!-- 用户菜单 -->
         <el-dropdown v-if="user" class="float-right" @command="command">
           <span class="username"><i class="el-icon-user" /> {{ user }}</span>
           <el-dropdown-menu v-if="userMenu" slot="dropdown">
@@ -13,9 +14,17 @@
             <el-dropdown-item command="logout" divided>{{ $t('logout') }}</el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
+        <!-- 菜单收缩 -->
         <div class="toggle" @click="collapse"><i :class="toggleIcon" /></div>
       </el-header>
       <el-main>
+        <!-- 三级菜单 -->
+        <div class="grand-menu" v-if="currentMenu">
+          <span v-for="(menu, key) in currentMenu" :key="key">
+            <i v-if="key">/</i><el-link :underline="false" :class="{ on: menu.path == path }" @click="$to(menu.path)">{{ menu.title }}</el-link>
+          </span>
+        </div>
+        <!-- 主要内容 -->
         <transition mode="out-in" name="fade-transform">
           <router-view/>
         </transition>
@@ -58,6 +67,18 @@ export default {
     toggleIcon() {
       if (this.isMobile) return this.opened ? 'el-icon-s-fold' : 'el-icon-s-unfold'
       else return this.collapsed ? 'el-icon-s-unfold' : 'el-icon-s-fold'
+    },
+    path() {
+      return this.$route.fullPath
+    },
+    currentMenu() {
+      let ret = null
+      this.menu.forEach(menu => {
+        if (menu.children) menu.children.forEach(m => {
+          if (m.path == this.path || (m.children && m.children.filter(n => n.path == this.path).length)) ret = m.children
+        })
+      })
+      return ret
     }
   },
   created() {
@@ -97,6 +118,10 @@ export default {
 .el-header .username i { margin-right: 10px; }
 .el-main { overflow: visible !important; }
 .collapsed .el-aside { width: 65px !important; }
+.grand-menu { margin-bottom: 10px; }
+.grand-menu > span { display: inline-block; }
+.grand-menu > span > i { margin: 0 10px; color: #ddd; }
+.grand-menu > span > a.on { color: #409EFF; }
 @media screen and (max-width: 992px) { /* 中型以下屏幕 */
   .el-aside { left: -100vh; position: fixed; z-index: 9999; }
   .ex-drawer { left: -100vh; position: fixed; z-index: 9998; width: 100vw; height: 100vh; background: #000; opacity: 0.5; }
