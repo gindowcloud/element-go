@@ -118,9 +118,9 @@ export default {
 .el-header .username i { margin-right: 10px; }
 .el-main { overflow: visible !important; }
 .collapsed .el-aside { width: 65px !important; }
-.grand-menu { margin-bottom: 10px; }
-.grand-menu > span { display: inline-block; }
+.grand-menu { padding-bottom: 10px; }
 .grand-menu > span > i { margin: 0 10px; color: #ddd; }
+.grand-menu > span > a.is-disabled { color: #409EFF; }
 @media screen and (max-width: 992px) { /* 中型以下屏幕 */
   .el-aside { left: -100vh; position: fixed; z-index: 9999; }
   .ex-drawer { left: -100vh; position: fixed; z-index: 9998; width: 100vw; height: 100vh; background: #000; opacity: 0.5; }

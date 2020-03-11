@@ -1,8 +1,5 @@
 <template>
-  <ex-layout 
-    :menu="menu"
-    :user-menu="userMenu" user="周明" @logout="logout"
-  />
+  <ex-layout :menu="menu" :user-menu="userMenu" user="周明" @logout="logout" />
 </template>
 
 <script>
@@ -12,7 +9,13 @@ export default {
       menu: [
         { title: '首页', path: '/dashboard', icon: 'el-icon-data-board' },
         { title: '组件', path: '/table', icon: 'el-icon-cherry', children: [
-          { title: 'ExTable', path: '/table' },
+          { title: 'ExTable', path: '/table',
+          //   children: [
+          //     { title: 'ExTable1', path: '/table1' },
+          //     { title: 'ExTable2', path: '/table2' },
+          //     { title: 'ExTable3', path: '/table3' },
+          //   ]
+          },
           { title: 'ExTree', path: '/tree' },
         ]},
         { title: '设置', path: '/settings', icon: 'el-icon-setting', children: [
