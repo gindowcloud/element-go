@@ -122,8 +122,8 @@ export default {
 .grand-menu > span > i { margin: 0 10px; color: #ddd; }
 .grand-menu > span > a.is-disabled { color: #409EFF; }
 @media screen and (max-width: 992px) { /* 中型以下屏幕 */
-  .el-aside { left: -100vh; position: fixed; z-index: 9999; }
-  .ex-drawer { left: -100vh; position: fixed; z-index: 9998; width: 100vw; height: 100vh; background: #000; opacity: 0.5; }
+  .el-aside { left: -100vw; position: fixed; z-index: 9999; }
+  .ex-drawer { left: -100vw; position: fixed; z-index: 9998; width: 100vw; height: 100vh; background: #000; opacity: 0.5; }
   .opened .el-aside,
   .opened .ex-drawer { left: 0; }
   .el-header { border-bottom: 1px solid #eee; }
