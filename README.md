@@ -1,13 +1,13 @@
-# Element Extensions
+# Element Go
 
-> Element Extensions for VueJs
+> Element Go for VueJs
 >
-> Github: https://github.com/hecity/element-extensions
+> Github: https://github.com/gindowin/element-go
 
 ## Install
 ``` bash
 # install
-npm i element-extensions -S
+npm i element-go -S
 ```
 
 ## Preview

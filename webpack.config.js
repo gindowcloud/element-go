@@ -9,8 +9,8 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, './dist'),
     publicPath: '/dist/',
-    filename: 'element-extensions.min.js',
-    library: 'elementExtension',
+    filename: 'element-go.min.js',
+    library: 'elementGo',
     libraryTarget: 'umd',
     umdNamedDefine: true
   },
