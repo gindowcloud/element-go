@@ -4,6 +4,11 @@
 >
 > Github: https://github.com/gindowin/element-go
 
+
+## Version
+Current version: 1.0.2
+
+
 ## Install
 ``` bash
 # install
