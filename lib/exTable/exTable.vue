@@ -15,7 +15,7 @@
     </el-row>
     <!-- 数据表格 -->
     <div v-loading="loading">
-      <el-table :data="value">
+      <el-table :data="value" @selection-change="selectionChange">
         <slot />
         <el-table-column width="150" align="right" v-if="hasAction">
           <template slot-scope="scope">
@@ -207,6 +207,9 @@ export default {
     // 删除一行
     destroy(index) {
       this.value.splice(index, 1)
+    },
+    selectionChange(val) {
+      this.$emit("selection-change", val)
     }
   }
 }

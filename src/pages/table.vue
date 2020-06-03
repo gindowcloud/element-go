@@ -8,7 +8,10 @@
       :creator="editor" allow-create @create="create" @store="store"
       allow-remove @remove="remove"
       allow-import @import="uploaded" import-sample="/upload-sample.xlsx"
-      allow-export @export="download">
+      allow-export @export="download"
+      @selection-change="selectionChange"
+    >
+      <el-table-column type="selection" width="55" />
       <el-table-column label="姓名" width="100" prop="name" />
       <el-table-column label="年龄" width="100" prop="age" />
       <el-table-column label="电话" width="160" prop="phone" />
@@ -110,6 +113,9 @@ export default {
     },
     download() {
       console.log('download')
+    },
+    selectionChange(val) {
+      console.log('selection-change', val)
     }
   }
 }
