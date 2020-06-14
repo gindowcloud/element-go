@@ -10,6 +10,10 @@
         </el-select>
         <!-- 级联选择 -->
         <el-cascader v-model="model[item.name]" :placeholder="item.placeholder" :disabled="item.readonly" v-else-if="item.type == 'cascader'" collapse-tags filterable :clearable="item.clearable" :options="item.options" :props="item.props" />
+        <!-- 单选组件 -->
+        <el-radio-group v-model="model[item.name]" :disabled="item.readonly" v-else-if="item.type == 'radio'">
+            <el-radio v-for="(j, i) in item.options" :key="i" :label="j.value">{{ j.label }}</el-radio>
+        </el-radio-group>
         <!-- 多选组件 -->
         <el-checkbox-group v-model="model[item.name]" :disabled="item.readonly" v-else-if="item.type == 'checkbox'">
             <el-checkbox v-for="(j, i) in item.options" :key="i" :label="j.value">{{ j.label }}</el-checkbox>
