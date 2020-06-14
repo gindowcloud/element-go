@@ -26,7 +26,8 @@
         </div>
         <!-- 主要内容 -->
         <transition mode="out-in" name="fade-transform">
-          <router-view/>
+          <router-view v-if="!alive" />
+          <keep-alive v-else><router-view /></keep-alive>
         </transition>
       </el-main>
     </el-container>
@@ -41,6 +42,7 @@ export default {
   name: 'exLayout',
   components: { exMenu },
   props: {
+    alive: { type: Boolean, default: false },
     width: { type: String, default: '140px' },
     logo: String,
     menu: Array,
