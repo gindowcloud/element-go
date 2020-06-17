@@ -18,3 +18,4 @@
 .container { padding: 20px; background-color: #fff; }
 .ex-layout { background: #f3f3f3; }
 .ex-table, .ex-tree { background-color: #fff; }
+.el-submenu .el-menu-item { min-width: auto !important; }
