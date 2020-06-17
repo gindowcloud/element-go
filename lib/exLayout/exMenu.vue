@@ -43,5 +43,5 @@ export default {
 .el-menu .logo .el-image { max-width: 80%; height: 32px; margin: 14px 0; }
 .el-menu >>> .el-submenu__title, .el-menu-item { height: 40px; line-height: 40px; }
 .el-menu >>> .el-submenu__icon-arrow { margin-top: -5px; color: #555; }
-.el-menu >>> .el-menu--inline .el-menu-item { padding-left: 49px !important; }
+.el-menu >>> .el-menu--inline .el-menu-item { padding-left: 49px !important; min-width: auto !important; }
 </style>
