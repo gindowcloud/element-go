@@ -2,14 +2,14 @@
   <div class="ex-table">
     <!-- 搜索表单 -->
     <el-row type="flex">
-      <el-col :sm="16" v-if="filter">
+      <el-col :sm="18" v-if="filter">
         <ex-search v-model="params" :filter="filter" @search="search" @reset="reset" />
       </el-col>
-      <el-col :sm="8" class="text-right">
+      <el-col :sm="6" class="text-right">
         <el-button-group>
-          <el-button plain v-if="allowCreate || creator" size="small" icon="el-icon-plus" @click="create">{{ $t('create') }}</el-button>
-          <el-button plain v-if="allowImport" size="small" icon="el-icon-upload2" @click="importStart">{{ $t('import') }}</el-button>
-          <el-button plain v-if="allowExport" size="small" icon="el-icon-download" @click="exportStart">{{ $t('export') }}</el-button>
+          <el-button type="text" size="small" v-if="allowCreate || creator" icon="el-icon-plus" @click="create">{{ $t('create') }}</el-button>
+          <el-button type="text" size="small" v-if="allowImport" icon="el-icon-upload2" @click="importStart">{{ $t('import') }}</el-button>
+          <el-button type="text" size="small" v-if="allowExport" icon="el-icon-download" @click="exportStart">{{ $t('export') }}</el-button>
         </el-button-group>
       </el-col>
     </el-row>
@@ -221,7 +221,8 @@ export default {
 .ex-table .col-action .el-dropdown { margin-left: 15px; }
 .ex-table .col-action .el-button:first-child,
 .ex-table .col-action .el-dropdown:first-child { margin-left: 0; }
-.ex-table .el-button-group { margin-top: 1px; }
+.ex-table .el-button-group { margin-top: 4px; }
+.ex-table .el-button-group .el-button { margin-left: 15px; }
 .ex-table .el-dropdown-link { cursor: pointer; color: #409EFF; }
 .ex-table .el-pagination { margin: 30px 0; text-align: center; }
 .ex-table .sample { font-weight: 400; }

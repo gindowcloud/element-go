@@ -12,11 +12,11 @@
       @selection-change="selectionChange"
     >
       <el-table-column type="selection" width="55" />
-      <el-table-column label="姓名" width="100" prop="name" />
-      <el-table-column label="年龄" width="100" prop="age" />
-      <el-table-column label="电话" width="160" prop="phone" />
+      <el-table-column label="姓名" width="80" prop="name" />
+      <el-table-column label="年龄" width="60" prop="age" />
+      <el-table-column label="电话" width="140" prop="phone" />
       <el-table-column label="地区" prop="county" />
-      <el-table-column label="积分"><template slot-scope="scope">{{ scope.row.money.thousands() }}</template></el-table-column>
+      <el-table-column label="积分" align="right"><template slot-scope="scope">{{ scope.row.money.thousands() }}</template></el-table-column>
       <el-table-column label="日期" width="120" prop="date" align="right" />
     </ex-table>
   </div>
