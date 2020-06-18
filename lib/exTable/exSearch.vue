@@ -40,7 +40,7 @@ export default {
 <style scoped>
 .el-select, .el-input { width: 140px; }
 .el-range-editor { width: 240px; }
-@media screen and (max-width: 992px) { /* 中型以下屏幕 */
+@media screen and (max-width: 991px) { /* 中型以下屏幕 */
   .el-select, .el-input { width: 120px; }
 }
 </style>

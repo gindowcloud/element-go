@@ -123,7 +123,7 @@ export default {
 .grand-menu { padding-bottom: 10px; }
 .grand-menu > span > i { margin: 0 10px; color: #ddd; }
 .grand-menu > span > a.is-disabled { color: #409EFF; }
-@media screen and (max-width: 992px) { /* 中型以下屏幕 */
+@media screen and (max-width: 991px) { /* 中型以下屏幕 */
   .el-aside { left: -100vw; position: fixed; z-index: 9999; }
   .ex-drawer { left: -100vw; position: fixed; z-index: 9998; width: 100vw; height: 100vh; background: #000; opacity: 0.5; }
   .opened .el-aside,
