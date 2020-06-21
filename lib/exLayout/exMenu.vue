@@ -8,14 +8,14 @@
       <el-image v-else :src="logo" fit="contain" />
     </div>
     <template v-for="(menu, key) in menu">
-      <el-menu-item v-if="!menu.children" :key="key" :index="menu.path" @click.native="closeDrawer()">
+      <el-menu-item v-if="!menu.children" :key="key" :index="menu.path" :hidden="menu.hide" @click.native="closeDrawer()">
         <i :class="menu.icon" /><span>{{ menu.title }}</span>
       </el-menu-item>
-      <el-submenu v-if="menu.children" :key="key" :index="menu.path">
+      <el-submenu v-if="menu.children" :key="key" :index="menu.path" :hidden="menu.hide">
         <template slot="title">
           <i :class="menu.icon" /><span>{{ menu.title }}</span>
         </template>          
-        <el-menu-item v-for="(item, i) in menu.children" :key="i" :index="item.path" @click.native="closeDrawer()">{{ item.title }}</el-menu-item>
+        <el-menu-item v-for="(item, i) in menu.children" :key="i" :index="item.path" :hidden="item.hide" @click.native="closeDrawer()">{{ item.title }}</el-menu-item>
       </el-submenu>
     </template>
   </el-menu>

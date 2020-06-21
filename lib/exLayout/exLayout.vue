@@ -10,7 +10,7 @@
         <el-dropdown v-if="user" class="float-right" @command="command">
           <span class="username"><i class="el-icon-user" /> {{ user }}</span>
           <el-dropdown-menu v-if="userMenu" slot="dropdown">
-            <el-dropdown-item v-for="(item, key) in userMenu" :key="key" :disabled="item.path == path" :command="item.path || ''">{{ item.title }}</el-dropdown-item>
+            <el-dropdown-item v-for="(item, key) in userMenu" :key="key" :hidden="item.hide" :disabled="item.path == path" :command="item.path || ''">{{ item.title }}</el-dropdown-item>
             <el-dropdown-item command="logout" divided>{{ $t('logout') }}</el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
