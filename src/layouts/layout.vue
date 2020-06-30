@@ -16,6 +16,7 @@ export default {
           //     { title: 'ExTable3', path: '/table3' },
           //   ]
           },
+          { title: 'ExView', path: '/view' },
           { title: 'ExTree', path: '/tree' },
         ]},
         { title: '设置', path: '/settings', icon: 'el-icon-setting', children: [

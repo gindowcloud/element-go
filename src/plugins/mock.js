@@ -13,6 +13,7 @@ Mock.mock('users', 'get', () => {
     date: Mock.mock('@date'),
     'money|100000-999999': 1,
     'age|18-60': 1,
+    "state|0-1": 1,
   }))
   return ret
 })

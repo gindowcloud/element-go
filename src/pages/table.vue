@@ -13,11 +13,10 @@
     >
       <el-table-column type="selection" width="55" />
       <el-table-column label="姓名" width="80" prop="name" />
-      <el-table-column label="年龄" width="60" prop="age" />
       <el-table-column label="电话" width="140" prop="phone" />
       <el-table-column label="地区" prop="county" />
-      <el-table-column label="积分" align="right"><template slot-scope="scope">{{ scope.row.money.thousands() }}</template></el-table-column>
       <el-table-column label="日期" width="120" prop="date" align="right" />
+      <el-dropdown-item slot="action" @click.native="$router.push('/view')">详情</el-dropdown-item>
     </ex-table>
   </div>
 </template>
@@ -27,8 +26,8 @@ export default {
   data() {
     return {
       states: [
-        { label: '禁用', value: 1 },
-        { label: '正常', value: 2 }
+        { label: '禁用', value: 0 },
+        { label: '正常', value: 1 }
       ],
       params: {
         size: 24,
@@ -55,6 +54,7 @@ export default {
       return [
         { name: 'name' , label: '姓名' },
         { name: 'phone', label: '电话' },
+        { name: 'county', label: '地区' },
         { name: 'state', label: '状态', type: 'select', options: this.states },
       ]
     },
@@ -64,6 +64,7 @@ export default {
         { name: 'name', label: '姓名', required: true },
         { name: 'phone', label: '电话' },
         { name: 'age', label: '年龄', readonly: true },
+        { name: 'state', label: '状态', type: 'select', options: this.states },
       ]
     }
   },
@@ -73,6 +74,7 @@ export default {
       this.$api.users().then(ret => {
         this.total = ret.meta.total
         this.data = ret.data
+        console.log(this.data)
         this.loading = false
       }).catch(() => {})
     },
