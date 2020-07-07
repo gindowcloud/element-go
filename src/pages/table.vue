@@ -1,6 +1,7 @@
 <template>
   <div class="ex-demo">
-    <ex-table ref="table"
+    <ex-table ref="table" 
+      title="ExTable"
       :params="params" :filter="filter" @search="search" @page-change="pageChange"
       :total="total" :loading="loading" v-model="data"
       :shower="shower" show-title="View Data" show-width="600px" allow-show @show="show"
@@ -11,6 +12,7 @@
       allow-export @export="download"
       @selection-change="selectionChange"
     >
+      <el-button slot="button" type="text" size="small" icon="el-icon-star-off">星星</el-button>
       <el-table-column type="selection" width="55" />
       <el-table-column label="姓名" width="80" prop="name" />
       <el-table-column label="电话" width="140" prop="phone" />

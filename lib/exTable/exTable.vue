@@ -1,18 +1,18 @@
 <template>
   <div class="ex-table">
-    <!-- 搜索表单 -->
-    <el-row type="flex">
-      <el-col :sm="18" v-if="filter">
-        <ex-search v-model="params" :filter="filter" @search="search" @reset="reset" />
-      </el-col>
-      <el-col :sm="6" class="text-right">
+    <el-row class="row-title" type="flex" v-if="title || hasButton">
+      <el-col :sm="6" v-if="title" class="col-title">{{ title }}</el-col>
+      <el-col class="text-right">
         <el-button-group>
+          <slot name="button" />
           <el-button type="text" size="small" v-if="allowCreate || creator" icon="el-icon-plus" @click="create">{{ $t('create') }}</el-button>
           <el-button type="text" size="small" v-if="allowImport" icon="el-icon-upload2" @click="importStart">{{ $t('import') }}</el-button>
           <el-button type="text" size="small" v-if="allowExport" icon="el-icon-download" @click="exportStart">{{ $t('export') }}</el-button>
         </el-button-group>
       </el-col>
     </el-row>
+    <!-- 搜索表单 -->
+    <ex-search v-model="params" :filter="filter" @search="search" @reset="reset" v-if="filter" />
     <!-- 数据表格 -->
     <div v-loading="loading">
       <el-table :data="value" @selection-change="selectionChange">
@@ -63,6 +63,7 @@ export default {
   name: 'exTable',
   components: { exSearch, exShower, exEditor, exImport },
   props: {
+    title: String,
     value: Array,
     loading: Boolean,
     params: Object,
@@ -99,6 +100,12 @@ export default {
     }
   },
   computed: {
+    hasButtonMore() {
+      return this.$scopedSlots.button
+    },
+    hasButton() {
+      return this.creator || this.allowCreate || this.allowImport || this.allowExport || this.hasButtonMore
+    },
     hasActionMore() {
       return this.$scopedSlots.action || this.allowRemove
     },
@@ -217,6 +224,8 @@ export default {
 
 <style scoped>
 .ex-table { padding: 20px; }
+.ex-table .row-title { margin-bottom: 12px; }
+.ex-table .col-title { font-size: 14px; line-height: 36px; }
 .ex-table .col-action .el-button,
 .ex-table .col-action .el-dropdown { margin-left: 15px; }
 .ex-table .col-action .el-button:first-child,
