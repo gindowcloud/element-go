@@ -1,7 +1,7 @@
 {
   "name": "element-go",
   "description": "Element Go",
-  "version": "1.0.12",
+  "version": "1.0.13",
   "author": "Joming He <joming.he@qq.com>",
   "license": "MIT",
   "private": false,
@@ -16,6 +16,7 @@
     "js-cookie": "^2.2.1",
     "prettier": "^1.19.1",
     "vue": "^2.5.11",
+    "vue-i18n": "^8.21.0",
     "vue-router": "^3.2.0",
     "vuex": "^3.4.0"
   },
@@ -34,6 +35,7 @@
     "css-loader": "^0.28.7",
     "file-loader": "^1.1.4",
     "mockjs": "^1.1.0",
+    "prettier": "^1.12.1",
     "vue-loader": "^13.0.5",
     "vue-template-compiler": "^2.4.4",
     "webpack": "^3.6.0",

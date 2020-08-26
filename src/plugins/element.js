@@ -1,8 +1,8 @@
 import Vue from 'vue'
 import ElementUI from 'element-ui'
-import ElementEx from '../../lib'
+import ElementGo from '../../lib'
+import i18n from '../plugins/i18n'
 import 'element-ui/lib/theme-chalk/index.css'
-import exLocale from '../../lib/locale/lang/zh-CN'
 
-Vue.use(ElementUI)
-Vue.use(ElementEx, { exLocale })
+Vue.use(ElementUI, {i18n: (key, value) => i18n.t(key, value)})
+Vue.use(ElementGo)

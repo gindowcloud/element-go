@@ -1,5 +1,5 @@
 <template>
-  <div class="container">Welcome</div>
+  <div class="container">{{ $t('welcome') }}</div>
 </template>
 
 <script>
