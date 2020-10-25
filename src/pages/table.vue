@@ -11,14 +11,15 @@
       allow-import @import="uploaded" import-sample="/upload-sample.xlsx"
       allow-export @export="download"
       @selection-change="selectionChange"
-    >
-      <el-button slot="button" type="text" size="small" icon="el-icon-star-off">星星</el-button>
-      <el-table-column type="selection" width="55" />
+      >
+      <el-table-column type="selection" width="55" align="center" />
       <el-table-column label="姓名" width="80" prop="name" />
       <el-table-column label="电话" width="140" prop="phone" />
       <el-table-column label="地区" prop="county" />
       <el-table-column label="日期" width="120" prop="date" align="right" />
-      <el-dropdown-item slot="action" @click.native="$router.push('/view')">详情</el-dropdown-item>
+      <el-dropdown-item slot="action" @click.native="$router.push('/view')">Detail</el-dropdown-item>
+      <el-button slot="button" size="small" type="text" icon="el-icon-star-off">Star</el-button>
+      <el-button slot="append" size="small" :disabled="!selected.length" @click="deleteSelected">Delete</el-button>
     </ex-table>
   </div>
 </template>
@@ -38,6 +39,7 @@ export default {
         date: []
       },
       data: [],
+      selected: [],
       total: 0,
       loading: false,
     }
@@ -104,7 +106,7 @@ export default {
       $ref.createClose()
       console.log('store', row)
     },
-    remove (index, row) {
+    remove(index, row) {
       let $ref = this.$refs['table']
       $ref.destroy(index)
       console.log('destroy', row)
@@ -120,6 +122,12 @@ export default {
     },
     selectionChange(val) {
       console.log('selection-change', val)
+      this.selected = val
+    },
+    deleteSelected() {
+      this.$confirm(this.$t('confirm.delete'), this.$t('confirm.title'), { type: 'warning' }).then(() => {
+        console.log(this.selected)
+      }).catch(() => {})
     }
   }
 }

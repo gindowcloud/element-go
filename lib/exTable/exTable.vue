@@ -15,7 +15,7 @@
     <ex-search v-model="params" :filter="filter" @search="search" @reset="reset" v-if="filter" />
     <!-- 数据表格 -->
     <div v-loading="loading">
-      <el-table :data="value" @selection-change="selectionChange">
+      <el-table ref="table" :data="value" @selection-change="selectionChange">
         <slot />
         <el-table-column width="150" align="right" v-if="hasAction">
           <template slot-scope="scope">
@@ -33,6 +33,10 @@
           </template>
         </el-table-column>
       </el-table>
+      <div class="append" v-if="hasAppend">
+        <el-button slot="append" size="small" @click="selectAll">{{ $t('select') }}</el-button>
+        <slot name="append" />
+      </div>
     </div>
     <!-- 数据分页 -->
     <el-pagination v-if="total" background layout="total,prev,pager,next" :load="true" :page-size="params.size" :current-page="params.page" :total="total" @current-change="pageChange" />
@@ -111,6 +115,9 @@ export default {
     },
     hasAction() {
       return this.allowShow || this.allowEdit || this.shower || this.editor || this.hasActionMore
+    },
+    hasAppend() {
+      return this.$scopedSlots.append
     }
   },
   mounted() {
@@ -215,6 +222,10 @@ export default {
     destroy(index) {
       this.value.splice(index, 1)
     },
+    // 选择全部
+    selectAll() {
+      this.$refs.table.toggleAllSelection()
+    },
     selectionChange(val) {
       this.$emit("selection-change", val)
     }
@@ -234,5 +245,11 @@ export default {
 .ex-table .el-button-group .el-button { margin-left: 15px; }
 .ex-table .el-dropdown-link { cursor: pointer; color: #409EFF; }
 .ex-table .el-pagination { margin: 30px 0; text-align: center; }
+.ex-table .append { margin: 15px 0; }
 .ex-table .sample { font-weight: 400; }
+@media screen and (max-width: 991px) { /* 中型以下屏幕 */
+  .ex-table .el-pagination >>> .el-pager .more,
+  .ex-table .el-pagination >>> .el-pager .number { display: none; }
+  .ex-table .el-pagination >>> .el-pager .active { display: inline-block; }
+}
 </style>
