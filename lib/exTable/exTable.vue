@@ -43,7 +43,7 @@
     <!-- 查看表单 -->
     <ex-shower v-if="shower" :items="shower" :show="dialogShow" :title="showTitle" :width="showWidth" @close="showClose" :model="row" />
     <!-- 编辑表单 -->
-    <ex-editor v-if="editor" :items="editor" :show="dialogEdit" :title="editTitle" :width="editWidth" @close="editClose" :model="row" @upload="editUpload" @submit="update" />
+    <ex-editor v-if="editor" :items="editor" :show="dialogEdit" :title="editTitle" :width="editWidth" :label-width="editLabelWidth" @close="editClose" :model="row" @upload="editUpload" @submit="update" />
     <!-- 添加表单 -->
     <ex-editor v-if="creator" :items="creator" :show="dialogCreate" :title="createTitle" :width="createWidth" @close="createClose" :model="row" @upload="createUpload" @submit="store" />
     <!-- 导入表单 -->
@@ -80,6 +80,7 @@ export default {
     showWidth: String,
     editTitle: String,
     editWidth: String,
+    editLabelWidth: String,
     createTitle: String,
     createWidth: String,
     importTitle: String,
@@ -251,5 +252,6 @@ export default {
   .ex-table .el-pagination >>> .el-pager .more,
   .ex-table .el-pagination >>> .el-pager .number { display: none; }
   .ex-table .el-pagination >>> .el-pager .active { display: inline-block; }
+  .ex-table >>> .el-dialog { width: 95% !important; }
 }
 </style>

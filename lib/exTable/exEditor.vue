@@ -1,7 +1,7 @@
 <template>
   <el-dialog :width="width" :title="showTitle" :visible.sync="visible">
     <el-form ref="formEditor" :model="model" @submit.native.prevent label-position="left">
-      <el-form-item v-for="(item, i) in datas" :key="i" :label="item.label" :prop="item.name" :required="item.required" label-width="200px">
+      <el-form-item v-for="(item, i) in datas" :key="i" :label="item.label" :prop="item.name" :required="item.required" :label-width="labelWidth">
         <!-- 开关组件 -->
         <el-switch v-model="model[item.name]" :readonly="item.readonly" v-if="item.type == 'switch'" />
         <!-- 下拉组件 -->
@@ -47,6 +47,7 @@ export default {
     width: String,
     items: Array,
     model: Object,
+    labelWidth: { type: String, default: '200px' }
   },
   data() {
     return {
