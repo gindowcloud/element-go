@@ -1,13 +1,18 @@
 <template>
-  <el-dialog :width="width" :title="showTitle" :visible.sync="visible">
-    <el-row v-for="(item, i) in datas" :key="i">
-      <el-col :md="4">{{ item.label || '&nbsp;' }}</el-col>
-      <el-col :md="20">
-        <el-image lazy class="shrink" :src="item.value" v-if="item.type == 'image'" :style="'width:' + (item.width || this.imageSize) + '; height:' + (item.height || this.imageSize) + ';'" />
-        <div v-else>{{ item.value || '-' }}</div>
-      </el-col>
-    </el-row>
-    <div slot="footer" class="dialog-footer">
+  <el-dialog :fullscreen="!width" :width="width" :title="showTitle" :visible.sync="visible">
+    <div class="dialog-content">
+      <el-form size="small" :label-position="labelPosition">
+        <el-row :gutter="20">
+          <el-col :md="span" v-for="(item, key) in datas" :key="key">
+            <el-form-item :label="item.label + ':'" :label-width="labelWidth">
+              <el-image lazy class="shrink" :src="item.value" v-if="item.type == 'image'" :style="'width:' + (item.width || this.imageSize) + '; height:' + (item.height || this.imageSize) + ';'" />
+              <div v-else>{{ item.value || '-'  }}</div>
+            </el-form-item>
+          </el-col>
+        </el-row>
+      </el-form>
+    </div>
+    <div slot="footer">
       <el-button @click="close" type="primary">{{ $t('okay') }}</el-button>
     </div>
   </el-dialog>
@@ -20,7 +25,10 @@ export default {
     title: String,
     width: String,
     items: Array,
-    model: Object
+    model: Object,
+    columns: { type: Number, default: 2 },
+    labelPosition: String,
+    labelWidth: String,
   },
   data() {
     return {
@@ -39,6 +47,9 @@ export default {
         }
         return j
       })
+    },
+    span() {
+      return 24 / this.columns
     }
   },
   watch: {
@@ -58,5 +69,5 @@ export default {
 </script>
 
 <style scoped>
-.el-row  { border-bottom: 1px solid #eee; padding: 8px; }
+.dialog-content { height: calc(100vh - 185px); overflow: scroll; }
 </style>

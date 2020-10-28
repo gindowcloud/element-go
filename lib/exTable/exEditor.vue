@@ -1,38 +1,44 @@
 <template>
-  <el-dialog :width="width" :title="showTitle" :visible.sync="visible">
-    <el-form ref="formEditor" :model="model" @submit.native.prevent label-position="left">
-      <el-form-item v-for="(item, i) in datas" :key="i" :label="item.label" :prop="item.name" :required="item.required" :label-width="labelWidth">
-        <!-- 开关组件 -->
-        <el-switch v-model="model[item.name]" :readonly="item.readonly" v-if="item.type == 'switch'" />
-        <!-- 下拉组件 -->
-        <el-select v-model="model[item.name]" :placeholder="item.placeholder" :disabled="item.readonly" v-else-if="item.type == 'select'" :filterable="item.filterable">
-            <el-option v-for="(j, i) in item.options" :key="i" :label="j.label" :value="j.value" :disabled="j.disabled" />
-        </el-select>
-        <!-- 级联选择 -->
-        <el-cascader v-model="model[item.name]" :placeholder="item.placeholder" :disabled="item.readonly" v-else-if="item.type == 'cascader'" collapse-tags filterable :clearable="item.clearable" :options="item.options" :props="item.props" />
-        <!-- 单选组件 -->
-        <el-radio-group v-model="model[item.name]" :disabled="item.readonly" v-else-if="item.type == 'radio'">
-            <el-radio v-for="(j, i) in item.options" :key="i" :label="j.value">{{ j.label }}</el-radio>
-        </el-radio-group>
-        <!-- 多选组件 -->
-        <el-checkbox-group v-model="model[item.name]" :disabled="item.readonly" v-else-if="item.type == 'checkbox'">
-            <el-checkbox v-for="(j, i) in item.options" :key="i" :label="j.value">{{ j.label }}</el-checkbox>
-        </el-checkbox-group>
-        <!-- 上传组件 -->
-        <el-upload class="uploader" :show-file-list="false" :before-upload="beforeUpload" :on-success="upload"
-            :action="item.action" :headers="{ Authorization: 'Bearer ' + item.token }" v-else-if="item.type == 'upload'">
-            <el-image lazy v-if="model[item.name]" :src="model[item.name]" fit="cover" />                    
-            <i class="el-icon-plus" v-else/>
-        </el-upload>
-        <!-- 日期组件 -->
-        <el-date-picker v-model="model[item.name]" :readonly="item.readonly" type="date" v-else-if="item.type == 'date'" />
-        <!-- 多行文本 -->
-        <el-input type="textarea" v-model="model[item.name]" :placeholder="item.placeholder" :readonly="item.readonly" v-else-if="item.type == 'textarea'" />
-        <!-- 文本组件 -->
-        <el-input v-model="model[item.name]" :placeholder="item.placeholder" :readonly="item.readonly" @keyup.enter.native="submit('form')" v-else/>
-      </el-form-item>
-    </el-form>
-    <div slot="footer" class="dialog-footer">
+  <el-dialog :fullscreen="!width" :width="width" :title="showTitle" :visible.sync="visible">
+    <div class="dialog-content">
+      <el-form ref="formEditor" :model="model" :label-position="labelPosition" @submit.native.prevent>
+        <el-row :gutter="20">
+          <el-col :md="span" v-for="(item, key) in datas" :key="key">
+            <el-form-item :label="item.label + ':'" :prop="item.name" :required="item.required" :label-width="labelWidth">
+              <!-- 开关组件 -->
+              <el-switch v-model="model[item.name]" :readonly="item.readonly" v-if="item.type == 'switch'" />
+              <!-- 下拉组件 -->
+              <el-select v-model="model[item.name]" :placeholder="item.placeholder" :disabled="item.readonly" v-else-if="item.type == 'select'" :filterable="item.filterable">
+                <el-option v-for="(j, i) in item.options" :key="i" :label="j.label" :value="j.value" :disabled="j.disabled" />
+              </el-select>
+              <!-- 级联选择 -->
+              <el-cascader v-model="model[item.name]" :placeholder="item.placeholder" :disabled="item.readonly" v-else-if="item.type == 'cascader'" collapse-tags filterable :clearable="item.clearable" :options="item.options" :props="item.props" />
+              <!-- 单选组件 -->
+              <el-radio-group v-model="model[item.name]" :disabled="item.readonly" v-else-if="item.type == 'radio'">
+                <el-radio v-for="(j, i) in item.options" :key="i" :label="j.value">{{ j.label }}</el-radio>
+              </el-radio-group>
+              <!-- 多选组件 -->
+              <el-checkbox-group v-model="model[item.name]" :disabled="item.readonly" v-else-if="item.type == 'checkbox'">
+                <el-checkbox v-for="(j, i) in item.options" :key="i" :label="j.value">{{ j.label }}</el-checkbox>
+              </el-checkbox-group>
+              <!-- 上传组件 -->
+              <el-upload class="uploader" :show-file-list="false" :before-upload="beforeUpload" :on-success="upload"
+                :action="item.action" :headers="{ Authorization: 'Bearer ' + item.token }" v-else-if="item.type == 'upload'">
+                <el-image lazy v-if="model[item.name]" :src="model[item.name]" fit="cover" />                    
+                <i class="el-icon-plus" v-else/>
+              </el-upload>
+              <!-- 日期组件 -->
+              <el-date-picker v-model="model[item.name]" :readonly="item.readonly" type="date" v-else-if="item.type == 'date'" />
+              <!-- 多行文本 -->
+              <el-input type="textarea" v-model="model[item.name]" :placeholder="item.placeholder" :readonly="item.readonly" v-else-if="item.type == 'textarea'" />
+              <!-- 文本组件 -->
+              <el-input v-model="model[item.name]" :placeholder="item.placeholder" :readonly="item.readonly" @keyup.enter.native="submit('form')" v-else/>
+            </el-form-item>
+          </el-col>
+        </el-row>
+      </el-form>
+    </div>
+    <div slot="footer">
       <el-button @click="cancel">{{ $t('cancel') }}</el-button>
       <el-button @click="submit" type="primary">{{ $t('save') }}</el-button>
     </div>
@@ -47,7 +53,9 @@ export default {
     width: String,
     items: Array,
     model: Object,
-    labelWidth: { type: String, default: '200px' }
+    columns: { type: Number, default: 2 },
+    labelPosition: String,
+    labelWidth: String,
   },
   data() {
     return {
@@ -66,6 +74,9 @@ export default {
         }
         return j
       })
+    },
+    span() {
+      return 24 / this.columns
     }
   },
   watch: {
@@ -111,6 +122,7 @@ export default {
 </script>
 
 <style scoped>
+.dialog-content { height: calc(100vh - 185px); overflow: scroll; }
 .el-select, .el-cascader, .el-date-editor { width: 100%; }
 .uploader { height: 120px; }
 .uploader >>> .el-upload { position: relative; overflow: hidden; cursor: pointer; }
