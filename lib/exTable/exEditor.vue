@@ -122,7 +122,7 @@ export default {
 </script>
 
 <style scoped>
-.is-fullscreen .dialog-content { height: calc(100vh - 185px); overflow: scroll; }
+.is-fullscreen .dialog-content { margin: 0 -10px; padding: 0 10px; height: calc(100vh - 185px); overflow: scroll; }
 .el-select, .el-cascader, .el-date-editor { width: 100%; }
 .uploader { height: 120px; }
 .uploader >>> .el-upload { position: relative; overflow: hidden; cursor: pointer; }

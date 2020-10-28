@@ -69,5 +69,5 @@ export default {
 </script>
 
 <style scoped>
-.is-fullscreen .dialog-content { height: calc(100vh - 185px); overflow: scroll; }
+.is-fullscreen .dialog-content { margin: 0 -10px; padding: 0 10px; height: calc(100vh - 185px); overflow: scroll; }
 </style>
