@@ -41,9 +41,9 @@
     <!-- 数据分页 -->
     <el-pagination v-if="total" background layout="total,prev,pager,next" :load="true" :page-size="params.size" :current-page="params.page" :total="total" @current-change="pageChange" />
     <!-- 查看表单 -->
-    <ex-shower v-if="shower" :items="shower" :show="dialogShow" :title="showTitle" :width="showWidth" :columns="showcolumns" :label-position="showLabelPosition" :label-width="showLabelWidth" @close="showClose" :model="row" />
+    <ex-shower v-if="shower" :items="shower" :show="dialogShow" :title="showTitle" :width="showWidth" :columns="showColumns" :label-position="showLabelPosition" :label-width="showLabelWidth" @close="showClose" :model="row" />
     <!-- 编辑表单 -->
-    <ex-editor v-if="editor" :items="editor" :show="dialogEdit" :title="editTitle" :width="editWidth" :columns="editcolumns" :label-position="editLabelPosition" :label-width="editLabelWidth" @close="editClose" :model="row" @upload="editUpload" @submit="update" />
+    <ex-editor v-if="editor" :items="editor" :show="dialogEdit" :title="editTitle" :width="editWidth" :columns="editColumns" :label-position="editLabelPosition" :label-width="editLabelWidth" @close="editClose" :model="row" @upload="editUpload" @submit="update" />
     <!-- 添加表单 -->
     <ex-editor v-if="creator" :items="creator" :show="dialogCreate" :title="createTitle" :width="createWidth" @close="createClose" :model="row" @upload="createUpload" @submit="store" />
     <!-- 导入表单 -->
