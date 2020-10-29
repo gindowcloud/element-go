@@ -1,5 +1,5 @@
 <template>
-  <el-dialog :fullscreen="!width" :width="width" :title="showTitle" :visible.sync="visible">
+  <el-dialog :fullscreen="fullscreen" :width="width" :title="showTitle" :visible.sync="visible">
     <div class="dialog-content">
       <el-form ref="formEditor" :model="model" :label-position="labelPosition" @submit.native.prevent>
         <el-row :gutter="20">
@@ -50,12 +50,13 @@ export default {
   props: {
     show: { type: Boolean, default: false },
     title: String,
-    width: String,
+    width: { type: String, default: '800px' },
     items: Array,
     model: Object,
-    columns: { type: Number, default: 2 },
+    columns: { type: Number, default: 1 },
     labelPosition: String,
     labelWidth: String,
+    fullscreen: Boolean,
   },
   data() {
     return {
