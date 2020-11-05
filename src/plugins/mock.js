@@ -1,11 +1,17 @@
-import Mock from 'mockjs';
+import Mock from 'mockjs'
 
 Mock.setup({
   timeout: '100 - 300'
 })
  
 Mock.mock('users', 'get', () => {
-  const ret = {code: 200, data: [], meta: { total: 15 }}
+  const ret = {
+    code: 200,
+    data: [],
+    meta: {
+      total: 15
+    }
+  }
   for (let i = 0; i < ret.meta.total; i++) ret.data.push(Mock.mock({
     name: Mock.mock('@cname'),
     phone: Mock.mock(/^1(5|3|7|8)[0-9]{9}$/),

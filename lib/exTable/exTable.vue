@@ -1,7 +1,10 @@
 <template>
   <div class="ex-table">
     <el-row class="row-title" type="flex" v-if="title || hasButton">
-      <el-col :sm="6" v-if="title" class="col-title">{{ title }}</el-col>
+      <el-col :sm="6" v-if="title" class="col-title">
+        <span>{{ title }}</span>
+        <slot name="title" />
+      </el-col>
       <el-col class="text-right">
         <el-button-group>
           <slot name="button" />
@@ -12,6 +15,7 @@
       </el-col>
     </el-row>
     <!-- 搜索表单 -->
+    <slot name="search" />
     <ex-search v-model="params" :filter="filter" @search="search" @reset="reset" v-if="filter" />
     <!-- 数据表格 -->
     <div v-loading="loading">
@@ -245,6 +249,7 @@ export default {
 .ex-table { padding: 20px; }
 .ex-table .row-title { margin-bottom: 12px; }
 .ex-table .col-title { font-size: 14px; line-height: 36px; }
+.ex-table .col-title { margin-right: 10px; }
 .ex-table .col-action .el-button,
 .ex-table .col-action .el-dropdown { margin-left: 15px; }
 .ex-table .col-action .el-button:first-child,
