@@ -130,5 +130,6 @@ export default {
   .opened .ex-drawer { left: 0; }
   .el-header { border-bottom: 1px solid #eee; }
   .el-main { padding: 0; }
+  .grand-menu { padding: 10px; }
 }
 </style>
