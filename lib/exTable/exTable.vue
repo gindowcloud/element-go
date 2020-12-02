@@ -19,7 +19,7 @@
     <ex-search v-model="params" :filter="filter" @search="search" @reset="reset" v-if="filter" />
     <!-- 数据表格 -->
     <div v-loading="loading">
-      <el-table ref="table" :data="value" @selection-change="selectionChange">
+      <el-table ref="table" :data="value" :show-summary="showSummary" @selection-change="selectionChange">
         <slot />
         <el-table-column width="150" align="right" v-if="hasAction">
           <template slot-scope="scope">
@@ -105,6 +105,7 @@ export default {
     allowCreate: Boolean,
     allowImport: Boolean,
     allowExport: Boolean,
+    showSummary: Boolean,
   },
   data() {
     return {
