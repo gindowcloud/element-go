@@ -23,6 +23,7 @@
         :data="value"
         :show-summary="showSummary"
         :tree-props="treeProps"
+        :row-key="rowKey"
         @selection-change="selectionChange"
         >
         <slot />
@@ -112,6 +113,7 @@ export default {
     allowExport: Boolean,
     showSummary: Boolean,
     treeProps: Object,
+    rowKey: String
   },
   data() {
     return {
