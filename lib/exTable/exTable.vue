@@ -24,13 +24,13 @@
         <el-table-column width="150" align="right" v-if="hasAction">
           <template slot-scope="scope">
             <div class="col-action">
-              <el-button type="text" v-if="allowShow || shower" @click="show(scope.row)">{{ $t('view') }}</el-button>
-              <el-button type="text" v-if="allowEdit || editor" @click="edit(scope.row)">{{ $t('edit') }}</el-button>
+              <el-button type="text" v-if="allowShow || shower" :disabled="scope.row.$disabledShow" @click="show(scope.row)">{{ $t('view') }}</el-button>
+              <el-button type="text" v-if="allowEdit || editor" :disabled="scope.row.$disabledEdit" @click="edit(scope.row)">{{ $t('edit') }}</el-button>
               <el-dropdown v-if="hasActionMore">
                 <span class="el-dropdown-link"><i class="el-icon-more" /></span>
                 <el-dropdown-menu slot="dropdown">
                   <slot name="action" :$index="scope.$index" :row="scope.row" />
-                  <el-dropdown-item v-if="allowRemove" @click.native="remove(scope.$index, scope.row)">{{ $t('delete') }}</el-dropdown-item>
+                  <el-dropdown-item v-if="allowRemove" @click.native="remove(scope.$index, scope.row)" :disabled="scope.row.$disabledRemove">{{ $t('delete') }}</el-dropdown-item>
                 </el-dropdown-menu>
               </el-dropdown>
             </div>
