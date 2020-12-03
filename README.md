@@ -2,7 +2,7 @@
 
 > Element Go for VueJs
 >
-> Github: https://github.com/gindowin/element-go
+> Github: https://github.com/gindowcloud/element-go
 
 
 ## Version

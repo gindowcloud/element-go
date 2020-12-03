@@ -43,9 +43,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/gindowin/element-go.git"
+    "url": "git+https://github.com/gindowcloud/element-go.git"
   },
   "bugs": {
-    "url": "https://github.com/gindowin/element-go/issues"
+    "url": "https://github.com/gindowcloud/element-go/issues"
   }
 }
