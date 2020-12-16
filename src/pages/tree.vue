@@ -8,6 +8,7 @@
       allow-remove @remove="remove"
     >
     <i class="el-icon-success color-green" slot="icon" />
+    <span slot="sort">sort</span>
     </ex-tree>
   </div>
 </template>

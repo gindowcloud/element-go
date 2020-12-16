@@ -26,6 +26,7 @@
             <el-button v-if="allowAppend && editor" type="text" size="mini" @click="create(node)"><i class="el-icon-plus" /> {{ $t('append') }}</el-button>
             <el-button v-if="editor" type="text" size="mini" @click="edit(node)"><i class="el-icon-edit-outline" /> {{ $t('edit') }}</el-button>
           </span>
+          <span v-if="hasSort" class="col-sort"><slot name="sort" :row="data" /></span>
         </div>
       </el-tree>
     </div>
@@ -64,6 +65,9 @@ export default {
     },
     hasIcon() {
       return this.$scopedSlots.icon
+    },
+    hasSort() {
+      return this.$scopedSlots.sort
     }
   },
   methods: {
@@ -123,5 +127,6 @@ export default {
 .ex-tree >>> .el-tree-node__content { height: 40px; line-height: 40px; border-bottom: 1px solid #f6f6f6; }
 .ex-tree .node { width: 100%; }
 .ex-tree .node span { display: inline-block; padding: 0 10px; }
-.ex-tree .col-action { float: right; text-align: right; width: 200px; }
+.ex-tree .node .col-sort { float: right; }
+.ex-tree .node .col-action { float: right; text-align: right; width: 200px; }
 </style>
