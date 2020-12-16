@@ -1,7 +1,6 @@
 <template>
   <div class="ex-demo">
-    <ex-table ref="table" 
-      title="ExTable"
+    <ex-table ref="table" title="ExTable"
       :params="params" :filter="filter" @search="search" @page-change="pageChange"
       :total="total" :loading="loading" v-model="data"
       :shower="shower" show-title="View Data" allow-show @show="show"

@@ -1,10 +1,13 @@
 <template>
   <div class="ex-tree">
     <!-- 控制区 -->
-    <el-row v-if="allowCreate" class="row-action">
+    <el-row class="row-title" type="flex" v-if="title || allowCreate">
+      <el-col :sm="6" v-if="title" class="col-title">
+        <span>{{ title }}</span>
+      </el-col>
       <el-col class="text-right">
         <el-button-group>
-          <el-button plain v-if="allowCreate" size="small" icon="el-icon-plus" @click="create({})">{{ $t('create') }}</el-button>
+          <el-button  type="text" size="small" v-if="allowCreate" icon="el-icon-plus" @click="create({})">{{ $t('create') }}</el-button>
         </el-button-group>
       </el-col>
     </el-row>
@@ -15,13 +18,14 @@
         :props="props" :data="data" :lazy="!data" :load="loadNode"
         >
         <div class="node" slot-scope="{ node, data }">
+          <span v-if="hasIcon" class="col-icon"><slot name="icon" :row="data" /></span>
           <span>{{ node.label }}</span>
+          <span v-if="hasSlot" class="col-slot"><slot :row="data" /></span>
           <span class="col-action">
             <el-button v-if="allowRemove && node.isLeaf" @click="remove(node)" type="text" size="mini"><i class="el-icon-delete" /> {{ $t('delete') }}</el-button>
             <el-button v-if="allowAppend && editor" type="text" size="mini" @click="create(node)"><i class="el-icon-plus" /> {{ $t('append') }}</el-button>
             <el-button v-if="editor" type="text" size="mini" @click="edit(node)"><i class="el-icon-edit-outline" /> {{ $t('edit') }}</el-button>
           </span>
-          <span v-if="hasSlot" class="col-slot"><slot :row="data" /></span>
         </div>
       </el-tree>
     </div>
@@ -37,6 +41,7 @@ export default {
   name: 'exTree',
   components: { exEditor },
   props: {
+    title: String,
     loading: Boolean,
     props: Object,
     data: Array,
@@ -56,6 +61,9 @@ export default {
   computed: {
     hasSlot() {
       return this.$scopedSlots.default
+    },
+    hasIcon() {
+      return this.$scopedSlots.icon
     }
   },
   methods: {
@@ -110,9 +118,10 @@ export default {
 
 <style scoped>
 .ex-tree { padding: 20px; }
-.ex-tree .row-action { margin-bottom: 20px; }
+.ex-tree .row-title { margin-bottom: 12px; }
+.ex-tree .col-title { font-size: 14px; line-height: 36px; }
 .ex-tree >>> .el-tree-node__content { height: 40px; line-height: 40px; border-bottom: 1px solid #f6f6f6; }
 .ex-tree .node { width: 100%; }
-.ex-tree .col-slot { float: right; }
+.ex-tree .node span { display: inline-block; padding: 0 10px; }
 .ex-tree .col-action { float: right; text-align: right; width: 200px; }
 </style>

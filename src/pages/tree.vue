@@ -1,12 +1,14 @@
 <template>
   <div class="demo">
-    <ex-tree
-      ref="tree"
+    <ex-tree ref="tree" title="ExTree"
       :props="props" @load="load" :loading="loading"
       :editor="editor" editTitle="添加/编辑目录"
+      allow-create
       allow-append @submit="submit"
       allow-remove @remove="remove"
-    />
+    >
+    <i class="el-icon-success color-green" slot="icon" />
+    </ex-tree>
   </div>
 </template>
 

@@ -257,8 +257,7 @@ export default {
 <style scoped>
 .ex-table { padding: 20px; }
 .ex-table .row-title { margin-bottom: 12px; }
-.ex-table .col-title { font-size: 14px; line-height: 36px; }
-.ex-table .col-title { margin-right: 10px; }
+.ex-table .col-title { font-size: 14px; line-height: 36px; margin-right: 10px; }
 .ex-table .col-action .el-button,
 .ex-table .col-action .el-dropdown { margin-left: 15px; }
 .ex-table .col-action .el-button:first-child,
