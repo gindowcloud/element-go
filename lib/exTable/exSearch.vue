@@ -12,6 +12,7 @@
       <!-- 普通输入 -->
       <el-input v-else v-model="value[item.name]" :placeholder="item.label" @keyup.enter.native="search" />
     </el-form-item>
+    <el-form-item v-if="hasSlot"><slot /></el-form-item>
     <el-form-item>
       <el-button type="primary" @click="search">{{ $t("search") }}</el-button>
       <el-button @click="reset">{{ $t("reset") }}</el-button>
@@ -24,6 +25,11 @@ export default {
   props: {
     value: Object,
     filter: Array,
+  },
+  computed: {
+    hasSlot() {
+      return this.$scopedSlots.default
+    }
   },
   methods: {
     search() {

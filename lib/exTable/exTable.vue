@@ -15,8 +15,9 @@
       </el-col>
     </el-row>
     <!-- 搜索表单 -->
-    <slot name="search" />
-    <ex-search v-model="params" :filter="filter" @search="search" @reset="reset" v-if="filter" />
+    <ex-search v-model="params" :filter="filter" @search="search" @reset="reset" v-if="filter">
+      <slot name="search" />
+    </ex-search>
     <!-- 数据表格 -->
     <div v-loading="loading">
       <el-table ref="table"
