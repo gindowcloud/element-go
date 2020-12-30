@@ -75,16 +75,28 @@ export default {
     loadNode(node, resolve) {
       this.$emit("load", node.data, resolve)
     },
+    //设置默认值
+    setDefaultRow(row = {}) {
+      let rowData = Object.assign({}, row)
+      this.editor.forEach(j => {
+        switch(j.type) {
+          case 'checkbox': rowData[j.name] = []; break
+          case 'select': rowData[j.name] = j.options[0].value; break
+          default: rowData[j.name] = null
+        }
+      })
+      return rowData
+    },
     // 新建提交
     create(parent) {
       this.parent = parent
-      this.row = {}
+      this.row = this.setDefaultRow()
       this.dialogEdit = true
     },
     // 编辑资料
     edit(node) {
       this.parent = null
-      this.row = node.data
+      this.row = this.setDefaultRow(node.data)
       this.dialogEdit = true
     },
     // 编辑关闭
