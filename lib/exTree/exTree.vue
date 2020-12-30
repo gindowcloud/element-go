@@ -75,7 +75,7 @@ export default {
     loadNode(node, resolve) {
       this.$emit("load", node.data, resolve)
     },
-    //设置默认值
+    // 设置默认值
     setDefaultRow(row = {}) {
       let rowData = Object.assign({}, row)
       this.editor.forEach(j => {
