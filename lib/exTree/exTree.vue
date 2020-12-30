@@ -13,9 +13,9 @@
     </el-row>
     <!-- 树型区 -->
     <div v-loading="loading">
-      <el-tree
+      <el-tree ref="_tree"
         :expand-on-click-node="false" icon-class="el-icon-arrow-right"
-        :props="props" :data="data" :lazy="!data" :load="loadNode"
+        :props="props" :data="data" :lazy="!data" :load="loadNode" :node-key="props.nodeKey"
         >
         <div class="node" slot-scope="{ node, data }">
           <span v-if="hasIcon" class="col-icon"><slot name="icon" :row="data" /></span>
@@ -73,6 +73,8 @@ export default {
   methods: {
     // 获取数据
     loadNode(node, resolve) {
+      node.data = []
+      node.childNodes.forEach(item => data.push(item.data))
       this.$emit("load", node.data, resolve)
     },
     //设置默认值
@@ -96,7 +98,7 @@ export default {
     // 编辑资料
     edit(node) {
       this.parent = null
-      this.row = this.setDefaultRow(node.data)
+      this.row = node.data
       this.dialogEdit = true
     },
     // 编辑关闭
@@ -106,6 +108,10 @@ export default {
     // 编辑保存
     submit() {
       this.$emit("submit", this.row, this.parent)
+    },
+    //添加父级
+    parentAppend(row) {
+      this.$refs._tree.append(row)
     },
     // 保存添加
     store(row, parent) {

@@ -17,7 +17,7 @@
 export default {
   data() {
     return {
-      props: { isLeaf: 'isLeaf' },
+      props: {isLeaf: 'isLeaf', nodeKey: 'id'},
       data: [
         { label: '一级 1', children: [{label: '二级 1-1', children: [{label: '三级 1-1-1'}]}] },
         { label: '一级 2', children: [{label: '二级 2-1', children: [{label: '三级 2-1-1'}]}, {label: '二级 2-2', children: [{label: '三级 2-2-1'}]}] },
@@ -54,7 +54,7 @@ export default {
     },
     submit(data, parent) {
       let $ref = this.$refs['tree']
-      if (parent) $ref.store(data, parent)
+      parent.id ? $ref.store(data, parent) : $ref.parentAppend(data)
       $ref.editClose()
     }
   }
