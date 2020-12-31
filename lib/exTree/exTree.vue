@@ -73,8 +73,10 @@ export default {
   methods: {
     // 获取数据
     loadNode(node, resolve) {
-      node.data = []
-      node.childNodes.forEach(item => data.push(item.data))
+      if (!node.data) {
+        node.data = []
+        node.childNodes.forEach(item => data.push(item.data))
+      }
       this.$emit("load", node.data, resolve)
     },
     //设置默认值
