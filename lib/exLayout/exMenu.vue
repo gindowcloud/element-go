@@ -2,7 +2,7 @@
   <el-menu
     router unique-opened
     :collapse-transition="false" background-color="#222" text-color="#fff"
-    :collapse="collapsed"  :default-active="$route.path">
+    :collapse="collapsed" :default-active="$route.path">
     <div class="logo">          
       <span v-if="!logo"><i  class="el-icon-eleme" /></span>
       <el-image v-else :src="logo" fit="contain" />
@@ -18,6 +18,10 @@
         <el-menu-item v-for="(item, i) in menu.children" :key="i" :index="item.path" :hidden="item.hide" @click.native="closeDrawer()">{{ item.title }}</el-menu-item>
       </el-submenu>
     </template>
+    <!-- 底部菜单 -->
+    <el-menu-item class="footer" v-if="footMenu" :index="footMenu.path" @click.native="closeDrawer()">
+      <i :class="footMenu.icon" /><span>{{ footMenu.title }}</span>
+    </el-menu-item>
   </el-menu>
 </template>
 
@@ -27,6 +31,7 @@ export default {
     collapsed: { type: Boolean, default: false },
     logo: String,
     menu: Array,
+    footMenu: Object,
   },
   methods: {
     closeDrawer() {
@@ -44,4 +49,5 @@ export default {
 .el-menu >>> .el-submenu__title, .el-menu-item { height: 40px; line-height: 40px; }
 .el-menu >>> .el-submenu__icon-arrow { margin-top: -5px; color: #555; }
 .el-menu >>> .el-menu--inline .el-menu-item { padding-left: 49px !important; min-width: auto !important; }
+.el-menu .footer { position: fixed; bottom: 0; }
 </style>

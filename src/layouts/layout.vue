@@ -1,5 +1,5 @@
 <template>
-  <ex-layout :menu="menu" :user-menu="userMenu" user="周明" @logout="logout" />
+  <ex-layout :menu="menu" :foot-menu="footMenu" :user-menu="userMenu" user="周明" @logout="logout" />
 </template>
 
 <script>
@@ -26,7 +26,8 @@ export default {
       userMenu: [
         { title: '资料'  },
         { title: '设置', path: '/settings' },
-      ]
+      ],
+      footMenu: { title: '方案及应用', icon: 'el-icon-menu', path: "/apps" },
     }
   },
   methods: {

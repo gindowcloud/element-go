@@ -5,6 +5,7 @@ import pageIndex from './pages/index'
 import pageTable from './pages/table'
 import pageView from './pages/view'
 import pageTree from './pages/tree'
+import apps from './pages/apps'
 
 Vue.use(Router)
 
@@ -15,6 +16,7 @@ const router = new Router({
       { path: 'table', component: pageTable },
       { path: 'view', component: pageView },
       { path: 'tree', component: pageTree },
+      { path: 'apps', component: apps },
     ]},
     { path: '*', component: layout, children: [
       { path: '/', component: pageIndex }
