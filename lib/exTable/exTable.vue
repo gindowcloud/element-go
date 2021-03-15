@@ -57,8 +57,10 @@
     <ex-editor v-if="editor" :items="editor" :show="dialogEdit" :title="editTitle" :width="editWidth" :columns="editColumns" :label-position="editLabelPosition" :label-width="editLabelWidth" :fullscreen="editFullscreen" @close="editClose" :model="row" @upload="editUpload" @submit="update" />
     <!-- 添加表单 -->
     <ex-editor v-if="creator" :items="creator" :show="dialogCreate" :title="createTitle" :width="createWidth" @close="createClose" :model="row" @upload="createUpload" @submit="store" />
+    <!-- 上传表单 -->
+    <ex-editor ref="importer" v-if="importer.length" :items="importer" :show="dialogImport" :title="importTitle" :width="importWidth" :import-file=allowImportFile @close="importClose" :model="importRow"  @submit="save" />
     <!-- 导入表单 -->
-    <ex-import v-if="allowImport"
+    <ex-import v-if="allowImport&&!importer.length"
       :title="importTitle" :width="importWidth" :show="dialogImport" @close="importClose"
       :action="importAction" :headers="importHeaders" @import="imported"
     >
@@ -114,7 +116,10 @@ export default {
     allowExport: Boolean,
     showSummary: Boolean,
     treeProps: Object,
-    rowKey: String
+    rowKey: String,
+    allowExportEdit: Boolean,
+    importer: { type: Array, default: () => [] },
+    allowImportFile: Boolean,
   },
   data() {
     return {
@@ -122,7 +127,8 @@ export default {
       dialogEdit: false,
       dialogCreate: false,
       dialogImport: false,
-      row: {}
+      row: {},
+      importRow: {}
     }
   },
   computed: {
@@ -250,6 +256,14 @@ export default {
     },
     selectionChange(val) {
       this.$emit("selection-change", val)
+    },
+    // 导入保存
+    save() {
+      let formData = new FormData()
+      for ( let key in this.importRow ) {
+        formData.append( key, this.importRow[key] );
+      }
+      this.$emit( "save", formData )
     }
   }
 }

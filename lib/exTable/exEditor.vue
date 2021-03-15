@@ -5,8 +5,10 @@
         <el-row :gutter="20">
           <el-col :md="span" v-for="(item, key) in datas" :key="key">
             <el-form-item :label="item.label + ':'" :prop="item.name" :required="item.required" :label-width="labelWidth">
+               <!-- link组件 -->
+              <el-link type="primary" v-if="item.type == 'link'" @click="sampleDownload(item)">{{ item.name||$t('importer.sample')}}</el-link>
               <!-- 开关组件 -->
-              <el-switch v-model="model[item.name]" :readonly="item.readonly" v-if="item.type == 'switch'" />
+              <el-switch v-model="model[item.name]" :readonly="item.readonly" v-else-if="item.type == 'switch'" />
               <!-- 下拉组件 -->
               <el-select v-model="model[item.name]" :placeholder="item.placeholder" :disabled="item.readonly" v-else-if="item.type == 'select'" :filterable="item.filterable">
                 <el-option v-for="(j, i) in item.options" :key="i" :label="j.label" :value="j.value" :disabled="j.disabled" />
@@ -22,10 +24,11 @@
                 <el-checkbox v-for="(j, i) in item.options" :key="i" :label="j.value">{{ j.label }}</el-checkbox>
               </el-checkbox-group>
               <!-- 上传组件 -->
-              <el-upload class="uploader" :show-file-list="false" :before-upload="beforeUpload" :on-success="upload"
-                :action="item.action" :headers="{ Authorization: 'Bearer ' + item.token }" v-else-if="item.type == 'upload'">
-                <el-image lazy v-if="model[item.name]" :src="model[item.name]" fit="cover" />                    
-                <i class="el-icon-plus" v-else/>
+              <el-upload ref="upload" :class="{'uploader':!item.fileList}" :show-file-list="item.fileList" :limit="1" :before-upload="beforeUpload" :on-success="upload"
+                :action="item.action" :headers="{ Authorization: 'Bearer ' + item.token }" :http-request="uploadFile" v-else-if="item.type == 'upload'">
+                <el-image lazy v-if="model[item.url]" :src="model[item.url]" fit="cover" />
+                <i class="el-icon-plus" v-else-if="!model[item.url]&&!item.fileList"/>
+                <el-button plain v-else size="mini" icon="el-icon-upload2">{{ $t('import') }}</el-button>
               </el-upload>
               <!-- 日期组件 -->
               <el-date-picker v-model="model[item.name]" :readonly="item.readonly" type="date" v-else-if="item.type == 'date'" />
@@ -57,6 +60,7 @@ export default {
     labelPosition: String,
     labelWidth: String,
     fullscreen: Boolean,
+    importFile:{ type: Boolean, default: false },
   },
   data() {
     return {
@@ -100,10 +104,10 @@ export default {
       this.close()
     },
     // 提交表单
-    submit() {
+    submit(formData) {
       this.$refs['formEditor'].validate((valid) => {
         if (!valid) return false
-        this.$emit("submit")
+        this.$emit("submit",formData)
       })
     },
     // 上传图片
@@ -112,12 +116,23 @@ export default {
     },
     // 校验上传
     beforeUpload(file) {
+      if (this.importFile) return true
       const isType = file.type === 'image/jpeg' || file.type === 'image/png'
       const isLt2M = file.size / 1024 / 1024 < 2
       if (!isType) this.$message.error('上传头像图片只能是 JPG/PNG 格式!')
       if (!isLt2M) this.$message.error('上传头像图片大小不能超过 2MB!')
       return isType && isLt2M;
-    }
+    },
+    // 自定义上传行为
+    uploadFile( params ) {
+      this.model.file = params.file
+    },
+    // 下载模板
+    sampleDownload( value ) {
+      let a = document.createElement( 'a' )
+      a.href = value.url
+      a.click()
+    },
   }
 }
 </script>
