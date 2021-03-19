@@ -10,8 +10,13 @@
               <!-- 开关组件 -->
               <el-switch v-model="model[item.name]" :readonly="item.readonly" v-else-if="item.type == 'switch'" />
               <!-- 下拉组件 -->
-              <el-select v-model="model[item.name]" :placeholder="item.placeholder" :disabled="item.readonly" v-else-if="item.type == 'select'" :filterable="item.filterable">
-                <el-option v-for="(j, i) in item.options" :key="i" :label="j.label" :value="j.value" :disabled="j.disabled" />
+              <el-select v-model="model[item.name]" :placeholder="item.placeholder" :disabled="item.readonly" v-else-if="item.type == 'select'" :filterable="item.filterable" :multiple="item.multiple" >
+               <template v-if="item.group">
+                 <el-option-group  v-for="group in item.options" :key="group.label" :label="group.label">
+                    <el-option v-for="(j, i) in group.options" :key="i" :label="j.label" :value="j.value" :disabled="j.disabled" />
+                 </el-option-group>
+               </template>
+                <el-option v-for="(j, i) in item.options" :key="i" :label="j.label" :value="j.value" :disabled="j.disabled" v-else/>
               </el-select>
               <!-- 级联选择 -->
               <el-cascader v-model="model[item.name]" :placeholder="item.placeholder" :disabled="item.readonly" v-else-if="item.type == 'cascader'" collapse-tags filterable :clearable="item.clearable" :options="item.options" :props="item.props" />
