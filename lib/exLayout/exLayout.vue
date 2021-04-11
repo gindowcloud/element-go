@@ -2,7 +2,7 @@
   <el-container class="ex-layout" :class="{ collapsed: collapsed, opened: opened }">
     <div class="ex-drawer" @click="closeDrawer" /><!-- 抽屉遮罩 -->
     <el-aside :width="width">
-      <ex-menu :collapsed="collapsed" @close-drawer="closeDrawer" :menu="menu" :footMenu="footMenu" :logo="logo" />
+      <ex-menu :collapsed="collapsed" @close-drawer="closeDrawer" :menu="menu" :logo="logo" />
     </el-aside>
     <el-container class="ex-main">
       <el-header>
@@ -47,8 +47,7 @@ export default {
     logo: String,
     menu: Array,
     user: String,
-    userMenu: Array,
-    footMenu: Object
+    userMenu: Array
   },
   data() {
     return {
