@@ -1,9 +1,7 @@
 <template>
   <el-container class="ex-layout" :class="{ collapsed: collapsed, opened: opened }">
     <div class="ex-drawer" @click="closeDrawer" /><!-- 抽屉遮罩 -->
-    <el-aside :width="width">
-      <ex-menu :collapsed="collapsed" @close-drawer="closeDrawer" :menu="menu" :logo="logo" :icon="icon" />
-    </el-aside>
+    <ex-menu :collapsed="collapsed" @close-drawer="closeDrawer" :menu="menu" :menu-width="menuWidth" :left-width="leftWidth" :logo="logo" :icon="icon" />
     <el-container class="ex-main">
       <el-header>
         <!-- 用户菜单 -->
@@ -18,12 +16,6 @@
         <div class="toggle" @click="collapse"><i :class="toggleIcon" /></div>
       </el-header>
       <el-main>
-        <!-- 三级菜单 -->
-        <div class="grand-menu" v-if="currentMenu">
-          <span v-for="(menu, key) in currentMenu" :key="key">
-            <i v-if="key">/</i><el-link :underline="false" :disabled="menu.path == path" @click="$to(menu.path)">{{ menu.title }}</el-link>
-          </span>
-        </div>
         <!-- 主要内容 -->
         <transition mode="out-in" name="fade-transform">
           <router-view v-if="!alive" />
@@ -43,10 +35,11 @@ export default {
   components: { exMenu },
   props: {
     alive: { type: Boolean, default: false },
-    width: { type: String, default: '140px' },
     logo: String,
     icon: String,
     menu: Array,
+    menuWidth: String,
+    leftWidth: String,
     user: String,
     userMenu: Array
   },
@@ -73,15 +66,6 @@ export default {
     },
     path() {
       return this.$route.fullPath
-    },
-    currentMenu() {
-      let ret = null
-      this.menu.forEach(menu => {
-        if (menu.children) menu.children.forEach(m => {
-          if (m.path == this.path || (m.children && m.children.filter(n => n.path == this.path).length)) ret = m.children
-        })
-      })
-      return ret
     }
   },
   created() {
@@ -120,7 +104,6 @@ export default {
 .el-header .username { float: right; border-left: 1px solid #f6f6f6; line-height: 20px; padding: 20px 15px 20px 25px; color: #666; }
 .el-header .username i { margin-right: 10px; }
 .el-main { overflow: visible !important; }
-.collapsed .el-aside { width: 65px !important; }
 .grand-menu { padding-bottom: 10px; }
 .grand-menu > span > i { margin: 0 10px; color: #ddd; }
 .grand-menu > span > a.is-disabled { color: #409EFF; }
