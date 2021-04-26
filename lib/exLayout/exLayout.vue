@@ -2,7 +2,7 @@
   <el-container class="ex-layout" :class="{ collapsed: collapsed, opened: opened }">
     <div class="ex-drawer" @click="closeDrawer" /><!-- 抽屉遮罩 -->
     <el-aside :width="width">
-      <ex-menu :collapsed="collapsed" @close-drawer="closeDrawer" :menu="menu" :logo="logo" />
+      <ex-menu :collapsed="collapsed" @close-drawer="closeDrawer" :menu="menu" :logo="logo" :icon="icon" />
     </el-aside>
     <el-container class="ex-main">
       <el-header>
@@ -45,6 +45,7 @@ export default {
     alive: { type: Boolean, default: false },
     width: { type: String, default: '140px' },
     logo: String,
+    icon: String,
     menu: Array,
     user: String,
     userMenu: Array

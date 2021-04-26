@@ -3,8 +3,9 @@
     router unique-opened
     :collapse-transition="false" background-color="#222" text-color="#fff"
     :collapse="collapsed" :default-active="$route.path">
-    <div class="logo">          
-      <span v-if="!logo"><i  class="el-icon-eleme" /></span>
+    <div class="logo">
+      <span v-if="!logo"><i class="el-icon-eleme" /></span>
+      <el-image v-else-if="icon && collapsed" :src="icon" fit="contain" />
       <el-image v-else :src="logo" fit="contain" />
     </div>
     <template v-for="(menu, key) in menu">
@@ -26,6 +27,7 @@ export default {
   props: {
     collapsed: { type: Boolean, default: false },
     logo: String,
+    icon: String,
     menu: Array
   },
   methods: {
