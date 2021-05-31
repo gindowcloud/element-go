@@ -35,6 +35,7 @@ export default {
   components: { exMenu },
   props: {
     alive: { type: Boolean, default: false },
+    width: String,
     logo: String,
     menu: Array,
     user: String,

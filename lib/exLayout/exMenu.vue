@@ -1,6 +1,6 @@
 <template>
   <el-aside width="auto">
-    <el-row type="flex">
+    <el-row type="flex" justify="start">
       <el-col>
         <!-- 首级菜单 -->
         <el-menu
@@ -18,7 +18,7 @@
           </template>
         </el-menu>
       </el-col>
-      <el-col v-if="current.children && current.children.length">
+      <el-col v-if="current.children && current.children.length" :style="{ width: width }">
         <!-- 次级菜单 -->
         <el-menu router>
           <div class="box-title">{{ current.title }}</div>
@@ -39,6 +39,7 @@
 export default {
   props: {
     collapsed: { type: Boolean, default: false },
+    width: String,
     logo: String,
     menu: Array
   },
@@ -68,9 +69,10 @@ export default {
 .el-menu .logo { height: 60px; text-align: center; font-size: 24px; background-color: #292929; }
 .el-menu .logo span { display: inline-block; width: 32px; height: 32px; margin-top: 14px; background-color: #fff; color: #1989fa; border-radius: 50%; }
 .el-menu .logo .el-image { max-width: 64px; height: 32px; margin: 14px auto; }
+.el-menu .el-menu-item { padding-right: 25px; }
 .el-menu >>> .el-submenu__title, .el-menu-item { height: 40px; line-height: 40px; }
 .el-menu >>> .el-submenu__icon-arrow { margin-top: -5px; color: #555; }
 .el-menu >>> .el-menu--inline .el-menu-item { padding-left: 49px !important; min-width: auto !important; }
+.el-menu >>> .el-menu-item-group > ul { border-bottom: 1px solid #f3f3f3; }
 .box-title { line-height: 60px; margin-bottom: 10px; text-align: center; background: #fff; box-shadow: 0 1px 5px #eee; }
-.sub-menu { padding: 0 32px !important; }
 </style>
