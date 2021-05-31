@@ -19,8 +19,8 @@ export default {
         ]},
         { title: '设置', path: '/settings', icon: 'el-icon-setting', children: [
           { title: '设置', path: '/settings', children: [
-            { title: '监控', path: '/system' },
-            { title: '日志', path: '/logs' },
+            { title: '系统监控', path: '/system' },
+            { title: '系统日志', path: '/logs' },
           ] },
         ]}        
       ],

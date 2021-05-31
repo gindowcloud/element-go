@@ -1,7 +1,7 @@
 <template>
   <el-container class="ex-layout" :class="{ collapsed: collapsed, opened: opened }">
     <div class="ex-drawer" @click="closeDrawer" /><!-- 抽屉遮罩 -->
-    <ex-menu :collapsed="collapsed" @close-drawer="closeDrawer" :menu="menu" :menu-width="menuWidth" :left-width="leftWidth" :logo="logo" :icon="icon" />
+    <ex-menu :collapsed="collapsed" @close-drawer="closeDrawer" :menu="menu" :width="width" :logo="logo" />
     <el-container class="ex-main">
       <el-header>
         <!-- 用户菜单 -->
@@ -36,10 +36,7 @@ export default {
   props: {
     alive: { type: Boolean, default: false },
     logo: String,
-    icon: String,
     menu: Array,
-    menuWidth: String,
-    leftWidth: String,
     user: String,
     userMenu: Array
   },
