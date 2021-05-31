@@ -9,7 +9,7 @@
           :collapse="collapsed" :default-active="$route.path">
           <div class="logo">
             <span v-if="!logo"><i class="el-icon-eleme" /></span>
-            <el-image v-else :src="logo" fit="contain" />
+            <el-avatar v-else :src="logo" fit="cover" />
           </div>
           <template v-for="(menu, key) in menu">
             <el-menu-item :key="key" :index="menu.path" :hidden="menu.hide" @click.native="closeDrawer()">
@@ -68,7 +68,6 @@ export default {
 .el-menu { min-height: 100vh; border-right: 0 !important; }
 .el-menu .logo { height: 60px; text-align: center; font-size: 24px; background-color: #292929; }
 .el-menu .logo span { display: inline-block; width: 32px; height: 32px; margin-top: 14px; background-color: #fff; color: #1989fa; border-radius: 50%; }
-.el-menu .logo .el-image { max-width: 64px; height: 32px; margin: 14px auto; }
 .el-menu .el-menu-item { padding-right: 25px; }
 .el-menu >>> .el-submenu__title, .el-menu-item { height: 40px; line-height: 40px; }
 .el-menu >>> .el-submenu__icon-arrow { margin-top: -5px; color: #555; }
