@@ -1,13 +1,13 @@
 <template>
   <div class="ex-table">
-    <el-row class="row-title" type="flex" v-if="title || hasButton">
+    <el-row class="row-title" type="flex" v-if="hasTitle || hasMenu">
       <el-col :sm="6" v-if="title" class="col-title">
-        <span>{{ title }}</span>
-        <slot name="title" />
+        <slot name="title" v-if="slotTitle" />
+        <span v-else>{{ title }}</span>
       </el-col>
       <el-col class="text-right">
-        <el-button-group>
-          <slot name="button" />
+        <slot name="menu" v-if="slotMenu" />
+        <el-button-group v-else>
           <el-button type="text" size="small" v-if="allowCreate || creator" icon="el-icon-plus" @click="create">{{ $t('create') }}</el-button>
           <el-button type="text" size="small" v-if="allowImport" icon="el-icon-upload2" @click="importStart">{{ $t('import') }}</el-button>
           <el-button type="text" size="small" v-if="allowExport" icon="el-icon-download" @click="exportStart">{{ $t('export') }}</el-button>
@@ -60,7 +60,7 @@
     <!-- 上传表单 -->
     <ex-editor ref="importer" v-if="importer.length" :items="importer" :show="dialogImport" :title="importTitle" :width="importWidth" :import-file=allowImportFile @close="importClose" :model="importRow"  @submit="save" />
     <!-- 导入表单 -->
-    <ex-import v-if="allowImport&&!importer.length"
+    <ex-import v-if="allowImport && !importer.length"
       :title="importTitle" :width="importWidth" :show="dialogImport" @close="importClose"
       :action="importAction" :headers="importHeaders" @import="imported"
     >
@@ -132,12 +132,19 @@ export default {
     }
   },
   computed: {
-    hasButtonMore() {
-      return this.$scopedSlots.button
+    slotTitle() {
+      return this.$scopedSlots.title
     },
-    hasButton() {
-      return this.creator || this.allowCreate || this.allowImport || this.allowExport || this.hasButtonMore
+    slotMenu() {
+      return this.$scopedSlots.menu
     },
+    hasTitle() {
+      return this.slotTitle || this.title
+    },
+    hasMenu() {
+      return this.slotMenu || this.creator || this.allowCreate || this.allowImport || this.allowExport
+    },
+
     hasActionMore() {
       return this.$scopedSlots.action || this.allowRemove
     },
