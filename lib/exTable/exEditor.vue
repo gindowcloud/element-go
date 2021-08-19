@@ -104,7 +104,7 @@ export default {
     },
     // 重置表单
     cancel() {
-      this.$refs['formEditor'].resetFields()      
+      // this.$refs['formEditor'].resetFields()
       this.$emit("cancel")
       this.close()
     },

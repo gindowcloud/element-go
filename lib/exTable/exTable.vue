@@ -235,6 +235,7 @@ export default {
       this.$emit("create")
     },
     createClose() {
+      this.row = {}
       this.dialogCreate = false
     },
     store() {
