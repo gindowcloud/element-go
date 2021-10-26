@@ -21,12 +21,12 @@
               <!-- 级联选择 -->
               <el-cascader v-model="model[item.name]" :placeholder="item.placeholder" :disabled="item.readonly" v-else-if="item.type == 'cascader'" collapse-tags filterable :clearable="item.clearable" :options="item.options" :props="item.props" />
               <!-- 单选组件 -->
-              <el-radio-group v-model="model[item.name]" :disabled="item.readonly" v-else-if="item.type == 'radio'">
-                <el-radio v-for="(j, i) in item.options" :key="i" :label="j.value">{{ j.label }}</el-radio>
+              <el-radio-group v-model="model[item.name]" v-else-if="item.type == 'radio'">
+                <el-radio v-for="(j, i) in item.options" :disabled="j.readonly" :key="i" :label="j.value">{{ j.label }}</el-radio>
               </el-radio-group>
               <!-- 多选组件 -->
-              <el-checkbox-group v-model="model[item.name]" :disabled="item.readonly" v-else-if="item.type == 'checkbox'">
-                <el-checkbox v-for="(j, i) in item.options" :key="i" :label="j.value">{{ j.label }}</el-checkbox>
+              <el-checkbox-group v-model="model[item.name]"  v-else-if="item.type == 'checkbox'">
+                <el-checkbox v-for="(j, i) in item.options" :disabled="j.readonly" :key="i" :label="j.value">{{ j.label }}</el-checkbox>
               </el-checkbox-group>
               <!-- 上传组件 -->
               <el-upload ref="upload" :class="{'uploader':!item.fileList}" :show-file-list="item.fileList" :limit="1" :before-upload="beforeUpload" :on-success="upload"
@@ -36,7 +36,7 @@
                 <el-button plain v-else size="mini" icon="el-icon-upload2">{{ $t('import') }}</el-button>
               </el-upload>
               <!-- 日期组件 -->
-              <el-date-picker v-model="model[item.name]" :readonly="item.readonly" type="date" v-else-if="item.type == 'date'" />
+              <el-date-picker v-model="model[item.name]" :readonly="item.readonly" type="date" value-format="yyyy-MM-dd" :picker-options="item.pickerOptions" v-else-if="item.type == 'date'" />
               <!-- 多行文本 -->
               <el-input type="textarea" v-model="model[item.name]" :placeholder="item.placeholder" :readonly="item.readonly" v-else-if="item.type == 'textarea'" />
               <!-- 文本组件 -->
@@ -104,7 +104,7 @@ export default {
     },
     // 重置表单
     cancel() {
-      this.$refs['formEditor'].resetFields()      
+      // this.$refs['formEditor'].resetFields()
       this.$emit("cancel")
       this.close()
     },

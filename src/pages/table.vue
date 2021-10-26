@@ -9,8 +9,10 @@
       allow-remove @remove="remove"
       allow-import @import="uploaded" import-sample="/upload-sample.xlsx"
       allow-export @export="download"
-      @selection-change="selectionChange"
-      >
+      @selection-change="selectionChange">
+      <template slot="menu">
+        <el-button type="text" size="small" icon="el-icon-star-off">Hello</el-button>
+      </template>
       <el-table-column type="selection" width="55" align="center" />
       <el-table-column label="姓名" width="80" prop="name" />
       <el-table-column label="电话" width="140" prop="phone" />

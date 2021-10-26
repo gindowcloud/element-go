@@ -9,21 +9,18 @@ export default {
       menu: [
         { title: '首页', path: '/dashboard', icon: 'el-icon-data-board' },
         { title: '组件', path: '/table', icon: 'el-icon-cherry', children: [
-          { title: 'ExTable', path: '/table',
-          //   children: [
-          //     { title: 'ExTable1', path: '/table1' },
-          //     { title: 'ExTable2', path: '/table2' },
-          //     { title: 'ExTable3', path: '/table3' },
-          //   ]
-          },
+          { title: 'ExTable', path: '/table', children: [
+            { title: 'ExTable1', path: '/table1' },
+            { title: 'ExTable2', path: '/table2' },
+            { title: 'ExTable3', path: '/table3' },
+          ]},
           { title: 'ExView', path: '/view' },
           { title: 'ExTree', path: '/tree' },
         ]},
         { title: '设置', path: '/settings', icon: 'el-icon-setting', children: [
-          { title: '设置', path: '/settings' },
-          { children: [
-            { title: '监控', path: '/system' },
-            { title: '日志', path: '/logs' },
+          { title: '设置', path: '/settings', children: [
+            { title: '系统监控', path: '/system' },
+            { title: '系统日志', path: '/logs' },
           ] },
         ]}        
       ],

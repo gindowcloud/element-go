@@ -1,17 +1,15 @@
 <template>
   <div class="ex-table">
-    <el-row class="row-title" type="flex" v-if="title || hasButton">
+    <el-row class="row-title" type="flex" v-if="hasTitle || hasMenu">
       <el-col :sm="6" v-if="title" class="col-title">
-        <span>{{ title }}</span>
-        <slot name="title" />
+        <slot name="title" v-if="slotTitle" />
+        <span v-else>{{ title }}</span>
       </el-col>
-      <el-col class="text-right">
-        <el-button-group>
-          <slot name="button" />
-          <el-button type="text" size="small" v-if="allowCreate || creator" icon="el-icon-plus" @click="create">{{ $t('create') }}</el-button>
-          <el-button type="text" size="small" v-if="allowImport" icon="el-icon-upload2" @click="importStart">{{ $t('import') }}</el-button>
-          <el-button type="text" size="small" v-if="allowExport" icon="el-icon-download" @click="exportStart">{{ $t('export') }}</el-button>
-        </el-button-group>
+      <el-col class="menu">
+        <slot name="menu" v-if="slotMenu" />
+        <el-button type="text" size="small" v-if="allowCreate || creator" icon="el-icon-plus" @click="create">{{ $t('create') }}</el-button>
+        <el-button type="text" size="small" v-if="allowImport" icon="el-icon-upload2" @click="importStart">{{ $t('import') }}</el-button>
+        <el-button type="text" size="small" v-if="allowExport" icon="el-icon-download" @click="exportStart">{{ $t('export') }}</el-button>
       </el-col>
     </el-row>
     <!-- 搜索表单 -->
@@ -25,8 +23,7 @@
         :show-summary="showSummary"
         :tree-props="treeProps"
         :row-key="rowKey"
-        @selection-change="selectionChange"
-        >
+        @selection-change="selectionChange">
         <slot />
         <el-table-column width="150" align="right" v-if="hasAction">
           <template slot-scope="scope">
@@ -60,7 +57,7 @@
     <!-- 上传表单 -->
     <ex-editor ref="importer" v-if="importer.length" :items="importer" :show="dialogImport" :title="importTitle" :width="importWidth" :import-file=allowImportFile @close="importClose" :model="importRow"  @submit="save" />
     <!-- 导入表单 -->
-    <ex-import v-if="allowImport&&!importer.length"
+    <ex-import v-if="allowImport && !importer.length"
       :title="importTitle" :width="importWidth" :show="dialogImport" @close="importClose"
       :action="importAction" :headers="importHeaders" @import="imported"
     >
@@ -132,11 +129,17 @@ export default {
     }
   },
   computed: {
-    hasButtonMore() {
-      return this.$scopedSlots.button
+    slotTitle() {
+      return this.$scopedSlots.title
     },
-    hasButton() {
-      return this.creator || this.allowCreate || this.allowImport || this.allowExport || this.hasButtonMore
+    slotMenu() {
+      return this.$scopedSlots.menu
+    },
+    hasTitle() {
+      return this.slotTitle || this.title
+    },
+    hasMenu() {
+      return this.slotMenu || this.creator || this.allowCreate || this.allowImport || this.allowExport
     },
     hasActionMore() {
       return this.$scopedSlots.action || this.allowRemove
@@ -232,6 +235,7 @@ export default {
       this.$emit("create")
     },
     createClose() {
+      this.row = {}
       this.dialogCreate = false
     },
     store() {
@@ -277,8 +281,8 @@ export default {
 .ex-table .col-action .el-dropdown { margin-left: 15px; }
 .ex-table .col-action .el-button:first-child,
 .ex-table .col-action .el-dropdown:first-child { margin-left: 0; }
-.ex-table .el-button-group { margin-top: 4px; }
-.ex-table .el-button-group .el-button { margin-left: 15px; }
+.ex-table .menu { margin-top: 4px; text-align: right; }
+.ex-table .menu >>> .el-button { margin-left: 15px; }
 .ex-table .el-dropdown-link { cursor: pointer; color: #409EFF; }
 .ex-table .el-pagination { margin: 30px 0; text-align: center; }
 .ex-table .append { margin: 15px 0; }
