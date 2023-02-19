@@ -1,4 +1,3 @@
-
 import type { App } from 'vue'
 import ExLoading from './loading'
 import ExPagination from './pagination'
