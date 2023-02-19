@@ -1,14 +1,14 @@
 import type { App } from 'vue'
-import ExLoading from './loading'
-import ExPagination from './pagination'
+import ExLoading from './ExLoading'
+import ExPagination from './ExPagination'
  
 // 所有组件列表
 const components = [ 
-    { name: 'ex-loading', component: ExLoading }, 
-    { name: 'ex-pagination', component: ExPagination }
+  ExLoading,
+  ExPagination
 ]
 const install = (app: App): void => {    
-    components.map(({ name, component }) => app.component(name, component))
+  components.map((component) => app.component(component.__name as string, component))
 }
  
 export { ExLoading, ExPagination }
