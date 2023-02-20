@@ -13,7 +13,7 @@ import type { FormInstance } from 'element-plus'
 import { ref } from 'vue'
 import { ElForm, ElFormItem, ElButton } from 'element-plus'
 
-defineProps({
+const props = defineProps({
   model: { type: Object, default: () => { return {} } }
 })
 
@@ -24,10 +24,12 @@ const emit = defineEmits<{
 
 const form = ref<FormInstance>()
 const search = () => {
+  console.log(props.model)
   emit('search')
 }
 const reset = (form: FormInstance | undefined) => {
   if (!form) return
+  console.log(props.model)
   form.resetFields()
   emit('reset')
 }

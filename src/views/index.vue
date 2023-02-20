@@ -20,7 +20,7 @@
 
 <script setup lang="ts">
 import type { User } from '../types'
-import { ref } from 'vue'
+import { ref, reactive } from 'vue'
 import { ElFormItem, ElInput, ElButton, ElTableColumn } from 'element-plus'
 import { ExPageHeader, ExTable } from '../../lib'
 import api from '../api'
@@ -29,7 +29,7 @@ const loaded = ref(false)
 const loading = ref(false)
 const total = ref<number>(0)
 const data = ref<User[]>([])
-const para = ref<{
+const para = reactive<{
   name?: string
   phone?: string
 }>({})
