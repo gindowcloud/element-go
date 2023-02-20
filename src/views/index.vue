@@ -1,14 +1,14 @@
 <template>
   <div class="demo">
     <ex-page-header back title="文章标题" intro="好的文章往往从描述开始"><el-button>新建</el-button></ex-page-header>
-    <ex-search :para="para" @search="getData">
+    <ex-form-search :model="para" @search="getData">
       <el-form-item prop="name">
-        <el-input v-model="para.name" placeholder="姓名" />
+        <el-input v-model="para.name" placeholder="姓名" clearable />
       </el-form-item>
       <el-form-item prop="phone">
-        <el-input v-model="para.phone" placeholder="电话" />
+        <el-input v-model="para.phone" placeholder="电话" clearable />
       </el-form-item>
-    </ex-search>
+    </ex-form-search>
     <ex-table :data="data" :loaded="loaded" :loading="loading" :total="total" @page-change="getData">
       <el-table-column prop="id" label="日期" width="260" />
       <el-table-column prop="name" label="姓名" width="130" />

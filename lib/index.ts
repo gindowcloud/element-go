@@ -2,7 +2,7 @@ import type { App } from 'vue'
 import ExLoading from './ExLoading'
 import ExPageHeader from './ExPageHeader'
 import ExPagination from './ExPagination'
-import ExSearch from './ExSearch'
+import ExFormSearch from './ExFormSearch'
 import ExTable from './ExTable'
  
 // 所有组件列表
@@ -10,7 +10,7 @@ const components = [
   ExLoading,
   ExPageHeader,
   ExPagination,
-  ExSearch,
+  ExFormSearch,
   ExTable
 ]
 const install = (app: App): void => {    
@@ -22,6 +22,6 @@ export {
   ExLoading,
   ExPageHeader,
   ExPagination,
-  ExSearch,
+  ExFormSearch,
   ExTable
 }
