@@ -1,6 +1,14 @@
 <template>
   <div class="demo">
-    <ex-page-header back title="文章标题" intro1="好的文章往往从描述开始"><el-button>新建</el-button></ex-page-header>
+    <ex-page-header back title="文章标题" intro="好的文章往往从描述开始"><el-button>新建</el-button></ex-page-header>
+    <ex-search :para="para" @search="getData">
+      <el-form-item prop="name">
+        <el-input v-model="para.name" placeholder="姓名" />
+      </el-form-item>
+      <el-form-item prop="phone">
+        <el-input v-model="para.phone" placeholder="电话" />
+      </el-form-item>
+    </ex-search>
     <ex-table :data="data" :loaded="loaded" :loading="loading" :total="total" @page-change="getData">
       <el-table-column prop="id" label="日期" width="260" />
       <el-table-column prop="name" label="姓名" width="130" />
@@ -13,7 +21,7 @@
 <script setup lang="ts">
 import type { User } from '../types'
 import { ref } from 'vue'
-import { ElButton, ElTableColumn } from 'element-plus'
+import { ElFormItem, ElInput, ElButton, ElTableColumn } from 'element-plus'
 import { ExPageHeader, ExTable } from '../../lib'
 import api from '../api'
 
@@ -21,6 +29,10 @@ const loaded = ref(false)
 const loading = ref(false)
 const total = ref<number>(0)
 const data = ref<User[]>([])
+const para = ref<{
+  name?: string
+  phone?: string
+}>({})
 const getData = () => {
   loading.value = true
   api.users().then((ret: any) => {
