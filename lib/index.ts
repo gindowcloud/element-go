@@ -12,11 +12,10 @@ const components = [
 const install = (app: App): void => {    
   components.map((component) => app.component(component.__name as string, component))
 }
- 
+
 export {
+  install as default,
   ExLoading,
   ExPagination,
   ExPageHeader
 }
-
-export default { install }
