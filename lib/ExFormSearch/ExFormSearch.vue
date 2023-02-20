@@ -1,5 +1,5 @@
 <template>
-  <el-form v-bind="$attrs" ref="form" inline :model="model" @submit.prevent="search">
+  <el-form ref="form" v-bind="$attrs" inline :model="model" @submit.prevent="search(form)">
     <slot />
     <el-form-item>
       <el-button type="primary" native-type="submit">搜索</el-button>
@@ -23,13 +23,15 @@ const emit = defineEmits<{
 }>()
 
 const form = ref<FormInstance>()
-const search = () => {
-  console.log(props.model)
+const search = (form: FormInstance | undefined) => {
+  if (!form) return
+  console.log('SEARCH', props.model)
   emit('search')
 }
+
 const reset = (form: FormInstance | undefined) => {
   if (!form) return
-  console.log(props.model)
+  console.log('RESET', props.model)
   form.resetFields()
   emit('reset')
 }

@@ -33,6 +33,7 @@ const para = reactive<{
   name?: string
   phone?: string
 }>({})
+
 const getData = () => {
   loading.value = true
   api.users().then((ret: any) => {
