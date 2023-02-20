@@ -10,7 +10,7 @@ import { Loading } from '@element-plus/icons'
 
 defineProps({
   fontSize: { type: String, default: '20px' },
-  padding: { type: String, default: '20px' },
+  padding: { type: String, default: '20px' }
 })
 </script>
 

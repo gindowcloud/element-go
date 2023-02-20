@@ -1,8 +1,8 @@
 import type { App } from 'vue'
-import ExLoading from './src/ExLoading.vue'
+import component from './ExLoading.vue'
  
-ExLoading.install = (app: App): void => {
-  app.component(ExLoading.__name as string, ExLoading)
+component.install = (app: App): void => {
+  app.component(component.__name as string, component)
 }
  
-export default ExLoading
+export default component

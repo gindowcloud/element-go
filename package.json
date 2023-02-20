@@ -18,7 +18,8 @@
   "dependencies": {
     "@element-plus/icons": "^0.0.11",
     "element-plus": "^2.2.32",
-    "vue": "^3.2.45"
+    "vue": "^3.2.45",
+    "vue-router": "^4.1.6"
   },
   "devDependencies": {
     "@types/node": "^18.14.0",
