@@ -6,7 +6,7 @@
 
 <script setup lang="ts">
 import { ElIcon } from 'element-plus'
-import { Loading } from '@element-plus/icons'
+import { Loading } from '@element-plus/icons-vue'
 
 defineProps({
   fontSize: { type: String, default: '20px' },

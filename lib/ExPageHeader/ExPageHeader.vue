@@ -17,7 +17,7 @@
 
 <script setup lang="ts">
 import { ElSpace, ElButton, ElIcon } from 'element-plus'
-import { ArrowLeft } from '@element-plus/icons'
+import { ArrowLeft } from '@element-plus/icons-vue'
 
 defineProps({
     title: { type: String, default: '' },
