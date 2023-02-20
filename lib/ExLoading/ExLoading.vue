@@ -4,7 +4,7 @@
   </div>
 </template>
 
-<script lang="ts" setup>
+<script setup lang="ts">
 import { ElIcon } from 'element-plus'
 import { Loading } from '@element-plus/icons'
 

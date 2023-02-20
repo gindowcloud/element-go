@@ -1,10 +1,13 @@
 <template>
-  <el-pagination v-if="total" background :layout="layout" :total="total" :page-size="pageSize" :page-sizes="pageSizes" :current-page="currentPage" @size-change="sizeChange" @current-change="currentChange" />
+  <el-config-provider :locale="locale">
+    <el-pagination v-if="total" background :layout="layout" :total="total" :page-size="pageSize" :page-sizes="pageSizes" :current-page="currentPage" @size-change="sizeChange" @current-change="currentChange" />
+  </el-config-provider>
 </template>
 
-<script lang="ts" setup>
+<script setup lang="ts">
 import { computed } from 'vue'
-import { ElPagination } from 'element-plus'
+import { ElConfigProvider, ElPagination } from 'element-plus'
+import locale from 'element-plus/es/locale/lang/zh-cn'
 
 const props = defineProps({
   total: { type: Number, default: 0 },

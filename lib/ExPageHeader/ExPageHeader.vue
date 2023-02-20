@@ -15,7 +15,7 @@
   </div>
 </template>
 
-<script lang="ts" setup>
+<script setup lang="ts">
 import { ElSpace, ElButton, ElIcon } from 'element-plus'
 import { ArrowLeft } from '@element-plus/icons'
 
@@ -28,7 +28,7 @@ defineProps({
 </script>
 
 <style scoped>
-.ex-page-header { display: flex; justify-content: space-between; align-items: center; min-height: 48px; margin-bottom: 40px; padding-bottom: 20px; border-bottom: 1px solid #eee; }
+.ex-page-header { display: flex; justify-content: space-between; align-items: center; min-height: 48px; padding-bottom: 12px; margin-bottom: 40px; border-bottom: 1px solid #eee; }
 .ex-page-header .back { font-size: 15px; }
 .ex-page-header .title { font-size: 20px; font-weight: 600; }
 .ex-page-header .intro { font-size: 14px;  color: #ccc; }
