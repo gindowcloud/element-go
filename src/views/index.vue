@@ -10,10 +10,17 @@
       </el-form-item>
     </ex-form-search>
     <ex-table :data="data" :loaded="loaded" :loading="loading" :total="total" @page-change="getData">
+      <el-table-column type="selection" width="30" />
       <el-table-column prop="id" label="日期" width="260" />
       <el-table-column prop="name" label="姓名" width="130" />
       <el-table-column prop="phone" label="电话" />
       <el-table-column prop="date" label="日期" align="right" />
+      <template #batch>
+        <el-button-group>
+          <el-button>下架</el-button>
+          <el-button>删除</el-button>
+        </el-button-group>
+      </template>
     </ex-table>
   </div>
 </template>
@@ -21,7 +28,7 @@
 <script setup lang="ts">
 import type { User } from '../types'
 import { ref, reactive } from 'vue'
-import { ElFormItem, ElInput, ElButton, ElTableColumn } from 'element-plus'
+import { ElFormItem, ElInput, ElButtonGroup, ElButton, ElTableColumn } from 'element-plus'
 import { ExPageHeader, ExTable } from '../../lib'
 import api from '../api'
 

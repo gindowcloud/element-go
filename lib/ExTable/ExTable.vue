@@ -5,6 +5,10 @@
   <el-table v-else :data="data" v-bind="$attrs" v-loading="loading">
     <slot />
   </el-table>
+  <!-- 操作区 -->
+  <div class="batch" v-if="slotBatch">
+    <slot name="batch" />
+  </div>
   <!-- 分页区 -->
   <div class="pagination" v-if="total">
     <ex-pagination :total="total" :page-size="pageSize" :current-page="currentPage" @current-change="currentChange" />
@@ -12,7 +16,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, useSlots } from 'vue'
 import { ElTable, vLoading } from 'element-plus'
 import ExPagination from '../ExPagination'
 
@@ -29,11 +33,14 @@ const emit = defineEmits<{
   (event: 'page-change', payload: number): void
 }>()
 
+const slotBatch = !!useSlots().batch;
+
 const pageSize = ref(props.pageSize)
 const currentPage = ref(props.currentPage)
 const currentChange = (page: number) => emit('page-change', currentPage.value = page)
 </script>
 
 <style scoped>
+.batch { margin-top: 20px; }
 .pagination { margin-top: 40px; }
 </style>
