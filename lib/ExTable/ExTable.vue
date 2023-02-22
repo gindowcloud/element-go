@@ -3,13 +3,17 @@
   <ex-loading v-if="!loaded" />
   <!-- 数据区 -->
   <el-table v-else :data="data" v-bind="$attrs" v-loading="loading">
-    <template v-if="columns.length">
-      <el-table-column v-for="(item, key) in columns" :label="item.label" :type="item.type" :prop="item.prop" :width="item.width" :align="item.align" />
+    <template v-for="item in columns">
+      <el-table-column :label="item.label" :type="item.type" :prop="item.prop" :width="item.width" :align="item.align">
+        <template #default="{ row }">
+          <slot v-if="!item.type" name="cell" v-bind="{ col: item, row: row }">{{ row[item.prop as string] }}</slot>
+        </template>
+      </el-table-column>
     </template>
     <slot />
   </el-table>
   <!-- 操作区 -->
-  <div class="batch" v-if="slotBatch">
+  <div class="batch" v-if="!!slots.batch">
     <slot name="batch" />
   </div>
   <!-- 分页区 -->
@@ -38,8 +42,7 @@ const emit = defineEmits<{
   (event: 'page-change', payload: number): void
 }>()
 
-const slotBatch = !!useSlots().batch;
-
+const slots = useSlots()
 const pageSize = ref(props.pageSize)
 const currentPage = ref(props.currentPage)
 const currentChange = (page: number) => emit('page-change', currentPage.value = page)

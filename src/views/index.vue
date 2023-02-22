@@ -10,11 +10,9 @@
       </el-form-item>
     </ex-form-search>
     <ex-table :data="data" :columns="columns" :loaded="loaded" :loading="loading" :total="total" @page-change="getData">
-      <el-table-column width="40">
-        <template #default="{ row }">
-          <el-icon :size="16" class="icon" :class="{ 'color-light': row.state, 'color-red': !row.state }"><Remove /></el-icon>
-        </template>
-      </el-table-column>
+      <template #cell="{ col, row }">        
+        <el-icon v-if="col.prop === 'state'" :size="16" class="icon" :class="{ 'color-light': !row.state, 'color-green': row.state }"><Check /></el-icon>
+      </template>
       <template #batch>
         <el-button-group>
           <el-button>下架</el-button>
@@ -28,16 +26,16 @@
 <script setup lang="ts">
 import type { User } from '../types'
 import { ref, reactive } from 'vue'
-import { ElFormItem, ElInput, ElButtonGroup, ElButton, ElTableColumn, ElIcon } from 'element-plus'
-import { Remove } from '@element-plus/icons-vue'
+import { ElFormItem, ElInput, ElButtonGroup, ElButton, ElIcon } from 'element-plus'
+import { Check } from '@element-plus/icons-vue'
 import { ExPageHeader, ExTable } from '../../lib'
 import api from '../api'
 
 const columns = ref([
-  { type: 'selection', width: 40 },
-  { prop: 'state', label: '状态', width: 80, align: 'center' },
-  { prop: 'id', label: '日期', width: 260 },
-  { prop: 'name', label: '姓名', width: 260 },
+  { type: 'selection', width: 40, align: 'center' },
+  { prop: 'state', label: '状态', width: 60, align: 'center' },
+  { prop: 'id', label: '编号', width: 250 },
+  { prop: 'name', label: '姓名', width: 140 },
   { prop: 'phone', label: '电话' },
   { prop: 'date', label: '日期', width: 260, align: 'right' }
 ])
@@ -68,7 +66,6 @@ getData()
 <style scoped>
 .demo { max-width: 1200px; margin: 0 auto; }
 .title { display: flex; justify-content: center; align-items: center; height: 100px; }
-.icon { float: left; }
 .color-light { color: #ccc; }
-.color-red { color: #f00; }
+.color-green { color: #093; }
 </style>
