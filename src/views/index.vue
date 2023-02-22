@@ -9,12 +9,12 @@
         <el-input v-model="para.phone" placeholder="电话" clearable />
       </el-form-item>
     </ex-form-search>
-    <ex-table :data="data" :loaded="loaded" :loading="loading" :total="total" @page-change="getData">
-      <el-table-column type="selection" width="30" />
-      <el-table-column prop="id" label="日期" width="260" />
-      <el-table-column prop="name" label="姓名" width="130" />
-      <el-table-column prop="phone" label="电话" />
-      <el-table-column prop="date" label="日期" align="right" />
+    <ex-table :data="data" :columns="columns" :loaded="loaded" :loading="loading" :total="total" @page-change="getData">
+      <el-table-column width="40">
+        <template #default="{ row }">
+          <el-icon :size="16" class="icon" :class="{ 'color-light': row.state, 'color-red': !row.state }"><Remove /></el-icon>
+        </template>
+      </el-table-column>
       <template #batch>
         <el-button-group>
           <el-button>下架</el-button>
@@ -28,9 +28,19 @@
 <script setup lang="ts">
 import type { User } from '../types'
 import { ref, reactive } from 'vue'
-import { ElFormItem, ElInput, ElButtonGroup, ElButton, ElTableColumn } from 'element-plus'
+import { ElFormItem, ElInput, ElButtonGroup, ElButton, ElTableColumn, ElIcon } from 'element-plus'
+import { Remove } from '@element-plus/icons-vue'
 import { ExPageHeader, ExTable } from '../../lib'
 import api from '../api'
+
+const columns = ref([
+  { type: 'selection', width: 40 },
+  { prop: 'state', label: '状态', width: 80, align: 'center' },
+  { prop: 'id', label: '日期', width: 260 },
+  { prop: 'name', label: '姓名', width: 260 },
+  { prop: 'phone', label: '电话' },
+  { prop: 'date', label: '日期', width: 260, align: 'right' }
+])
 
 const loaded = ref(false)
 const loading = ref(false)
@@ -58,4 +68,7 @@ getData()
 <style scoped>
 .demo { max-width: 1200px; margin: 0 auto; }
 .title { display: flex; justify-content: center; align-items: center; height: 100px; }
+.icon { float: left; }
+.color-light { color: #ccc; }
+.color-red { color: #f00; }
 </style>

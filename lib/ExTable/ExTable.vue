@@ -3,6 +3,9 @@
   <ex-loading v-if="!loaded" />
   <!-- 数据区 -->
   <el-table v-else :data="data" v-bind="$attrs" v-loading="loading">
+    <template v-if="columns.length">
+      <el-table-column v-for="(item, key) in columns" :label="item.label" :type="item.type" :prop="item.prop" :width="item.width" :align="item.align" />
+    </template>
     <slot />
   </el-table>
   <!-- 操作区 -->
@@ -16,12 +19,14 @@
 </template>
 
 <script setup lang="ts">
+import type { TableColumn } from '../types'
 import { ref, useSlots } from 'vue'
-import { ElTable, vLoading } from 'element-plus'
+import { ElTable, ElTableColumn, vLoading } from 'element-plus'
 import ExPagination from '../ExPagination'
 
 const props = defineProps({
   data: { type: Array, default: () => { return [] } },
+  columns: { type: Array<TableColumn>, default: () => { return [] } },
   loaded: { type: Boolean, default: true },
   loading: { type: Boolean, default: false },
   total: { type: Number, default: 0 },
