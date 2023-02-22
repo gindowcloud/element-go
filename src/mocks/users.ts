@@ -15,7 +15,11 @@ Mock.mock('users', 'get', () => {
       id: Mock.mock('@id'),
       name: Mock.mock('@cname'),
       phone: Mock.mock(/^1(5|3|7|8)[0-9]{9}$/),
-      county: Mock.mock('@county(true)'),
+      address: {
+        province: Mock.mock('@province(true)'),
+        city: Mock.mock('@city'),
+        county: Mock.mock('@county'),
+      },
       date: Mock.mock('@date'),
       'money|100000-999999': 1,
       'age|18-60': 1,

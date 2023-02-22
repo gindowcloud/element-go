@@ -33,11 +33,12 @@ import api from '../api'
 
 const columns = ref([
   { type: 'selection', width: 40, align: 'center' },
-  { prop: 'state', label: '状态', width: 60, align: 'center' },
-  { prop: 'id', label: '编号', width: 250 },
-  { prop: 'name', label: '姓名', width: 140 },
-  { prop: 'phone', label: '电话' },
-  { prop: 'date', label: '日期', width: 260, align: 'right' }
+  { label: '状态', prop: 'state', width: 60, align: 'center' },
+  { label: '编号', prop: 'id', width: 250 },
+  { label: '姓名', prop: 'name', width: 140 },
+  { label: '电话', prop: 'phone' },
+  { label: '城市', prop: 'address.city', align: 'right' },
+  { label: '日期', prop: 'date', width: 180, align: 'right' }
 ])
 
 const loaded = ref(false)

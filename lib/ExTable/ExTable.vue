@@ -6,7 +6,9 @@
     <template v-for="item in columns">
       <el-table-column :label="item.label" :type="item.type" :prop="item.prop" :width="item.width" :align="item.align">
         <template #default="{ row }">
-          <slot v-if="!item.type" name="cell" v-bind="{ col: item, row: row }">{{ row[item.prop as string] }}</slot>
+          <slot v-if="!item.type" name="cell" v-bind="{ col: item, row: row }">
+            {{ getValue(row, item.prop as string) }}
+          </slot>
         </template>
       </el-table-column>
     </template>
@@ -26,6 +28,7 @@
 import type { TableColumn } from '../types'
 import { ref, useSlots } from 'vue'
 import { ElTable, ElTableColumn, vLoading } from 'element-plus'
+import { getValue } from '../utils'
 import ExPagination from '../ExPagination'
 
 const props = defineProps({
