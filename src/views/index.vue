@@ -11,7 +11,8 @@
     </ex-form-search>
     <ex-table :data="data" :columns="columns" :loaded="loaded" :loading="loading" :total="total" @page-change="getData">
       <template #cell="{ col, row }">        
-        <el-icon v-if="col.prop === 'state'" :size="16" class="icon" :class="{ 'color-light': !row.state, 'color-green': row.state }"><Check /></el-icon>
+        <el-icon v-if="col.prop == 'state'" :size="16" class="icon" :class="{ 'color-light': !row.state, 'color-green': row.state }"><Check /></el-icon>
+        <div v-if="col.prop == 'address'" class="address">{{ row.address }}</div>
       </template>
       <template #batch>
         <el-button-group>
@@ -33,12 +34,14 @@ import api from '../api'
 
 const columns = ref([
   { type: 'selection', width: 40, align: 'center' },
+  { type: 'index', width: 40, align: 'center' },
   { label: '状态', prop: 'state', width: 60, align: 'center' },
   { label: '编号', prop: 'id', width: 250 },
   { label: '姓名', prop: 'name', width: 140 },
   { label: '电话', prop: 'phone' },
   { label: '城市', prop: 'address.city', align: 'right' },
-  { label: '日期', prop: 'date', width: 180, align: 'right' }
+  { label: '日期', prop: 'date', width: 180, align: 'right' },
+  { type: 'expand', prop: 'address' },
 ])
 
 const loaded = ref(false)
@@ -67,6 +70,7 @@ getData()
 <style scoped>
 .demo { max-width: 1200px; margin: 0 auto; }
 .title { display: flex; justify-content: center; align-items: center; height: 100px; }
+.address { padding: 40px; text-align: center; color: #999; }
 .color-light { color: #ccc; }
 .color-green { color: #093; }
 </style>

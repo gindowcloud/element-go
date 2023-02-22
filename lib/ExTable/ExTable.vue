@@ -6,7 +6,7 @@
     <template v-for="item in columns">
       <el-table-column :label="item.label" :type="item.type" :prop="item.prop" :width="item.width" :align="item.align">
         <template #default="{ row }">
-          <slot v-if="!item.type" name="cell" v-bind="{ col: item, row: row }">
+          <slot v-if="!item.type || item.type == 'expand'" name="cell" v-bind="{ col: item, row: row }">
             {{ getValue(row, item.prop as string) }}
           </slot>
         </template>
