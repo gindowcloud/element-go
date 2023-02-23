@@ -9,15 +9,15 @@
         <el-input v-model="para.phone" placeholder="电话" clearable />
       </el-form-item>
     </ex-form-search>
-    <ex-table allow-remove :data="data" :columns="columns" :loaded="loaded" :loading="loading" :total="total" @page-change="getData" @remove="remove">
+    <ex-table allow-modify allow-remove :data="data" :columns="columns" :loaded="loaded" :loading="loading" :total="total" @page-change="getData" @remove="remove">
       <template #cell="{ col, row }">        
-        <el-icon v-if="col.prop == 'state'" :size="16" class="icon" :class="{ 'color-light': !row.state, 'color-green': row.state }"><Check /></el-icon>
+        <Check v-if="col.prop == 'state'" :class="{ 'color-light': !row.state, 'color-green': row.state }" />
         <div v-if="col.prop == 'address'" class="address">{{ row.address.province }} / {{ row.address.city }} / {{ row.address.county }}</div>
       </template>
       <template #batch>
         <el-button-group>
-          <el-button>下架</el-button>
-          <el-button>删除</el-button>
+          <el-button :icon="PreviewCloseOne">下架</el-button>
+          <el-button :icon="Delete">删除</el-button>
         </el-button-group>
       </template>
     </ex-table>
@@ -27,8 +27,8 @@
 <script setup lang="ts">
 import type { User } from '../types'
 import { ref, reactive } from 'vue'
-import { ElFormItem, ElInput, ElButtonGroup, ElButton, ElIcon } from 'element-plus'
-import { Check } from '@element-plus/icons-vue'
+import { ElFormItem, ElInput, ElButtonGroup, ElButton } from 'element-plus'
+import { Check, PreviewCloseOne, Delete } from '@icon-park/vue-next'
 import { ExPageHeader, ExTable } from '../../lib'
 import api from '../api'
 

@@ -1,10 +1,7 @@
 <template>
   <div class="ex-page-header">
     <el-space size="large" class="space" spacer="|">
-      <div v-if="back">
-        <el-button link @click="$router.back()"><template #icon><el-icon><ArrowLeft /></el-icon></template>
-        <span class="back">返回</span>
-      </el-button></div>
+      <el-button v-if="back" link :icon="ArrowLeft" @click="$router.back()">返回</el-button>
       <div>
         <div class="title">{{ title }}</div>
         <div v-if="intro" class="intro" v-html="intro" />
@@ -16,8 +13,8 @@
 </template>
 
 <script setup lang="ts">
-import { ElSpace, ElButton, ElIcon } from 'element-plus'
-import { ArrowLeft } from '@element-plus/icons-vue'
+import { ElSpace, ElButton } from 'element-plus'
+import { ArrowLeft } from '@icon-park/vue-next'
 
 defineProps({
     title: { type: String, default: '' },

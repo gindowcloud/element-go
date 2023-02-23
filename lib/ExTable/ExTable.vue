@@ -17,8 +17,9 @@
     <el-table-column v-if="!!slots.menu || allowRemove || allowUpdate" :width="menuWidth" align="right">
       <template #default="{ row, $index }">
         <slot name="menu" :row="row" />
+        <el-button v-if="allowModify" link :icon="Edit" @click="modify(row)">编辑</el-button>
         <el-button v-if="allowUpdate" link :icon="Edit" @click="update(row)">编辑</el-button>
-        <el-button v-if="allowRemove" link :icon="Delete" @click="remove(row, $index)">删除</el-button>
+        <el-button v-if="allowRemove" link :icon="Close" @click="remove(row, $index)">删除</el-button>
       </template>
     </el-table-column>
   </el-table>
@@ -36,7 +37,7 @@
 import type { TableColumn } from '../types'
 import { ref, useSlots } from 'vue'
 import { vLoading, ElMessageBox, ElTable, ElTableColumn, ElButton } from 'element-plus'
-import { Edit, Delete } from '@element-plus/icons-vue'
+import { Edit, Close } from '@icon-park/vue-next'
 import { getValue } from '../utils'
 import ExPagination from '../ExPagination'
 
@@ -49,12 +50,14 @@ const props = defineProps({
   pageSize: { type: Number, default: 15 },
   currentPage: { type: Number, default: 1 },
   menuWidth: { type: Number, default: 90 },
+  allowModify: { type: Boolean, default: false },
   allowUpdate: { type: Boolean, default: false },
   allowRemove: { type: Boolean, default: false },
 })
 
 const emit = defineEmits<{
   (event: 'page-change', payload: number): void
+  (event: 'modify', row: object): void
   (event: 'update', row: object): void
   (event: 'remove', row: object, index: number): void
 }>()
@@ -64,19 +67,20 @@ const pageSize = ref(props.pageSize)
 const currentPage = ref(props.currentPage)
 const currentChange = (page: number) => emit('page-change', currentPage.value = page)
 
+const modify = (row: object) => emit('modify', row)
+
 const update = (row: object) => {}
 
 // 删除确认
 const remove = (row: object, index: number) => {
-  ElMessageBox.confirm('是否确认进行删除?', '操作确认', { type: 'warning' }).then(() => {
-    emit('remove', row, index)
-  }).catch(() => {})
+  ElMessageBox.confirm('是否确认进行删除?', '操作确认', { type: 'warning' })
+    .then(() => emit('remove', row, index))
+    .catch(() => {})
 }
 </script>
 
 <style scoped>
-.el-table .el-icon { outline: none; }
-.el-table .el-button + .el-button { margin-left: 0; }
+.el-table .el-button { outline: none; }
 .batch { margin-top: 20px; }
 .pagination { margin-top: 40px; }
 </style>

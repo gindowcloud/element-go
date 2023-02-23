@@ -1,12 +1,11 @@
 <template>
   <div class="loading" :style="{ padding, fontSize }">
-    <el-icon class="is-loading"><Loading /></el-icon>
+    <Loading class="el-icon is-loading" />
   </div>
 </template>
 
 <script setup lang="ts">
-import { ElIcon } from 'element-plus'
-import { Loading } from '@element-plus/icons-vue'
+import { Loading } from '@icon-park/vue-next'
 
 defineProps({
   fontSize: { type: String, default: '20px' },
