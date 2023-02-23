@@ -17,8 +17,8 @@
     <el-table-column v-if="!!slots.menu || allowRemove || allowUpdate" :width="menuWidth" align="right">
       <template #default="{ row, $index }">
         <slot name="menu" :row="row" />
-        <el-button v-if="allowModify" link :icon="Edit" @click="modify(row)">编辑</el-button>
         <el-button v-if="allowUpdate" link :icon="Edit" @click="update(row)">编辑</el-button>
+        <el-button v-else-if="allowModify" link :icon="Edit" @click="modify(row)">编辑</el-button>
         <el-button v-if="allowRemove" link :icon="Close" @click="remove(row, $index)">删除</el-button>
       </template>
     </el-table-column>

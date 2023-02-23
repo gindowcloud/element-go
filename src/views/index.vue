@@ -11,7 +11,7 @@
     </ex-form-search>
     <ex-table allow-modify allow-remove :data="data" :columns="columns" :loaded="loaded" :loading="loading" :total="total" @page-change="getData" @remove="remove">
       <template #cell="{ col, row }">        
-        <Check v-if="col.prop == 'state'" :class="{ 'color-light': !row.state, 'color-green': row.state }" />
+        <ReduceOne v-if="col.prop == 'state'" :class="{ 'color-light': row.state, 'color-red': !row.state }" />
         <div v-if="col.prop == 'address'" class="address">{{ row.address.province }} / {{ row.address.city }} / {{ row.address.county }}</div>
       </template>
       <template #batch>
@@ -28,7 +28,7 @@
 import type { User } from '../types'
 import { ref, reactive } from 'vue'
 import { ElFormItem, ElInput, ElButtonGroup, ElButton } from 'element-plus'
-import { Check, PreviewCloseOne, Delete } from '@icon-park/vue-next'
+import { ReduceOne, PreviewCloseOne, Delete } from '@icon-park/vue-next'
 import { ExPageHeader, ExTable } from '../../lib'
 import api from '../api'
 
@@ -75,5 +75,5 @@ getData()
 .title { display: flex; justify-content: center; align-items: center; height: 100px; }
 .address { padding: 30px; text-align: center; color: #999; }
 .color-light { color: #ccc; }
-.color-green { color: #093; }
+.color-red { color: #f00; }
 </style>
