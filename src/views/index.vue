@@ -9,14 +9,11 @@
         <el-input v-model="para.phone" placeholder="电话" clearable />
       </el-form-item>
     </ex-form-search>
-    <ex-table
-      :data="data" :columns="columns" :loaded="loaded" :loading="loading"
-      :total="total" @page-change="getData"
-      allow-remove @remove="remove">
+    <ex-table allow-remove :data="data" :columns="columns" :loaded="loaded" :loading="loading" :total="total" @page-change="getData" @remove="remove">
       <template #cell="{ col, row }">        
         <el-icon v-if="col.prop == 'state'" :size="16" class="icon" :class="{ 'color-light': !row.state, 'color-green': row.state }"><Check /></el-icon>
         <div v-if="col.prop == 'address'" class="address">{{ row.address.province }} / {{ row.address.city }} / {{ row.address.county }}</div>
-      </template>      
+      </template>
       <template #batch>
         <el-button-group>
           <el-button>下架</el-button>
@@ -67,7 +64,7 @@ const getData = () => {
 }
 
 // 删除一行
-const remove = (index: number, item: object) => getData()
+const remove = (row: object, index: number) => getData()
 
 // 获取数据
 getData()
