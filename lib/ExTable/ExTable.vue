@@ -3,7 +3,7 @@
   <ex-loading v-if="!loaded" />
   <!-- 数据区 -->
   <el-table v-else :data="data" v-bind="$attrs" v-loading="loading">
-    <!-- Columns -->
+    <!-- Cell -->
     <template v-for="item in columns">
       <el-table-column :label="item.label" :type="item.type" :prop="item.prop" :width="item.width" :align="item.align">
         <template #default="{ row }">
@@ -13,13 +13,20 @@
     </template>
     <!-- Slot -->
     <slot />
-    <!-- Action -->
-    <el-table-column v-if="!!slots.menu || allowRemove || allowUpdate" :width="menuWidth" align="right">
-      <template #default="{ row, $index }">
-        <slot name="menu" :row="row" />
-        <el-button v-if="allowUpdate" link :icon="Edit" @click="update(row)">编辑</el-button>
-        <el-button v-else-if="allowModify" link :icon="Edit" @click="modify(row)">编辑</el-button>
-        <el-button v-if="allowRemove" link :icon="Close" @click="remove(row, $index)">删除</el-button>
+    <!-- Menu -->
+    <el-table-column v-if="!!slots.menu || allowRemove || allowUpdate" width="50" align="center">
+      <template #default="{ row, $index }">        
+        <el-dropdown>
+          <More class="icon" />
+          <template #dropdown>
+            <el-dropdown-menu>
+              <slot name="menu" :row="row" />
+              <el-dropdown-item v-if="allowUpdate" @click="update(row)">编辑</el-dropdown-item>
+              <el-dropdown-item v-else-if="allowModify" @click="modify(row)">编辑</el-dropdown-item>
+              <el-dropdown-item v-if="allowRemove" @click="remove(row, $index)">删除</el-dropdown-item>
+            </el-dropdown-menu>
+          </template>
+        </el-dropdown>
       </template>
     </el-table-column>
   </el-table>
@@ -36,8 +43,8 @@
 <script setup lang="ts">
 import type { TableColumn } from '../types'
 import { ref, useSlots } from 'vue'
-import { vLoading, ElMessageBox, ElTable, ElTableColumn, ElButton } from 'element-plus'
-import { Edit, Close } from '@icon-park/vue-next'
+import { vLoading, ElMessageBox, ElTable, ElTableColumn, ElButton, ElDropdown, ElDropdownMenu, ElDropdownItem } from 'element-plus'
+import { More } from '@icon-park/vue-next'
 import { getValue } from '../utils'
 import ExPagination from '../ExPagination'
 
@@ -49,7 +56,6 @@ const props = defineProps({
   total: { type: Number, default: 0 },
   pageSize: { type: Number, default: 15 },
   currentPage: { type: Number, default: 1 },
-  menuWidth: { type: Number, default: 90 },
   allowModify: { type: Boolean, default: false },
   allowUpdate: { type: Boolean, default: false },
   allowRemove: { type: Boolean, default: false },
@@ -80,7 +86,8 @@ const remove = (row: object, index: number) => {
 </script>
 
 <style scoped>
-.el-table .el-button { outline: none; }
+.el-table .el-dropdown { vertical-align: middle; }
+.el-table .icon { font-size: 18px; height: 18px; outline: none; }
 .batch { margin-top: 20px; }
 .pagination { margin-top: 40px; }
 </style>
