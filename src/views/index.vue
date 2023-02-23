@@ -9,11 +9,14 @@
         <el-input v-model="para.phone" placeholder="电话" clearable />
       </el-form-item>
     </ex-form-search>
-    <ex-table :data="data" :columns="columns" :loaded="loaded" :loading="loading" :total="total" @page-change="getData">
+    <ex-table
+      :data="data" :columns="columns" :loaded="loaded" :loading="loading"
+      :total="total" @page-change="getData"
+      allow-remove @remove="remove">
       <template #cell="{ col, row }">        
         <el-icon v-if="col.prop == 'state'" :size="16" class="icon" :class="{ 'color-light': !row.state, 'color-green': row.state }"><Check /></el-icon>
-        <div v-if="col.prop == 'address'" class="address">{{ row.address }}</div>
-      </template>
+        <div v-if="col.prop == 'address'" class="address">{{ row.address.province }} / {{ row.address.city }} / {{ row.address.county }}</div>
+      </template>      
       <template #batch>
         <el-button-group>
           <el-button>下架</el-button>
@@ -34,14 +37,13 @@ import api from '../api'
 
 const columns = ref([
   { type: 'selection', width: 40, align: 'center' },
-  { type: 'index', width: 40, align: 'center' },
   { label: '状态', prop: 'state', width: 60, align: 'center' },
-  { label: '编号', prop: 'id', width: 250 },
-  { label: '姓名', prop: 'name', width: 140 },
-  { label: '电话', prop: 'phone' },
-  { label: '城市', prop: 'address.city', align: 'right' },
-  { label: '日期', prop: 'date', width: 180, align: 'right' },
-  { type: 'expand', prop: 'address' },
+  { label: '编号', prop: 'id', width: 200 },
+  { label: '姓名', prop: 'name', width: 100 },
+  { type: 'expand', prop: 'address', width: 30, align: 'center' },
+  { label: '城市', prop: 'address.city' },
+  { label: '电话', prop: 'phone', align: 'right' },
+  { label: '日期', prop: 'date', width: 160, align: 'right' },
 ])
 
 const loaded = ref(false)
@@ -64,13 +66,17 @@ const getData = () => {
   })
 }
 
+// 删除一行
+const remove = (index: number, item: object) => getData()
+
+// 获取数据
 getData()
 </script>
 
 <style scoped>
 .demo { max-width: 1200px; margin: 0 auto; }
 .title { display: flex; justify-content: center; align-items: center; height: 100px; }
-.address { padding: 40px; text-align: center; color: #999; }
+.address { padding: 30px; text-align: center; color: #999; }
 .color-light { color: #ccc; }
 .color-green { color: #093; }
 </style>
