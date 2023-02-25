@@ -3,6 +3,7 @@ import App from './App.vue'
 import router from './router'
 import ElementGo from '../packages/lib'
 import 'element-plus/dist/index.css'
+import './assets/style.css'
 
 const app = createApp(App)
 app.use(router)
