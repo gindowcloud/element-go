@@ -38,7 +38,7 @@ import type { User } from '../types'
 import { ref, reactive } from 'vue'
 import { ElFormItem, ElInput, ElButtonGroup, ElButton, ElDropdownItem } from 'element-plus'
 import { ReduceOne, PreviewCloseOne, Delete, Copy } from '@icon-park/vue-next'
-import { ExPageHeader, ExTable } from '../../package/lib'
+import { ExPageHeader, ExTable } from '../../packages/lib'
 import api from '../api'
 
 const columns = ref([
