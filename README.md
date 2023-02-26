@@ -1,16 +1,17 @@
 # Element Go
 基于 Element Plus 扩展常用的业务组件
+
 https://gindowcloud.github.io/element-go/components/table
 
-## Install
+## 项目安装
 ``` bash
-# under you project
+# 在您的项目中使用
 yarn add element-go
 ```
 
-## Preview
+## 本地预览
 ``` bash
-# after git clone
+# 下载此代码到本地
 yarn install
 yarn dev
 ```
