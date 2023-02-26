@@ -2,11 +2,11 @@
   <el-container>
     <el-header>
       <div class="logo"><router-link to="/">Element Go</router-link></div>
-      <div class="subject"><el-tag effect="plain">基于 Element Plus 扩展的常用业务组件</el-tag></div>
+      <div class="subject"><el-tag effect="plain">基于 Element Plus 扩展常用的业务组件</el-tag></div>
     </el-header>
     <el-container class="content">
       <el-aside width="200px">
-        <el-menu router>
+        <el-menu router :default-active="routePath">
           <el-menu-item index="/components/page-header">PageHeader 页头</el-menu-item>
           <el-menu-item index="/components/form-search">FormSearch 搜索</el-menu-item>
           <el-menu-item index="/components/table">Table 表格</el-menu-item>
@@ -24,7 +24,12 @@
 </template>
 
 <script setup lang="ts">
+import { computed } from 'vue'
+import { useRoute } from 'vue-router'
 import { ElContainer, ElHeader, ElAside, ElMain, ElTag, ElMenu, ElLink, ElMenuItem } from 'element-plus'
+
+const paths = useRoute().path.split('/')
+const routePath = computed(() => '/' + paths[1] + '/' + paths[2])
 </script>
 
 <style>

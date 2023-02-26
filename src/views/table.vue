@@ -1,45 +1,44 @@
 <template>
   <ex-page-header title="Table 表格" intro="好的内容往往从描述开始"><el-button>新建</el-button></ex-page-header>
-  <div class="demo">
-    <ex-form-search :model="para" @search="getData">
-      <el-form-item label="姓名" prop="name">
-        <el-input v-model="para.name" placeholder="姓名" clearable />
-      </el-form-item>
-      <el-form-item label="电话" prop="phone">
-        <el-input v-model="para.phone" placeholder="电话" clearable />
-      </el-form-item>
-    </ex-form-search>
-    <ex-table :data="data" :columns="columns" :loaded="loaded" :loading="loading" :total="total" @page-change="getData"
-      allow-view :viewer="viewer"
-      allow-modify @modify="modify"
-      allow-remove @remove="remove">
-      <template #cell="{ col, row }">        
-        <ReduceOne v-if="col.prop == 'state'" :class="{ 'color-light': row.state, 'color-red': !row.state }" />
-        <div v-if="col.prop == 'address'" class="address">{{ row.address.province }} / {{ row.address.city }} / {{ row.address.county }}</div>
-      </template>
-      <template #link>
-        <el-button link :icon="LinkOne">链接</el-button>
-      </template>
-      <template #menu>
-        <el-dropdown-item>菜单</el-dropdown-item>
-      </template>
-      <template #batch>
-        <el-button-group>
-          <el-button :icon="PreviewCloseOne">下架</el-button>
-          <el-button :icon="Delete">删除</el-button>
-        </el-button-group>
-      </template>
-    </ex-table>
-  </div>
+  <!-- 演示 -->
+  <ex-form-search :model="para" @search="getData">
+    <el-form-item label="姓名" prop="name">
+      <el-input v-model="para.name" placeholder="姓名" clearable />
+    </el-form-item>
+    <el-form-item label="电话" prop="phone">
+      <el-input v-model="para.phone" placeholder="电话" clearable />
+    </el-form-item>
+  </ex-form-search>
+  <ex-table :data="data" :columns="columns" :loaded="loaded" :loading="loading" :total="total" @page-change="getData"
+    allow-view :viewer="viewer"
+    allow-modify @modify="modify"
+    allow-remove @remove="remove">
+    <template #cell="{ col, row }">        
+      <ReduceOne v-if="col.prop == 'state'" :class="{ 'color-light': row.state, 'color-red': !row.state }" />
+      <div v-if="col.prop == 'address'" class="address">{{ row.address.province }} / {{ row.address.city }} / {{ row.address.county }}</div>
+    </template>
+    <template #link>
+      <el-button link :icon="LinkOne">链接</el-button>
+    </template>
+    <template #menu>
+      <el-dropdown-item>菜单</el-dropdown-item>
+    </template>
+    <template #batch>
+      <el-button-group>
+        <el-button :icon="PreviewCloseOne">下架</el-button>
+        <el-button :icon="Delete">删除</el-button>
+      </el-button-group>
+    </template>
+  </ex-table>
   <!-- 属性 -->
   <h3 class="subject">属性说明</h3>
-  <ex-table :data="propData" :columns="propColumns" />
+  <ex-table :data="props" :columns="propColumns" />
   <!-- 方法 -->
   <h3 class="subject">方法说明</h3>
-  <ex-table :data="methodData" :columns="methodColumns" />
+  <ex-table :data="methods" :columns="methodColumns" />
   <!-- 插槽 -->
   <h3 class="subject">插槽说明</h3>
-  <ex-table :data="slotData" :columns="slotColumns" />
+  <ex-table :data="slots" :columns="slotColumns" />
 </template>
 
 <script setup lang="ts">
@@ -48,6 +47,7 @@ import { ref, reactive } from 'vue'
 import { ElFormItem, ElInput, ElButtonGroup, ElButton, ElDropdownItem } from 'element-plus'
 import { ReduceOne, PreviewCloseOne, Delete, LinkOne } from '@icon-park/vue-next'
 import { ExPageHeader, ExTable } from '../../packages/lib'
+import { propColumns, methodColumns, slotColumns } from '../types'
 import api from '../api'
 
 const columns = [
@@ -72,7 +72,7 @@ const viewer = [
   { label: '日期', prop: 'date' },
 ]
 
-const propData = [
+const props = [
   { name: 'data', desc: '数据内容（行定义）', type: 'array', default: '[]' },
   { name: 'columns', desc: '数据列表（列定义）', type: 'array', default: '[]' },
   { name: 'loaded', desc: '完成首次加载', type: 'boolean', default: 'true' },
@@ -89,38 +89,20 @@ const propData = [
   { name: 'link-width', desc: '添加 Link 内容表格宽度', type: 'number', default: '60' },
 ]
 
-const propColumns = [
-  { label: '属性名', prop: 'name', width: 250 },
-  { label: '说明', prop: 'desc' },
-  { label: '类型', prop: 'type', width: 250 },
-  { label: '默认', prop: 'default', width: 250 },
+const methods = [
+  { name: '@page-change', desc: '用户切换分页', para: 'page: number 页码' },
+  { name: '@view', desc: '用户点击了查看按钮', para: 'row: object 数据行' },
+  { name: '@modify', desc: '用户点击了编辑按钮', para: 'row: object 数据行' },
+  { name: '@update', desc: '使用更新窗完成了数据更新', para: 'row: object 数据行' },
+  { name: '@remove', desc: '完成了删除操作', para: 'row: object 数据行, index: number 序号' },
 ]
 
-const methodData = [
-{ name: '@page-change', desc: '用户切换分页', para: 'page: number 页码' },
-{ name: '@view', desc: '用户点击了查看按钮', para: 'row: object 数据行' },
-{ name: '@modify', desc: '用户点击了编辑按钮', para: 'row: object 数据行' },
-{ name: '@update', desc: '使用更新窗完成了数据更新', para: 'row: object 数据行' },
-{ name: '@remove', desc: '完成了删除操作', para: 'row: object 数据行, index: number 序号' },
-]
-const methodColumns = [
-  { label: '方法名', prop: 'name', width: 250 },
-  { label: '说明', prop: 'desc' },
-  { label: '参数', prop: 'para', width: 500 },
-]
-
-const slotData = [
+const slots = [
 { name: '-', desc: '自定义默认内容', para: '-' },
 { name: 'cell', desc: '数据单元区', para: '{ row 行数据, col 列数据 }' },
 { name: 'link', desc: '数据行的链接', para: '{ row 行数据 }' },
 { name: 'menu', desc: '数据行的菜单', para: '{ row 行数据 }' },
 { name: 'batch', desc: '批量操作区', para: '-' },
-]
-
-const slotColumns = [
-  { label: '插槽名', prop: 'name', width: 250 },
-  { label: '说明', prop: 'desc' },
-  { label: '参数', prop: 'para', width: 500 },
 ]
 
 const loaded = ref(false)
@@ -156,9 +138,7 @@ getData()
 </script>
 
 <style scoped>
-.demo { border: 5px solid #eee; padding: 20px; }
-.demo .address { padding: 30px; text-align: center; color: #999; }
-.demo .color-light { color: #ccc; }
-.demo .color-red { color: #f00; }
-h3.subject { margin-top: 40px; }
+.address { padding: 30px; text-align: center; color: #999; }
+.color-light { color: #ccc; }
+.color-red { color: #f00; }
 </style>

@@ -2,7 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import layout from '../layouts/layout.vue'
 
 const router = createRouter({
-  history: createWebHistory(import.meta.env.VITE_BASE_MOD),
+  history: createWebHistory(import.meta.env.VITE_BASE_PATH),
   routes: [
     {
       path: '/',

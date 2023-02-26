@@ -8,8 +8,8 @@
 import { Loading } from '@icon-park/vue-next'
 
 defineProps({
+  padding: { type: String, default: '20px' },
   fontSize: { type: String, default: '20px' },
-  padding: { type: String, default: '20px' }
 })
 </script>
 
