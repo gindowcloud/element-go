@@ -1,7 +1,7 @@
 import Mock from 'mockjs'
 
 Mock.setup({
-  timeout: '300 - 500'
+  timeout: '100 - 250'
 })
  
 Mock.mock('users', 'get', () => {

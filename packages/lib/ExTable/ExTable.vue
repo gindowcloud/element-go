@@ -15,9 +15,9 @@
     <!-- Slot -->
     <slot />
     <!-- Menu -->
-    <el-table-column v-if="slots.action || allowView || hasMore" :width="totalWidth" align="right">
+    <el-table-column v-if="slots.link || allowView || hasMore" :width="totalWidth" align="right">
       <template #default="{ row, $index }">
-        <slot name="action" :row="row" />        
+        <slot name="link" :row="row" />        
         <el-button link v-if="allowView" :underline="false" @click="view(row)">查看</el-button>
         <el-dropdown v-if="hasMore">
           <el-button link class="more" :icon="More" />
@@ -71,7 +71,7 @@ const props = defineProps({
   allowRemove: { type: Boolean, default: false },
   viewer: { type: Object, default: () => { return [] } },
   viewerColumn: { type: Number, default: 2 },
-  actionWidth: { type: Number, default: 60 },
+  linkWidth: { type: Number, default: 60 },
 })
 
 const emit = defineEmits<{
@@ -88,7 +88,7 @@ const currentPage = ref(props.currentPage)
 const currentChange = (page: number) => emit('page-change', currentPage.value = page)
 
 const hasMore = computed(() => !!slots.menu || props.allowModify || props.allowUpdate || props.allowRemove)
-const totalWidth = computed(() => (!!slots.action ? props.actionWidth : 0) + (props.allowView ? 60 : 0) + (hasMore.value ? 50 : 0))
+const totalWidth = computed(() => (!!slots.link ? props.linkWidth : 0) + (props.allowView ? 60 : 0) + (hasMore.value ? 50 : 0))
 const columnWidth = 100 / props.viewerColumn + '%' // 查看视图列宽
 const show = reactive({
   viewer: false

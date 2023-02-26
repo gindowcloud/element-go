@@ -17,7 +17,7 @@
   },
   "dependencies": {
     "@icon-park/vue-next": "^1.4.2",
-    "element-plus": "^2.2.32",
+    "element-plus": "^2.2.0",
     "vue": "^3.2.45"
   },
   "devDependencies": {
