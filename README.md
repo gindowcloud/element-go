@@ -1,7 +1,7 @@
 # Element Go
 基于 Element Plus 扩展常用的业务组件
 
-https://gindowcloud.github.io/element-go/components/table
+文档: https://gindowcloud.github.io/element-go/
 
 ## 项目安装
 ``` bash
