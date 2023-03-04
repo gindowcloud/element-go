@@ -76,6 +76,7 @@ const props = defineProps({
 
 const emit = defineEmits<{
   (event: 'page-change', payload: number): void
+  (event: 'selection-change', payload: object): void
   (event: 'view', row: object): void
   (event: 'modify', row: object): void
   (event: 'update', row: object): void
