@@ -3,7 +3,7 @@
   <!-- 加载中 -->
   <ex-loading v-if="!loaded" />
   <!-- 数据区 -->
-  <el-table v-else :data="data" v-bind="$attrs" v-loading="loading">
+  <el-table v-else :data="data" v-bind="$attrs" v-loading="loading" @selection-change="selectionChange">
     <!-- Cell -->
     <template v-for="item in columns">
       <el-table-column :label="item.label" :type="item.type" :prop="item.prop" :width="item.width" :align="item.align">
@@ -75,8 +75,8 @@ const props = defineProps({
 })
 
 const emit = defineEmits<{
-  (event: 'page-change', payload: number): void
   (event: 'selection-change', payload: object): void
+  (event: 'page-change', payload: number): void
   (event: 'view', row: object): void
   (event: 'modify', row: object): void
   (event: 'update', row: object): void
@@ -87,6 +87,7 @@ const slots = useSlots()
 const pageSize = ref(props.pageSize)
 const currentPage = ref(props.currentPage)
 const currentChange = (page: number) => emit('page-change', currentPage.value = page)
+const selectionChange = (value: object) => emit('selection-change', value)
 
 const hasMore = computed(() => !!slots.menu || props.allowModify || props.allowUpdate || props.allowRemove)
 const totalWidth = computed(() => (!!slots.link ? props.linkWidth : 0) + (props.allowView ? 60 : 0) + (hasMore.value ? 50 : 0))

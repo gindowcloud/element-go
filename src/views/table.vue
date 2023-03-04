@@ -9,7 +9,7 @@
       <el-input v-model="para.phone" placeholder="电话" clearable />
     </el-form-item>
   </ex-form-search>
-  <ex-table :data="data" :columns="columns" :loaded="loaded" :loading="loading" :total="total" @page-change="getData"
+  <ex-table :data="data" :columns="columns" :loaded="loaded" :loading="loading" :total="total" @page-change="getData" @selection-change="selectionChange"
     allow-view :viewer="viewer"
     allow-modify @modify="modify"
     allow-remove @remove="remove">
@@ -128,6 +128,10 @@ const getData = () => {
   })
 }
 
+// 选中变化
+const selectionChange = () => {}
+
+// 修改一行
 const modify = () => {}
 
 // 删除一行
