@@ -27,8 +27,8 @@ const home = () => {
 </script>
 
 <style scoped>
-.logo { display: flex; align-items: center; width: 180px; }
-.logo .icon { width: 18px; height: 18px; }
-.logo .title { margin-left: 10px; cursor: pointer; }
+.logo { display: flex; align-items: center; font-size: 16px; width: 180px; color: #111; }
+.logo .icon { display: flex; align-items: center; width: 18px; height: 18px; }
+.logo .title { margin-left: 6px; cursor: pointer; }
 .collapse { width: 35px; }
 </style>

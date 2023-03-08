@@ -9,12 +9,12 @@ import './style.css'
 
 // 所有组件列表
 const components = [ 
-  ExLoading,
+  ExLayout,
   ExPageHeader,
-  ExPagination,
   ExFormSearch,
   ExTable,
-  ExLayout
+  ExLoading,
+  ExPagination
 ]
 const install = (app: App): void => {    
   components.map((component) => app.component(component.__name as string, component))
@@ -22,10 +22,10 @@ const install = (app: App): void => {
 
 export {
   install as default,
-  ExLoading,
+  ExLayout,
   ExPageHeader,
-  ExPagination,
   ExFormSearch,
   ExTable,
-  ExLayout
+  ExLoading,
+  ExPagination
 }
