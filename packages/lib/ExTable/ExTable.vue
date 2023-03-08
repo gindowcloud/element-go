@@ -3,7 +3,7 @@
   <!-- 加载中 -->
   <ex-loading v-if="!loaded" />
   <!-- 数据区 -->
-  <el-table v-else :data="data" v-bind="$attrs" v-loading="loading" @selection-change="selectionChange">
+  <el-table v-else :data="data" v-bind="$attrs" v-loading="loading" :height="height" @selection-change="selectionChange">
     <!-- Cell -->
     <template v-for="item in columns">
       <el-table-column :label="item.label" :type="item.type" :prop="item.prop" :width="item.width" :align="item.align">
@@ -60,6 +60,7 @@ import locale from 'element-plus/es/locale/lang/zh-cn'
 const props = defineProps({
   data: { type: Array, default: () => { return [] } },
   columns: { type: Object, default: () => { return [] } },  
+  height: { type: Number },
   loaded: { type: Boolean, default: true },
   loading: { type: Boolean, default: false },
   total: { type: Number, default: 0 },

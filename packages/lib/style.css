@@ -1,4 +1,4 @@
+.el-form { --el-border-radius-base: 0; }
 .el-button { --el-border-radius-base: 0; }
-.el-input { --el-border-radius-base: 0; }
 .el-radio-button { --el-border-radius-base: 0; }
 .el-tag { --el-tag-border-radius: 0px !important; }

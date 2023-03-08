@@ -8,8 +8,11 @@
     <el-form-item label="电话" prop="phone">
       <el-input v-model="para.phone" placeholder="电话" clearable />
     </el-form-item>
+    <el-form-item label="日期" prop="date">
+      <el-date-picker v-model="para.date" type="daterange" placeholder="日期" clearable />
+    </el-form-item>
   </ex-form-search>
-  <ex-table :data="data" :columns="columns" :loaded="loaded" :loading="loading" :total="total" @page-change="getData" @selection-change="selectionChange"
+  <ex-table :data="data" :columns="columns" :loaded="loaded" :loading="loading" :total="total" :height="400" @page-change="getData" @selection-change="selectionChange"
     allow-view :viewer="viewer"
     allow-modify @modify="modify"
     allow-remove @remove="remove">
@@ -44,7 +47,7 @@
 <script setup lang="ts">
 import type { User } from '../types'
 import { ref, reactive } from 'vue'
-import { ElFormItem, ElInput, ElButtonGroup, ElButton, ElDropdownItem } from 'element-plus'
+import { ElFormItem, ElInput, ElButtonGroup, ElButton, ElDropdownItem, ElDatePicker } from 'element-plus'
 import { ReduceOne, PreviewCloseOne, Delete, LinkOne } from '@icon-park/vue-next'
 import { ExPageHeader, ExTable } from '../../packages/lib'
 import { propColumns, methodColumns, slotColumns } from '../types'
@@ -112,6 +115,7 @@ const data = ref<User[]>([])
 const para = reactive<{
   name?: string
   phone?: string
+  date?: string
 }>({})
 
 const getData = () => {
