@@ -12,7 +12,7 @@
       <el-date-picker v-model="para.date" type="daterange" placeholder="日期" clearable />
     </el-form-item>
   </ex-form-search>
-  <ex-table :data="data" :columns="columns" :loaded="loaded" :loading="loading" :total="total" :height="400" @page-change="getData" @selection-change="selectionChange"
+  <ex-table :data="data" :columns="columns" :loaded="loaded" :loading="loading" :total="total" @page-change="getData" @selection-change="selectionChange"
     allow-view :viewer="viewer"
     allow-modify @modify="modify"
     allow-remove @remove="remove">

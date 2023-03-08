@@ -5,9 +5,9 @@ Mock.setup({
 })
  
 Mock.mock('users', 'get', () => {
-  const per_page = 500
+  const per_page = 15
   const current_page = 1
-  const total = per_page * 600
+  const total = per_page * 40000
   const mock = Mock.mock({
     ["data|" + per_page]: [{
       id: '@id',

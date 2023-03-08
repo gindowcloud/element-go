@@ -19,6 +19,7 @@ const router = createRouter({
         { path: 'table', component: () => import('../views/table.vue') },
         { path: 'loading', component: () => import('../views/loading.vue') },
         { path: 'pagination', component: () => import('../views/pagination.vue') },
+        { path: 'layout', component: () => import('../views/layout.vue') },
       ]
     }
   ]

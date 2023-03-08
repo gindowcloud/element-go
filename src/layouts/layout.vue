@@ -1,43 +1,22 @@
 <template>
-  <el-container>
-    <el-header>
-      <div class="logo"><router-link to="/">Element Go</router-link></div>
-      <div class="subject"><el-tag effect="plain">基于 Element Plus 扩展常用的业务组件</el-tag></div>
-    </el-header>
-    <el-container class="content">
-      <el-aside width="200px">
-        <el-menu router :default-active="routePath">
-          <el-menu-item index="/components/page-header">PageHeader 页头</el-menu-item>
-          <el-menu-item index="/components/form-search">FormSearch 搜索</el-menu-item>
-          <el-menu-item index="/components/table">Table 表格</el-menu-item>
-          <el-menu-item index="/components/loading">Loading 加载</el-menu-item>
-          <el-menu-item index="/components/pagination">Pagination 分页</el-menu-item>
-        </el-menu>
-      </el-aside>
-      <el-main>
-        <div class="page">
-          <router-view />
-        </div>
-      </el-main>
-    </el-container>
-  </el-container>
+  <ex-layout title="Element Go" homepage="/components/page-header"
+    :channels="channels" :menu="menu">
+    <router-view />
+  </ex-layout>
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
-import { useRoute } from 'vue-router'
-import { ElContainer, ElHeader, ElAside, ElMain, ElTag, ElMenu, ElLink, ElMenuItem } from 'element-plus'
+import type { Menu } from '../../packages/lib/types'
+import { ExLayout } from '../../packages/lib'
+import { HamburgerButton, Search, TableFile, Loading, MoreFour, Page } from '@icon-park/vue-next'
+import menu from './menu'
 
-const paths = useRoute().path.split('/')
-const routePath = computed(() => '/' + paths[1] + '/' + paths[2])
+const channels: Array<Menu> = [
+  { title: '页头', icon: HamburgerButton, path: '/components/page-header' },
+  { title: '搜索', icon: Search, path: '/components/form-search' },
+  { title: '表格', icon: TableFile, path: '/components/table' },
+  { title: '加载', icon: Loading, path: '/components/loading' },
+  { title: '分页', icon: MoreFour, path: '/components/pagination' },
+  { title: '布局', icon: Page, path: '/components/layout' }
+]
 </script>
-
-<style>
-.el-header { display: flex; align-items: center; border-bottom: 1px solid #eee; }
-.el-header .logo { width: 180px; text-align: center; font-size: 24px; }
-.el-header .logo a { text-decoration: none; color: #000; }
-.el-header .subject {  margin-left: 20px; }
-.el-aside { background-color: #f9f9f9; border-right: 1px solid #eee; }
-.el-aside .el-menu { background: transparent; border-right: none; min-height: calc(100vh - 60px); }
-.el-main { padding: 40px !important; }
-</style>
