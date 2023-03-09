@@ -36,8 +36,8 @@ defineProps({
   border-right-color: #eee;
   --el-menu-bg-color: #f9f9f9;
   --el-menu-item-font-size: 15px;
-  --el-menu-base-level-padding: 16px;
-  --el-menu-icon-width: 22px;
+  /* --el-menu-base-level-padding: 16px; */
+  --el-menu-icon-width: 25px;
   --el-menu-level-padding: 30px;
 }
 .el-sub-menu :deep(.el-sub-menu__icon-arrow) { right: 20px; color: #aaa; }

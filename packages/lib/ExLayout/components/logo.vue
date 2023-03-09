@@ -1,6 +1,6 @@
 <template>
   <div class="logo" :class="{ collapse }" :style="{ backgroundColor, color: textColor }">
-    <application-menu v-if="channels.length" class="icon" @click="emit('toggle')" />
+    <span v-if="channels.length" class="icon"><application-menu @click="emit('toggle')" /></span>
     <router-link v-else-if="collapse" class="title word" :to="homepage" :style="{ color: textColor }" @click="home">{{ title?.substring(0, 1) }}</router-link><!-- 收缩且无频道 -->
     <router-link v-if="!collapse" class="title" :to="homepage" :style="{ color: textColor }" @click="home">{{ title }}</router-link>
   </div>
@@ -30,8 +30,9 @@ const home = () => {
 <style scoped>
 .el-header .logo { padding-left: 20px; height: 60px; opacity: 0.96; }
 .logo { display: flex; align-items: center; font-size: 16px; width: 179px; color: #111; }
-.logo .icon { display: flex; align-items: center; width: 18px; height: 18px; margin-right: 5px; }
-.logo .title { display: flex; align-items: center; justify-content: center; cursor: pointer; text-decoration: none; color: #111; }
-.logo .word { width: 15px; } 
-.collapse { width: 33px; }
+.logo .icon { display: flex; align-items: center; justify-content: center; width: 25px; }
+.logo .icon .i-icon { display: flex; align-items: center; }
+.logo .title { display: flex; align-items: center; justify-content: center; cursor: pointer; text-decoration: none; color: #111; margin-left: 5px; }
+.logo .word { width: 26px; margin-left: 0px; } 
+.collapse { width: 45px; }
 </style>
