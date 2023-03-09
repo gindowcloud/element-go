@@ -44,6 +44,7 @@ defineProps({
   /* --el-menu-base-level-padding: 16px; */
   --el-menu-icon-width: 25px;
   --el-menu-level-padding: 30px;
+  overflow: hidden;
 }
 .el-sub-menu :deep(.el-sub-menu__icon-arrow) { right: 20px; color: #aaa; }
 </style>
