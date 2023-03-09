@@ -2,9 +2,9 @@
   <el-container>
     <el-header>
       <view-logo :title="title" :homepage="homepage" :channels="channels" :collapse="show && collapse"
-        :background-color="backgroundColor" :text-color="textColor" :activeTextColor="activeTextColor"
+        :background-color="backgroundColor" :text-color="textColor" :activeTextColor="activeTextColor" :style="{ borderBottomColor: backgroundColor }"
         @toggle="open" />
-      <span v-if="show" class="fold"><menu-unfold-one class="el-icon" :class="{ collapse }" @click="collapse = !collapse" /></span>
+      <div v-if="show" class="fold"><menu-unfold-one class="el-icon" :class="{ collapse }" @click="collapse = !collapse" /></div>
       <div><slot name="account" /></div>
     </el-header>
     <el-container class="content">
@@ -56,8 +56,9 @@ const close = () => {
 </script>
 
 <style scoped>
-.el-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #eee; margin-bottom: -1px; padding-left: 0; }
-.el-header .fold { padding-left: 20px; font-size: 16px; height: 16px; color: #ccc; flex: 1; }
+.el-header { display: flex; justify-content: space-between; align-items: center; padding-left: 0; }
+.el-header > div { display: flex; align-items: center; height: 60px; border-bottom: 1px solid #eee; }
+.el-header .fold { padding-left: 20px; font-size: 16px; color: #ccc; flex: 1; }
 .el-header .fold .el-icon { cursor: pointer; }
 .el-header .fold .el-icon:hover { color: #000; }
 .el-header .fold .el-icon.collapse { rotate: 180deg; }

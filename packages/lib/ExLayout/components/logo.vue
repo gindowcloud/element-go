@@ -28,7 +28,7 @@ const home = () => {
 </script>
 
 <style scoped>
-.el-header .logo { padding-left: 20px; height: 60px; opacity: 0.9; }
+.el-header .logo { padding-left: 20px; height: 60px; border-bottom-color: #e6e6e6; opacity: 0.9; }
 .logo { display: flex; align-items: center; font-size: 16px; width: 179px; color: #111; }
 .logo .icon { display: flex; align-items: center; justify-content: center; width: 25px; }
 .logo .icon .i-icon { display: flex; align-items: center; }
