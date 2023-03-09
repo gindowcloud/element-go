@@ -1,7 +1,9 @@
 <template>
   <el-container>
     <el-header>
-      <view-logo :title="title" :homepage="homepage" :channels="channels" :collapse="show && collapse" @toggle="open" />
+      <view-logo :title="title" :homepage="homepage" :channels="channels" :collapse="show && collapse"
+        :background-color="backgroundColor" :text-color="textColor" :activeTextColor="activeTextColor"
+        @toggle="open" />
       <span v-if="show" class="fold"><menu-unfold-one class="el-icon" :class="{ collapse }" @click="collapse = !collapse" /></span>
       <div><slot name="account" /></div>
     </el-header>
@@ -54,7 +56,7 @@ const close = () => {
 </script>
 
 <style scoped>
-.el-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #eee; background-color: #fff; }
+.el-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #eee; background-color: #fff; padding-left: 0; }
 .el-header .fold { padding-left: 20px; font-size: 16px; height: 16px; color: #ccc; flex: 1; }
 .el-header .fold .el-icon { cursor: pointer; }
 .el-header .fold .el-icon:hover { color: #000; }

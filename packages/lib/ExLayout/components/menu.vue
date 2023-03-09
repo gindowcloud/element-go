@@ -1,5 +1,5 @@
 <template>
-  <el-menu router unique-opened v-bind="$attrs" :default-active="route.path" :collapse="collapse" :collapse-transition="false">
+  <el-menu router unique-opened v-bind="$attrs" :default-active="$route.path" :collapse="collapse" :collapse-transition="false">
     <template v-for="(item, key) in menu">
       <!-- 多级菜单 -->
       <el-sub-menu v-if="item.children && item.children.length" :key="key" :index="item.path">
@@ -20,15 +20,12 @@
 
 <script setup lang="ts">
 import type { Menu } from '../../types'
-import { useRoute } from 'vue-router'
 import { ElIcon, ElMenu, ElMenuItem, ElSubMenu } from 'element-plus'
 
 defineProps({
   menu: { type: Array<Menu>, default: () => { return [] } },
   collapse: { type: Boolean, default: false },
 })
-
-const route = useRoute()
 </script>
 
 <style scoped>
