@@ -1,5 +1,6 @@
 <template>
-  <el-menu router unique-opened v-bind="$attrs" :default-active="$route.path" :collapse="collapse" :collapse-transition="false">
+  <el-menu router unique-opened v-bind="$attrs" :default-active="$route.path" :collapse="collapse" :collapse-transition="false"
+    :background-color="backgroundColor" :text-color="textColor" :active-text-color="activeTextColor" :style="{ borderRightColor: backgroundColor }">
     <template v-for="(item, key) in menu">
       <!-- 多级菜单 -->
       <el-sub-menu v-if="item.children && item.children.length" :key="key" :index="item.path">
@@ -25,14 +26,18 @@ import { ElIcon, ElMenu, ElMenuItem, ElSubMenu } from 'element-plus'
 defineProps({
   menu: { type: Array<Menu>, default: () => { return [] } },
   collapse: { type: Boolean, default: false },
+  backgroundColor: { type: String },
+  textColor: { type: String },
+  activeTextColor: { type: String },
 })
 </script>
 
 <style scoped>
 .el-menu {
   height: 100%;
-  min-height: calc(100vh - 60px);
+  min-height: calc(100vh - 59px);
   padding-top: 20px;
+  border-top: 1px solid #eee;
   border-right-color: #eee;
   --el-menu-bg-color: #f9f9f9;
   --el-menu-item-font-size: 15px;
