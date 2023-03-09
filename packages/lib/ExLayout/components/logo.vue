@@ -28,8 +28,8 @@ const home = () => {
 </script>
 
 <style scoped>
-.el-header .logo { padding-left: 20px; }
-.logo { display: flex; align-items: center; height: 60px; font-size: 16px; width: 179px; color: #111; opacity: 0.96; }
+.el-header .logo { padding-left: 20px; height: 60px; opacity: 0.96; }
+.logo { display: flex; align-items: center; font-size: 16px; width: 179px; color: #111; }
 .logo .icon { display: flex; align-items: center; width: 18px; height: 18px; margin-right: 5px; }
 .logo .title { display: flex; align-items: center; justify-content: center; cursor: pointer; text-decoration: none; color: #111; }
 .logo .word { width: 15px; } 
