@@ -1,7 +1,7 @@
 <template>
   <el-form ref="form" v-bind="$attrs" inline :model="model" label-suffix=":" @submit.prevent="search(form)">
     <slot />
-    <el-form-item>
+    <el-form-item v-if="showButton">
       <el-button type="primary" native-type="submit">搜索</el-button>
       <el-button @click="reset(form)">重置</el-button>
     </el-form-item>
@@ -14,7 +14,8 @@ import { ref } from 'vue'
 import { ElForm, ElFormItem, ElButton } from 'element-plus'
 
 const props = defineProps({
-  model: { type: Object, default: () => { return {} } }
+  model: { type: Object, default: () => { return {} } },
+  showButton: { type: Boolean, default: true },
 })
 
 const emit = defineEmits<{
