@@ -2,3 +2,4 @@
 .el-button { --el-border-radius-base: 0; }
 .el-radio-button { --el-border-radius-base: 0; }
 .el-tag { --el-tag-border-radius: 0px !important; }
+.el-icon, .i-icon { outline: none; }
