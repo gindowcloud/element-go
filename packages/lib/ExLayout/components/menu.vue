@@ -37,14 +37,14 @@ defineProps({
   height: 100%;
   min-height: calc(100vh - 59px);
   padding-top: 20px;
-  border-top: 1px solid #eee;
-  border-right-color: #eee;
-  --el-menu-bg-color: #f9f9f9;
+  border-top: 1px solid var(--el-border-color);
+  border-right-color: var(--el-border-color);
+  --el-menu-bg-color: var(--el-fill-color-light);
   --el-menu-item-font-size: 15px;
   /* --el-menu-base-level-padding: 16px; */
   --el-menu-icon-width: 25px;
   --el-menu-level-padding: 30px;
   overflow: hidden;
 }
-.el-sub-menu :deep(.el-sub-menu__icon-arrow) { right: 20px; color: #aaa; }
+.el-sub-menu :deep(.el-sub-menu__icon-arrow) { right: 20px; color: var(--el-text-color-placeholder); }
 </style>

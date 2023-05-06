@@ -146,7 +146,7 @@ getData()
 </script>
 
 <style scoped>
-.address { padding: 30px; text-align: center; color: #999; }
-.color-light { color: #ccc; }
-.color-red { color: #f00; }
+.address { padding: 30px; text-align: center; color: var(--el-text-color-placeholder); }
+.color-light { color: var(--el-text-color-disabled); }
+.color-red { color: var(--el-color-danger); }
 </style>

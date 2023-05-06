@@ -41,7 +41,6 @@ const reset = (form: FormInstance | undefined) => {
 <style scoped>
 .el-form { margin-bottom: 22px; }
 .el-form :deep(.el-form-item) { display: inline-block; margin-right: 12px; vertical-align: bottom; }
-.el-form :deep(.el-form-item__label) { color: #000; }
 .el-form :deep(.el-input),
 .el-form :deep(.el-cascader .el-input) { width: 160px; }
 .el-form :deep(.el-range-editor) { width: 240px; }

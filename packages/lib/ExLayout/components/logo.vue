@@ -28,11 +28,11 @@ const home = () => {
 </script>
 
 <style scoped>
-.el-header .logo { padding-left: 20px; height: 60px; border-bottom-color: #e6e6e6; opacity: 0.9; }
-.logo { display: flex; align-items: center; font-size: 16px; width: 180px; color: #111; }
+.el-header .logo { padding-left: 20px; height: 60px; opacity: 0.9; }
+.logo { display: flex; align-items: center; font-size: 16px; width: 180px; color: var(--el-text-color-primary); }
 .logo .icon { display: flex; align-items: center; justify-content: center; width: 25px; }
 .logo .icon .i-icon { display: flex; align-items: center; }
-.logo .title { display: flex; align-items: center; justify-content: center; cursor: pointer; text-decoration: none; color: #111; margin-left: 5px; }
+.logo .title { display: flex; align-items: center; justify-content: center; cursor: pointer; text-decoration: none; color: var(--el-text-color-primary); margin-left: 5px; }
 .logo .word { width: 26px; margin-left: 0px; } 
 .collapse { width: 45px; }
 </style>

@@ -14,5 +14,5 @@ defineProps({
 </script>
 
 <style scoped>
-.loading { color: #ccc; text-align: center; }
+.loading { color: var(--el-text-color-placeholder); text-align: center; }
 </style>
