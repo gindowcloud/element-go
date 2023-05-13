@@ -1,9 +1,9 @@
 <template>
-  <el-form ref="form" v-bind="$attrs" inline :model="model" label-suffix=":" @submit.prevent="search(form)">
+  <el-form ref="form" v-bind="$attrs" inline :model="model" label-suffix=":" @submit.prevent="search(form)" @reset.prevent="reset(form)">
     <slot />
     <el-form-item v-if="showButton">
-      <el-button type="primary" native-type="submit">搜索</el-button>
-      <el-button @click="reset(form)">重置</el-button>
+      <el-button native-type="submit" type="primary">搜索</el-button>
+      <el-button native-type="reset">重置</el-button>
     </el-form-item>
   </el-form>
 </template>
