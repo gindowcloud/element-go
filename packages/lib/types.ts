@@ -5,4 +5,5 @@ export interface Menu {
   path: string
   icon?: Icon
   children?: Menu[]
+  external?: boolean
 }

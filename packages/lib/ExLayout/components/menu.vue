@@ -3,7 +3,7 @@
     :background-color="backgroundColor" :text-color="textColor" :active-text-color="activeTextColor" :style="{ borderRightColor: backgroundColor }">
     <template v-for="(item, key) in menu">
       <!-- 多级菜单 -->
-      <el-sub-menu v-if="item.children && item.children.length" :key="key" :index="item.path">
+      <el-sub-menu v-if="item.children && item.children.length" :key="key" :index="item.external ? '#' : item.path" @clicke="open(item)">
         <template #title>
           <el-icon v-if="item.icon"><component :is="item.icon" /></el-icon>
           <span>{{ item.title }}</span>
@@ -11,7 +11,7 @@
         <el-menu-item v-for="(child, key) in item.children" :key="key" :index="child.path">{{ child.title }}</el-menu-item>
       </el-sub-menu>
       <!-- 一级菜单 -->
-      <el-menu-item v-else :key="item.path" :index="item.path">
+      <el-menu-item v-else :key="item.path" :index="item.external ? '#' : item.path" @click="open(item)">
         <el-icon v-if="item.icon"><component :is="item.icon" /></el-icon>
         <template #title>{{ item.title }}</template>
       </el-menu-item>
@@ -30,6 +30,10 @@ defineProps({
   textColor: { type: String },
   activeTextColor: { type: String },
 })
+
+const open = (item: Menu) => {
+  if (item.external) window.open(item.path)
+}
 </script>
 
 <style scoped>
