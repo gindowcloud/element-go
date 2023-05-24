@@ -61,7 +61,7 @@ const close = () => {
 .el-header .fold .el-icon { cursor: pointer; }
 .el-header .fold .el-icon:hover { color: var(--el-text-color-primary); }
 .el-header .fold .el-icon.collapse { rotate: 180deg; }
-.el-aside.expand { width: 200px; }
+.el-aside.expand { min-width: 200px; }
 .el-main { padding: 40px; }
 .el-main.wide { margin: 0 auto; max-width: 1600px; }
 </style>

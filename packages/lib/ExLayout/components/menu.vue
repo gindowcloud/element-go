@@ -3,17 +3,21 @@
     :background-color="backgroundColor" :text-color="textColor" :active-text-color="activeTextColor" :style="{ borderRightColor: backgroundColor }">
     <template v-for="(item, key) in menu">
       <!-- 多级菜单 -->
-      <el-sub-menu v-if="item.children && item.children.length" :key="key" :index="item.external ? '#' : item.path" @clicke="open(item)">
+      <el-sub-menu v-if="item.children && item.children.length" :key="key" :index="item.path">
         <template #title>
           <el-icon v-if="item.icon"><component :is="item.icon" /></el-icon>
           <span>{{ item.title }}</span>
         </template>
-        <el-menu-item v-for="(child, key) in item.children" :key="key" :index="child.path">{{ child.title }}</el-menu-item>
+        <el-menu-item v-for="(child, key) in item.children" :key="key" :index="child.external ? '#' : child.path" @click="open(child)">
+          <span>{{ child.title }}</span>
+          <el-icon class="icon-external" v-if="child.external"><LinkTwo /></el-icon>
+        </el-menu-item>
       </el-sub-menu>
       <!-- 一级菜单 -->
       <el-menu-item v-else :key="item.path" :index="item.external ? '#' : item.path" @click="open(item)">
         <el-icon v-if="item.icon"><component :is="item.icon" /></el-icon>
-        <template #title>{{ item.title }}</template>
+        <span>{{ item.title }}</span>
+        <el-icon class="icon-external" v-if="item.external"><LinkTwo /></el-icon>
       </el-menu-item>
     </template>
   </el-menu>
@@ -22,6 +26,7 @@
 <script setup lang="ts">
 import type { Menu } from '../../types'
 import { ElIcon, ElMenu, ElMenuItem, ElSubMenu } from 'element-plus'
+import { LinkTwo } from '@icon-park/vue-next'
 
 defineProps({
   menu: { type: Array<Menu>, default: () => { return [] } },
@@ -50,5 +55,6 @@ const open = (item: Menu) => {
   --el-menu-level-padding: 30px;
   overflow: hidden;
 }
-.el-sub-menu :deep(.el-sub-menu__icon-arrow) { right: 20px; color: var(--el-text-color-placeholder); }
+.el-menu .el-sub-menu :deep(.el-sub-menu__icon-arrow) { right: 20px; color: var(--el-text-color-placeholder); }
+.el-menu .icon-external { margin-left: 5px; color: var(--el-text-color-placeholder); }
 </style>
