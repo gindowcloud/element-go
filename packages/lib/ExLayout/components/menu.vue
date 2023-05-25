@@ -10,14 +10,12 @@
         </template>
         <el-menu-item v-for="(child, key) in item.children" :key="key" :index="child.external ? '#' : child.path" @click="open(child)">
           <span>{{ child.title }}</span>
-          <el-icon class="icon-external" v-if="child.external"><LinkTwo /></el-icon>
         </el-menu-item>
       </el-sub-menu>
       <!-- 一级菜单 -->
       <el-menu-item v-else :key="item.path" :index="item.external ? '#' : item.path" @click="open(item)">
         <el-icon v-if="item.icon"><component :is="item.icon" /></el-icon>
         <span>{{ item.title }}</span>
-        <el-icon class="icon-external" v-if="item.external"><LinkTwo /></el-icon>
       </el-menu-item>
     </template>
   </el-menu>
@@ -26,7 +24,6 @@
 <script setup lang="ts">
 import type { Menu } from '../../types'
 import { ElIcon, ElMenu, ElMenuItem, ElSubMenu } from 'element-plus'
-import { LinkTwo } from '@icon-park/vue-next'
 
 defineProps({
   menu: { type: Array<Menu>, default: () => { return [] } },
