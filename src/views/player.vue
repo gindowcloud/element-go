@@ -27,8 +27,8 @@ const props = [
   { name: 'player', desc: '播放器模式', type: 'boolean', default: 'False'  },
 ]
 
-const src = 'https://data.gindow.com/videos/album/202305/202305241459046742.mp4'
-const poster = 'https://data.gindow.com/shrinks/album/202305/202305231422255955.480.webp'
+const src = 'https://github.com/gindowcloud/assets/raw/master/element-go/202305241459046742.mp4'
+const poster = 'https://raw.githubusercontent.com/gindowcloud/assets/master/element-go/202305231422255955.480.webp'
 const dialog = ref(true)
 </script>
 
