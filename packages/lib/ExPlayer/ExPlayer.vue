@@ -1,45 +1,38 @@
 <template>
   <!-- 直接播放 -->
-  <video-play v-if="player" :poster="poster" v-bind="options" :style="{ width, height }" />
+  <video-player v-if="player" :src="src" :poster="poster" :width="width" :height="height" controls />
   <!-- 弹窗模式 -->
   <span v-else class="shrink">
     <PlayOne class="el-icon" @click.stop="play" />
-    <el-image fit="cover" :src="poster" :style="{ width, height }" />
+    <el-image fit="cover" :src="poster" :style="{ width: width + 'px', height: height + 'px' }" />
     <teleport to="body">
-      <el-dialog v-model="dialogShow" draggable destroy-on-close title="视频播放器" width="800px">
-        <video-play v-if="dialogShow" :poster="poster" v-bind="options" />
+      <el-dialog v-model="show" draggable destroy-on-close title="视频播放器" width="800px">
+        <div class="player">
+          <video-player v-if="show" :src="src" :poster="poster" :width="width" :height="height" controls autoplay />
+        </div>
       </el-dialog>
     </teleport>
   </span>
 </template>
 
 <script lang="ts" setup>
-import { ref, computed, onMounted, onUnmounted } from 'vue'
+import { ref, onMounted, onUnmounted } from 'vue'
 import { ElImage, ElDialog } from 'element-plus'
 import { PlayOne } from '@icon-park/vue-next'
-import VideoPlay from 'vue3-video-play'
-import 'vue3-video-play/dist/style.css'
+import { VideoPlayer } from '@videojs-player/vue'
+import 'video.js/dist/video-js.css'
 
-const props = defineProps({
+defineProps({
   src: { type: String, required: true },
   poster: { type: String, default: null },
-  width: { type: String, default: null },
-  height: { type: String, default: null },
+  width: { type: Number, default: null },
+  height: { type: Number, default: null },
   player: { type: Boolean, default: false }
 })
 
-const dialogShow = ref(false)
-const options = computed(() => {
-  return {
-    src: props.src,
-    width: props.player ? props.width : null,
-    height: props.player ? props.height : null,
-    autoPlay: props.player ? false : true
-  }
-})
-
+const show = ref(false)
 const play = () => {
-  dialogShow.value = true
+  show.value = true
 }
 
 onMounted(() => {
@@ -58,4 +51,5 @@ onUnmounted(() => {
   background-color: rgb(0 0 0 / 50%); padding: 5px; border-radius: 50%;
   color: #fff; opacity: .75; z-index: 999; cursor: pointer;
 }
+.player { display: flex; align-items: center; justify-content: center; }
 </style>

@@ -3,9 +3,9 @@
   <!-- 演示 -->
   <div class="demo">
     <div class="player">
-      <ex-player :player="!dialog" width="500px" height="400px" :src="src" :poster="poster" />
+      <ex-player :player="!dialog" :height="400" :src="src" :poster="poster" />
     </div>
-    <div class="dialog">弹窗模式</div>
+    <div class="title">弹窗模式</div>
     <div><el-switch v-model="dialog" /></div>
   </div>
   <!-- 属性 -->
@@ -27,8 +27,8 @@ const props = [
   { name: 'player', desc: '播放器模式', type: 'boolean', default: 'False'  },
 ]
 
-const src = 'https://github.com/gindowcloud/assets/raw/master/element-go/202305241459046742.mp4'
-const poster = 'https://raw.githubusercontent.com/gindowcloud/assets/master/element-go/202305231422255955.480.webp'
+const src = '//d2zihajmogu5jn.cloudfront.net/sintel/master.m3u8'
+const poster = '//d2zihajmogu5jn.cloudfront.net/sintel/poster.png'
 const dialog = ref(true)
 </script>
 
@@ -36,5 +36,5 @@ const dialog = ref(true)
 .demo { display: flex; align-items: start; justify-content: center; flex-wrap: wrap; }
 .demo > div { width: 100%; display: flex; align-items: start; justify-content: center; }
 .demo .player { width: 100%; height: 420px; }
-.demo .dialog { color: var(--el-text-color-disabled); margin-bottom: 5px; }
+.demo .title { color: var(--el-text-color-disabled); margin: 5px; }
 </style>
