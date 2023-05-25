@@ -15,7 +15,10 @@ export default defineConfig({
       name: 'element-go'
     },
     rollupOptions: {
-      external: ['vue', '@videojs-player'],
+      external: [
+        'vue', 
+        '@videojs-player/vue'
+      ],
       output: { globals: { vue: 'Vue' } }
     }
   }
