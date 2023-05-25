@@ -44,10 +44,10 @@ const open = (item: Menu) => {
 <style scoped>
 .el-menu {
   height: 100%;
-  min-height: calc(100vh - 59px);
+  min-height: calc(100vh - 120px);
   padding-top: 20px;
   border-top: 1px solid var(--el-border-color);
-  border-right-color: var(--el-border-color);
+  border-right-width: 0;
   --el-menu-bg-color: var(--el-fill-color-light);
   --el-menu-item-font-size: 15px;
   /* --el-menu-base-level-padding: 16px; */
