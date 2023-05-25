@@ -5,6 +5,7 @@ import ExPagination from './ExPagination'
 import ExFormSearch from './ExFormSearch'
 import ExTable from './ExTable'
 import ExLayout from './ExLayout'
+import ExPlayer from './ExPlayer'
 import './style.css'
 
 // 所有组件列表
@@ -14,7 +15,8 @@ const components = [
   ExFormSearch,
   ExTable,
   ExLoading,
-  ExPagination
+  ExPagination,
+  ExPlayer
 ]
 const install = (app: App): void => {    
   components.map((component) => app.component(component.__name as string, component))
@@ -27,5 +29,6 @@ export {
   ExFormSearch,
   ExTable,
   ExLoading,
-  ExPagination
+  ExPagination,
+  ExPlayer
 }
