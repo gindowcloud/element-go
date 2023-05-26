@@ -10,11 +10,11 @@ export default defineConfig(({ mode }) => {
       vue()
     ],
     build: {
-      commonjsOptions: {
-        transformMixedEsModules: true
-      },
       rollupOptions: {
-        external: ['@videojs-player/vue'],
+        external: [
+          '@videojs-player/vue',
+          'video.js/dist/video-js.css'
+        ],
         output: { globals: { vue: 'Vue' } }
       }
     }
