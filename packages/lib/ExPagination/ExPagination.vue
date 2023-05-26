@@ -1,6 +1,7 @@
 <template>
-  <el-config-provider :locale="locale" />
-  <el-pagination v-if="total" background :layout="layout" :total="total" :page-size="pageSize" :page-sizes="pageSizes" :current-page="currentPage" @size-change="sizeChange" @current-change="currentChange" />
+  <el-config-provider :locale="locale">
+    <el-pagination v-if="total" background :layout="layout" :total="total" :page-size="pageSize" :page-sizes="pageSizes" :current-page="currentPage" @size-change="sizeChange" @current-change="currentChange" />
+  </el-config-provider>
 </template>
 
 <script setup lang="ts">

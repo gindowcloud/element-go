@@ -1,5 +1,4 @@
 <template>
-  <el-config-provider :locale="locale" />
   <!-- 加载中 -->
   <ex-loading v-if="!loaded" />
   <!-- 数据区 -->
@@ -51,11 +50,10 @@
 
 <script setup lang="ts">
 import { ref, reactive, computed, useSlots } from 'vue'
-import { vLoading, ElConfigProvider, ElMessageBox, ElTable, ElTableColumn, ElButton, ElDropdown, ElDropdownMenu, ElDropdownItem, ElDialog, ElDescriptions, ElDescriptionsItem } from 'element-plus'
+import { vLoading, ElMessageBox, ElTable, ElTableColumn, ElButton, ElDropdown, ElDropdownMenu, ElDropdownItem, ElDialog, ElDescriptions, ElDescriptionsItem } from 'element-plus'
 import { More } from '@icon-park/vue-next'
 import { $value } from '../utils'
 import ExPagination from '../ExPagination'
-import locale from 'element-plus/es/locale/lang/zh-cn'
 
 const props = defineProps({
   data: { type: Array, default: () => { return [] } },
