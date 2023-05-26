@@ -8,6 +8,15 @@ export default defineConfig(({ mode }) => {
     base: env.VITE_BASE_PATH,
     plugins: [
       vue()
-    ]  
+    ],
+    build: {
+      commonjsOptions: {
+        transformMixedEsModules: true
+      },
+      rollupOptions: {
+        external: ['@videojs-player/vue'],
+        output: { globals: { vue: 'Vue' } }
+      }
+    }
   }
 })

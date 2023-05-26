@@ -14,14 +14,8 @@ export default defineConfig({
       entry: resolve(__dirname, 'lib/index.ts'),
       name: 'element-go'
     },
-    commonjsOptions: {
-      transformMixedEsModules: true
-    },
     rollupOptions: {
-      external: [
-        'vue', 
-        '@videojs-player/vue'
-      ],
+      external: ['vue'],
       output: { globals: { vue: 'Vue' } }
     }
   }
