@@ -25,8 +25,8 @@ import 'video.js/dist/video-js.css'
 defineProps({
   src: { type: String, required: true },
   poster: { type: String, default: null },
-  width: { type: Number, default: null },
-  height: { type: Number, default: null },
+  width: { type: Number },
+  height: { type: Number },
   player: { type: Boolean, default: false }
 })
 
