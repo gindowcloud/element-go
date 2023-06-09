@@ -7,7 +7,7 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { ElConfigProvider, ElPagination } from 'element-plus'
-import locale from 'element-plus/es/locale/lang/zh-cn'
+import locale from 'element-plus/lib/locale/lang/zh-cn'
 
 const props = defineProps({
   total: { type: Number, default: 0 },
