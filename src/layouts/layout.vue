@@ -1,6 +1,6 @@
 <template>
   <ex-layout title="Element Go" homepage="/components/page-header"
-    :channels="channels" :menu="menu">
+    :channels="channels" :menu="menu" :show-header="true" :show-menu="true">
     <template #account>
       <el-button circle size="small" :icon="isDark ? Sun : Moon" @click="toggleDark()" />
     </template>

@@ -1,13 +1,13 @@
 <template>
   <el-container>
-    <el-header>
-      <view-logo :title="title" :homepage="homepage" :channels="channels" :collapse="show && collapse"
+    <el-header v-if="showHeader">
+      <view-logo :title="title" :homepage="homepage" :channels="channels" :collapse="showMenu && collapse"
         :background-color="backgroundColor" :text-color="textColor" :activeTextColor="activeTextColor"
         @toggle="open" />
       <div><slot name="account" /></div>
     </el-header>
     <el-container class="content">
-      <el-aside v-if="show" width="auto" :class="{ expand: !collapse }">
+      <el-aside v-if="showMenu" width="auto" :class="{ expand: !collapse }">
         <view-menu :menu="menu" :collapse="collapse" :background-color="backgroundColor" :text-color="textColor" :activeTextColor="activeTextColor" :style="{ borderTopColor: backgroundColor }" />        
         <el-affix position="bottom">
           <div class="folder">
@@ -37,7 +37,8 @@ import viewChannels from './components/channels.vue'
 defineProps({
   title: { type: String, default: 'LOGO' },
   homepage: { type: String, default: '/' },
-  show: { type: Boolean, default: true },
+  showHeader: { type: Boolean, default: true }, // 显示头部
+  showMenu: { type: Boolean, default: true }, // 显示菜单
   menu: { type: Array<Menu>, default: () => { return [] } },
   channels: { type: Array<Menu>, default: () => { return [] } },
   backgroundColor: { type: String },
