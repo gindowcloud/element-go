@@ -8,7 +8,10 @@
     </el-header>
     <el-container class="content">
       <el-aside v-if="showMenu" width="auto" :class="{ expand: !collapse }">
-        <view-menu :menu="menu" :collapse="collapse" :background-color="backgroundColor" :text-color="textColor" :activeTextColor="activeTextColor" :style="{ borderTopColor: backgroundColor }" />        
+        <view-menu
+          :menu="menu" :collapse="collapse"
+          :background-color="backgroundColor" :text-color="textColor" :activeTextColor="activeTextColor"
+          :style="{ borderTopColor: backgroundColor, minHeight: 'calc(100vh - ' + (showHeader ? 120 : 60) + 'px)' }" />
         <el-affix position="bottom">
           <div class="folder">
             <menu-fold-one class="el-icon" @click="collapse = !collapse" />
@@ -61,7 +64,7 @@ const close = () => {
 </script>
 
 <style scoped>
-.el-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--el-border-color); margin-bottom: -1px; padding-left: 0; }
+.el-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--el-border-color); padding-left: 0; }
 .el-aside { overflow: hidden; border-right: 1px solid var(--el-border-color); background-color: var(--el-fill-color-light); }
 .el-aside .el-affix { width: 65px !important; }
 .el-aside .folder { display: flex; align-items: center; justify-content: center; height: 60px; padding: 0 20px; background-color: var(--el-fill-color-light); }
