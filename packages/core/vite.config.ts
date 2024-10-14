@@ -15,7 +15,8 @@ export default defineConfig({
       name: 'element-go'
     },
     rollupOptions: {
-      external: ['vue', 'vue-router']
+      external: ['vue', 'vue-router'],
+      output: { globals: { vue: 'vue' } }
     }
   }
 })
