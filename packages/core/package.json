@@ -1,7 +1,7 @@
 {
   "name": "element-go",
   "private": false,
-  "version": "1.1.76",
+  "version": "1.1.77",
   "license": "MIT",
   "type": "module",
   "main": "./dist/element-go.umd.cjs",
@@ -20,6 +20,7 @@
     "video.js": "^8.18.1"
   },
   "devDependencies": {
-    "@types/video.js": "^7.3.58"
+    "@types/video.js": "^7.3.58",
+    "vite-plugin-dts": "^4.2.4"
   }
 }
