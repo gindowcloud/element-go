@@ -45,7 +45,7 @@ jobs:
         run: pnpm -r install
 
       - name: Build
-        run: pnpm -F help build
+        run: pnpm -F demo build
 
       - name: Setup Pages
         uses: actions/configure-pages@v3
@@ -53,7 +53,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
         with:
-          path: './packages/help/dist'
+          path: './packages/demo/dist'
 
       - name: Deploy to GitHub Pages
         id: deployment

@@ -51,10 +51,9 @@
 <script setup lang="ts">
 import { ref, reactive, computed, useSlots } from 'vue'
 import { vLoading, ElMessageBox, ElTable, ElTableColumn, ElButton, ElDropdown, ElDropdownMenu, ElDropdownItem, ElDialog, ElDescriptions, ElDescriptionsItem } from 'element-plus'
-import { ExLoading } from '../index'
+import { ExLoading, ExPagination } from '../index'
 import { More } from '@icon-park/vue-next'
 import { $value } from '../utils'
-import ExPagination from '../ExPagination'
 
 const props = defineProps({
   data: { type: Array, default: () => { return [] } },

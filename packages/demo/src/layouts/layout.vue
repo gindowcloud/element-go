@@ -22,11 +22,11 @@ import menu from './menu'
 const isDark = useDark()
 const toggleDark = useToggle(isDark)
 const channels: Array<Menu> = [
-  { title: '布局', icon: Page, path: '/components/layout' },
-  { title: '页头', icon: HamburgerButton, path: '/components/page-header' },
-  { title: '搜索', icon: Search, path: '/components/form-search' },
-  { title: '表格', icon: TableFile, path: '/components/table' },
-  { title: '加载', icon: Loading, path: '/components/loading' },
-  { title: '分页', icon: MoreFour, path: '/components/pagination' },
+  { label: '布局', icon: Page, path: '/components/layout' },
+  { label: '页头', icon: HamburgerButton, path: '/components/page-header' },
+  { label: '搜索', icon: Search, path: '/components/form-search' },
+  { label: '表格', icon: TableFile, path: '/components/table' },
+  { label: '加载', icon: Loading, path: '/components/loading' },
+  { label: '分页', icon: MoreFour, path: '/components/pagination' },
 ]
 </script>

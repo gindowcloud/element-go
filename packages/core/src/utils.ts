@@ -1,4 +1,10 @@
 /**
+ * 跳转地址
+ * @param uri 
+ */
+export const $jump = (uri: string = '') => location.href = uri
+
+/**
  * JSON 对象浅拷贝
  * @param data 
  * @returns 

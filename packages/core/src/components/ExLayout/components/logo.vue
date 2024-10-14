@@ -7,12 +7,12 @@
 </template>
 
 <script setup lang="ts">
-import type { Menu } from '../../types'
+import type { Menu } from '../../../types'
 import { ApplicationMenu } from '@icon-park/vue-next'
 
 defineProps({
   title: { type: String },
-  homepage: { type: String, default: '/' },
+  homepage: { type: String, default: '' },
   channels: { type: Array<Menu>, default: () => { return [] } },
   collapse: { type: Boolean, default: false },
   backgroundColor: { type: String },
@@ -22,17 +22,15 @@ defineProps({
 
 const emit = defineEmits(['toggle', 'close'])
 
-const home = () => {
-  emit('close')
-}
+const home = () => emit('close')
 </script>
 
 <style scoped>
 .el-header .logo { padding-left: 20px; height: 60px; opacity: 0.9; }
-.logo { display: flex; align-items: center; font-size: 16px; width: 180px; color: var(--el-text-color-primary); }
+.logo { display: flex; align-items: center; font-size: 18px; width: 180px; color: var(--el-text-color-primary); }
 .logo .icon { display: flex; align-items: center; justify-content: center; width: 25px; }
 .logo .icon .i-icon { display: flex; align-items: center; }
-.logo .title { display: flex; align-items: center; justify-content: center; cursor: pointer; text-decoration: none; color: var(--el-text-color-primary); margin-left: 5px; }
+.logo .title { display: flex; align-items: center; justify-content: center; text-decoration: none; color: var(--el-text-color-primary); margin-left: 4px; }
 .logo .word { width: 26px; margin-left: 0px; } 
 .collapse { width: 45px; }
 </style>
