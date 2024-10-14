@@ -9,7 +9,7 @@
 </template>
 
 <script setup lang="ts">
-// import { ExPageHeader, ExTable } from '@core/index'
+import { ExPageHeader, ExTable } from '@core/index'
 import { propColumns, slotColumns } from '../types'
 
 const props = [

@@ -49,7 +49,7 @@ import type { User } from '../types'
 import { ref, reactive } from 'vue'
 import { ElFormItem, ElInput, ElButtonGroup, ElButton, ElDropdownItem, ElDatePicker } from 'element-plus'
 import { ReduceOne, PreviewCloseOne, Delete, LinkOne } from '@icon-park/vue-next'
-// import { ExPageHeader, ExFormSearch, ExTable } from '@core/index'
+import { ExPageHeader, ExFormSearch, ExTable } from '@core/index'
 import { propColumns, methodColumns, slotColumns } from '../types'
 import api from '../api'
 

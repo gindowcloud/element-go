@@ -14,7 +14,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-// import { ExPageHeader, ExPagination, ExTable } from '@core/index'
+import { ExPageHeader, ExPagination, ExTable } from '@core/index'
 import { propColumns, methodColumns } from '../types'
 
 const props = [

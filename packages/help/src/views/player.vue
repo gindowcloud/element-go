@@ -16,7 +16,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { ElSwitch } from 'element-plus'
-// import { ExPageHeader, ExPlayer, ExTable } from '@core/index'
+import { ExPageHeader, ExPlayer, ExTable } from '@core/index'
 import { propColumns } from '../types'
 
 const props = [

@@ -3,5 +3,5 @@
 </template>
 
 <script setup lang="ts">
-// import { ExPageHeader } from '@core/index'
+import { ExPageHeader } from '@core/index'
 </script>

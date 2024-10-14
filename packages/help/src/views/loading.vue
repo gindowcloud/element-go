@@ -8,7 +8,7 @@
 </template>
 
 <script setup lang="ts">
-// import { ExPageHeader, ExLoading, ExTable } from '@core/index'
+import { ExPageHeader, ExLoading, ExTable } from '@core/index'
 import { propColumns } from '../types'
 
 const props = [

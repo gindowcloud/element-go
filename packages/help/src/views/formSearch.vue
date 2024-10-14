@@ -23,7 +23,7 @@
 <script setup lang="ts">
 import { reactive } from 'vue'
 import { ElFormItem, ElInput } from 'element-plus'
-// import { ExPageHeader, ExFormSearch, ExTable } from '@core/index'
+import { ExPageHeader, ExFormSearch, ExTable } from '@core/index'
 import { propColumns, methodColumns, slotColumns } from '../types'
 
 const props = [
