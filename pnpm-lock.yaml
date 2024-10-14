@@ -6,54 +6,11 @@ settings:
 
 importers:
 
-  packages/core:
+  .:
     dependencies:
       '@icon-park/vue-next':
         specifier: ^1.4.2
         version: 1.4.2(vue@3.5.12(typescript@5.6.3))
-      '@videojs-player/vue':
-        specifier: ^1.0.0
-        version: 1.0.0(@types/video.js@7.3.58)(video.js@8.18.1)(vue@3.5.12(typescript@5.6.3))
-      element-plus:
-        specifier: ^2.8.5
-        version: 2.8.5(vue@3.5.12(typescript@5.6.3))
-      video.js:
-        specifier: ^8.18.1
-        version: 8.18.1
-      vue:
-        specifier: ^3.5.10
-        version: 3.5.12(typescript@5.6.3)
-    devDependencies:
-      '@types/node':
-        specifier: ^22.7.5
-        version: 22.7.5
-      '@types/video.js':
-        specifier: ^7.3.58
-        version: 7.3.58
-      '@vitejs/plugin-vue':
-        specifier: ^5.1.4
-        version: 5.1.4(vite@5.4.8(@types/node@22.7.5))(vue@3.5.12(typescript@5.6.3))
-      typescript:
-        specifier: ^5.5.3
-        version: 5.6.3
-      vite:
-        specifier: ^5.4.8
-        version: 5.4.8(@types/node@22.7.5)
-      vue-tsc:
-        specifier: ^2.1.6
-        version: 2.1.6(typescript@5.6.3)
-
-  packages/help:
-    dependencies:
-      '@icon-park/vue-next':
-        specifier: ^1.4.2
-        version: 1.4.2(vue@3.5.12(typescript@5.6.3))
-      '@vueuse/core':
-        specifier: ^11.1.0
-        version: 11.1.0(vue@3.5.12(typescript@5.6.3))
-      axios:
-        specifier: ^1.7.7
-        version: 1.7.7
       element-plus:
         specifier: ^2.8.5
         version: 2.8.5(vue@3.5.12(typescript@5.6.3))
@@ -70,9 +27,6 @@ importers:
       '@vitejs/plugin-vue':
         specifier: ^5.1.4
         version: 5.1.4(vite@5.4.8(@types/node@22.7.5))(vue@3.5.12(typescript@5.6.3))
-      mockjs:
-        specifier: ^1.1.0
-        version: 1.1.0
       typescript:
         specifier: ^5.5.3
         version: 5.6.3
@@ -82,6 +36,31 @@ importers:
       vue-tsc:
         specifier: ^2.1.6
         version: 2.1.6(typescript@5.6.3)
+
+  packages/core:
+    dependencies:
+      '@videojs-player/vue':
+        specifier: ^1.0.0
+        version: 1.0.0(@types/video.js@7.3.58)(video.js@8.18.1)(vue@3.5.12(typescript@5.6.3))
+      video.js:
+        specifier: ^8.18.1
+        version: 8.18.1
+    devDependencies:
+      '@types/video.js':
+        specifier: ^7.3.58
+        version: 7.3.58
+
+  packages/help:
+    dependencies:
+      '@vueuse/core':
+        specifier: ^11.1.0
+        version: 11.1.0(vue@3.5.12(typescript@5.6.3))
+      axios:
+        specifier: ^1.7.7
+        version: 1.7.7
+      mockjs:
+        specifier: ^1.1.0
+        version: 1.1.0
 
 packages:
 
